@@ -1,114 +1,163 @@
 # Índice Geral do Case
 
-Este documento centraliza todos os links e evidências exigidos para avaliação.
+Este documento centraliza todos os links, evidências e ativos exigidos para avaliação do Case Técnico.
 
----
+### 🔎 Status Geral do Projeto:
 
-## 🔹 Planejamento (PMBOK)
+✔ Planejamento  
+✔ Engenharia  
+✔ Modelagem  
+⏳ GenAI  
+⏳ Dashboard  
+⏳ Pipeline  
+⏳ Data App  
+⏳ Apresentação
 
-Documento:
-[Link para planejamento]
+## 🔹 01. Planejamento (PMBOK)
 
-Print:
-[Inserir print]
+📄 Documento:  
+[01_planejamento_pmbok.md](../docs/01_planejamento_pmbok.md)
 
----
+📋 Ferramenta de Gestão Utilizada:
 
-## 🔹 Base de Dados
+- Azure DevOps (Agile/Kanban)
 
-Dataset utilizado:
-Amazon Products Dataset 2023 (1.4M Products)
+🖼 Evidências:
 
-Link:
-https://www.kaggle.com/datasets/asaniczka/amazon-products-dataset-2023-1-4m-products
+- Estruturação em Epics, Features e Tasks
+- Prints incluídos no documento
 
----
+## 🔹 02. Base de Dados
 
-## 🔹 Integrar
+📄 Documento:  
+[02_base_de_dados.md](../docs/02_base_de_dados.md)
 
-Ativo na Dadosfera:
-[Link]
+🌐 Link Dataset:  
+[Amazon Products Dataset 2023 (1.4M Products)](https://www.kaggle.com/datasets/asaniczka/amazon-products-dataset-2023-1-4m-products)
 
-Print do Dataset carregado:
-[Inserir imagem]
+## 🔹 03. Integrar e Explorar
 
----
+📄 Documento:  
+[03_integrar_explorar.md](../docs/03_integrar_explorar.md)
 
-## 🔹 Explorar
+📓 Notebooks:  
+[01_etl_ingestao_limpeza_silver.ipynb](../notebooks/01_etl_ingestao_limpeza_silver.ipynb)  
+[02_gold_series_temporal_e_metricas.ipynb](../notebooks/02_gold_series_temporal_e_metricas.ipynb)
 
-Dicionário de Dados:
-[Link]
+📑 Saídas geradas:
 
-Print do Catálogo:
-[Inserir imagem]
+- amazon_products_bronze
+- amazon_products_silver
+- gold_products_curated
+- gold_category_metrics
+- gold_category_segment_tier_monthly
+- gold_top_products
 
----
+🖼 Evidências:
 
-## 🔹 Data Quality
+- Print do dataset carregado
+- Evidência de ingestão
+- Dicionário de dados
+- Print do catálogo
 
-Relatório gerado com:
+## 🔹 04. Data Quality
 
-- Great Expectations / Soda
+📄 Documento:  
+[04_data_quality.md](../docs/04_data_quality.md)
 
-Print:
-[Inserir imagem]
+🖼 Evidências:
 
----
+- Análise de nulos
+- Validação de schema
+- Prints
 
-## 🔹 GenAI / LLM
+## 🔹 05. GenAI / LLM
 
-Notebook:
-[Link]
+📄 Documento:  
+[05_processar_genai_llm.md](../docs/05_processar_genai_llm.md)
 
-Print das features geradas:
-[Inserir imagem]
+📋 Modelo utilizado:
 
----
+- OpenAI (GPT-4o-mini / GPT-4.1-mini)
 
-## 🔹 Modelagem
+📓 Notebook:  
+[05_processar_genai_llm_features.ipynb](../notebooks/03_processar_genai_llm_features.ipynb)
 
-Diagrama:
-![Modelo Kimball](../assets/diagrams/modelo_kimball.png)
+🖼 Evidências:
 
-Link:
-https://dbdesigner.page.link/9HjidL4vzZvz1yC1A
+- Prints das features geradas
+- Persistência Gold Enriched
 
----
+## 🔹 06. Modelagem de Dados
 
-## 🔹 Dashboard
+📄 Documento:  
+[06_modelagem_dados.md](../docs/06_modelagem_dados.md)
 
-Coleção:
+📓 Notebook:  
+[02_gold_series_temporal_e_metricas.ipynb](../notebooks/02_gold_series_temporal_e_metricas.ipynb)
+
+🗺 Diagrama ERD:
+
+- Gerado via dbdesigner
+- Validado no DuckDB (DBeaver)
+
+📂 DDL:  
+[assets/sql/kimball_ddl.sql](../assets/sql/kimball_ddl.sql)
+
+## 🔹 07. Dashboard
+
+📄 Documento:  
+[07_analisar_dashboard.md](../docs/07_analisar_dashboard.md)
+
+📊 Coleção:  
 <Nome Sobrenome - Mes_Ano>
 
-SQL utilizada:
-[Link ou arquivo]
+📄 SQL utilizada:  
+[assets/sql/dashboard_queries.sql](../assets/sql/dashboard_queries.sql)
 
-Print do dashboard:
-[Inserir imagem]
+🖼 Evidências:
 
----
+- 5 visualizações distintas
+- Evidência de coleção criada
 
-## 🔹 Pipeline
+## 🔹 08. Pipeline
 
-Ativo cadastrado:
-[Link]
+📄 Documento:  
+[08_pipelines.md](../docs/08_pipelines.md)
 
-Print:
-[Inserir imagem]
+⚙ Ativo cadastrado na Dadosfera
 
----
+🖼 Evidências:
 
-## 🔹 Data App
+- Print do pipeline
+- Evidência de execução
 
-Link do Streamlit:
+## 🔹 09. Data App
+
+📄 Documento:  
+[09_data_app.md](../docs/09_data_app.md)
+
+🌐 Link Streamlit:  
 [Inserir link]
 
-Print:
-[Inserir imagem]
+📓 Notebook:  
+[04_data_app_streamlit.ipynb](../notebooks/04_data_app_streamlit.ipynb)
 
----
+🖼 Evidências:  
+[](../assets/prints/)
 
-## 🔹 Apresentação
+## 🔹 10. Apresentação
 
-Link do YouTube (Unlisted):
-[Inserir link]
+📄 Documento:  
+[10_apresentacao.md](../docs/10_apresentacao.md)
+
+🎥 Vídeo (YouTube - Unlisted):  
+[Inserir link]()
+
+## 🔹 11. Arquitetura e Substituição
+
+> [!WARNING]
+> Descrição da proposta de substituição arquitetural utilizando Dadosfera como plataforma central.
+
+📄 Documento:  
+[11_arquitetura_substituicao.md](../docs/11_arquitetura_substituicao.md)

@@ -6,8 +6,6 @@ Este repositório apresenta a implementação de uma Plataforma de Dados para ot
 
 O objetivo é demonstrar, ponta a ponta, o ciclo de vida dos dados, desde ingestão até geração de valor com IA e Data Apps.
 
----
-
 ## 🎯 Problema de Negócio
 
 A empresa possui mais de 1 milhão de produtos cadastrados com:
@@ -19,8 +17,6 @@ A empresa possui mais de 1 milhão de produtos cadastrados com:
 
 A solução proposta centraliza, estrutura e enriquece o catálogo utilizando engenharia de dados e GenAI.
 
----
-
 ## 🏗 Arquitetura do Projeto
 
 Camadas implementadas:
@@ -30,8 +26,6 @@ Camadas implementadas:
 - **Gold** → Tabelas analíticas e série temporal
 - **GenAI** → Extração de features via LLM
 - **Data App** → Aplicação interativa com Streamlit
-
----
 
 ## 📂 Estrutura do Repositório
 
@@ -43,25 +37,21 @@ docs/
 notebooks/
 ```
 
----
-
 ## 📊 Itens do Case
 
 | Item | Descrição            | Status |
 | ---- | -------------------- | ------ |
-| 0    | Planejamento (PMBOK) | ⏳     |
+| 0    | Planejamento (PMBOK) | ✅     |
 | 1    | Base de Dados        | ✅     |
 | 2    | Integrar             | ✅     |
 | 3    | Explorar             | ✅     |
-| 4    | Data Quality         | ⏳     |
+| 4    | Data Quality         | ✅     |
 | 5    | GenAI / LLM          | ⏳     |
-| 6    | Modelagem de Dados   | ⏳     |
+| 6    | Modelagem de Dados   | ✅     |
 | 7    | Análise / Dashboard  | ⏳     |
 | 8    | Pipelines            | ⏳     |
 | 9    | Data App             | ⏳     |
 | 10   | Apresentação         | ⏳     |
-
----
 
 ## 🧠 Tecnologias e Ferramentas
 
@@ -97,9 +87,7 @@ notebooks/
 
 - GitHub
 
----
-
-## ▶ Como Reproduzir
+## ▶️ Como Reproduzir
 
 1. Baixar o dataset via Kaggle
 2. Executar notebook 01 (ETL Silver)
@@ -107,14 +95,10 @@ notebooks/
 4. Executar notebook 03 (LLM)
 5. Rodar Streamlit em `app/app.py`
 
----
-
 ## 🎥 Apresentação
 
 Link do vídeo (Unlisted):
 [INSERIR LINK AQUI]
-
----
 
 ## 🚀 Conclusão
 
