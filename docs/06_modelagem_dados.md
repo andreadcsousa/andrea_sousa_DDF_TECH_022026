@@ -132,7 +132,7 @@ A dimensão de categoria é compartilhada entre os fatos, garantindo consistênc
 
 #### 📌 Modelo Kimball
 
-![Modelo Kimball](../assets/diagrams/modelo_kimball.png)
+![Modelo Kimball](../assets/diagrams/04_modelagem_00_diagrama_kimball.png)
 
 ## 🧾 DDL (SQL)
 
@@ -152,7 +152,7 @@ A validação estrutural assegura que o modelo pode ser implantado em qualquer e
 
 #### 📌 DDL no Dbeaver
 
-![Kimball DDL](../assets/prints/kimball_ddl.jpg)
+![Kimball DDL](../assets/prints/04_modelagem_01_kimball_ddl.jpg)
 
 > [!WARNING]
 > A carga de dados não foi realizada neste momento, pois o objetivo desta etapa é demonstrar o desenho lógico do Data Warehouse.

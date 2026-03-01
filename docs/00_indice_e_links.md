@@ -7,7 +7,7 @@ Este documento centraliza todos os links, evidências e ativos exigidos para ava
 ✔ Planejamento  
 ✔ Engenharia  
 ✔ Modelagem  
-⏳ GenAI  
+✔ GenAI  
 ⏳ Dashboard  
 ⏳ Pipeline  
 ⏳ Data App  
@@ -18,59 +18,55 @@ Este documento centraliza todos os links, evidências e ativos exigidos para ava
 - **Documento:** [Planejamento do Projeto (PMBOK)](../docs/01_planejamento_pmbok.md)
 - **Ferramenta de Gestão Utilizada:** Azure DevOps (Agile/Kanban)
 - **Evidências:**
-  - Estruturação em Epics, Features e Tasks
-  - Prints incluídos no documento
+  - Estruturação em epics, features e tasks
 
 ## 2️⃣ Base de Dados
 
 - **Documento:** [Base de Dados](../docs/02_base_de_dados.md)
 - **Link Dataset:** [Amazon Products Dataset 2023](https://www.kaggle.com/datasets/asaniczka/amazon-products-dataset-2023-1-4m-products)
+- **Evidências:**
+  - Leitura, head e info do dataset
 
 ## 3️⃣ Integrar e Explorar
 
 - **Documento:** [Integrar e Explorar](../docs/03_integrar_explorar.md)
+- **Link da Dadosfera:** [app.dadosfera.ai](https://app.dadosfera.ai/pt-BR/)
 - **Notebooks:**
   - [ETL de ingestão e limpeza](../notebooks/01_etl_ingestao_limpeza_silver.ipynb)
   - [Gold série temporal e métricas](../notebooks/02_gold_series_temporal_e_metricas.ipynb)
-- **Link da Dadosfera:** [app.dadosfera.ai](https://app.dadosfera.ai/pt-BR/)
-- **Saídas geradas:**
-  - amazon_products_bronze
-  - amazon_products_silver
-  - gold_products_curated
-  - gold_category_metrics
-  - gold_category_segment_tier_monthly
-  - gold_top_products
 - **Evidências:**
-  - Print do dataset carregado
-  - Evidência de ingestão
-  - Dicionário de dados
-  - Print do catálogo
+  - Upload no catálogo da Dadosfera
+  - Descrição dos ativos
+  - Análise exploratória
+  - Estrutura final da silver
 
 ## 4️⃣ Data Quality
 
 - **Documento:** [Data Quality](../docs/04_data_quality.md)
 - **Evidências:**
   - Análise de nulos
-  - Validação de schema
-  - Prints
+  - Distribuição de preços e rating
 
 ## 5️⃣ GenAI / LLM
 
-- **Documento:** [Processar GenAI LLM](../docs/05_processar_genai_llm.md)
+- **Documento:** [Processar com GenAI (LLM Feature Extraction)](../docs/05_processar_genai_llm.md)
 - **Notebook:** [Processar GenAI LLM features](../notebooks/03_processar_genai_llm_features.ipynb)
-- **Modelo utilizado:** OpenAI (GPT-4o-mini / GPT-4.1-mini)
+- **Modelo utilizado:** OpenAI (GPT-5.2 Plus)
 - **Evidências:**
-  - Prints das features geradas
-  - Persistência Gold Enriched
+  - Shape do Sample
+  - Prompt Definition
+  - Enriched Dataframe Preview
+  - Parquet Saved Confirmation
+  - Execution Progress Bar e Summary
+  - Cost Estimation Output
 
 ## 6️⃣ Modelagem de Dados
 
 - **Documento:** [Modelagem de Dados](../docs/06_modelagem_dados.md)
 - **Notebook:** [Gold série temporal e métricas](../notebooks/02_gold_series_temporal_e_metricas.ipynb)
-- **Diagrama ERD:**
-  - Gerado via dbdesigner
-  - Validado no DuckDB (DBeaver)
-- **DDL:** [Kimball DDL SQL](../assets/sql/kimball_ddl.sql)
+- **Evidências:**
+  - Diagrama ERD
+  - Kimball DDL
 
 ## 7️⃣ Dashboard
 
@@ -96,7 +92,7 @@ Este documento centraliza todos os links, evidências e ativos exigidos para ava
 - **Documento:** [Data APP](../docs/09_data_app.md)
 - **Notebook:** [Data APP Streamlit](../notebooks/04_data_app_streamlit.ipynb)
 - **Link Streamlit:** [Inserir link]()
-- **Evidências:** [](../assets/prints/)
+- **Evidências:**
 
 ## 🔟 Apresentação
 

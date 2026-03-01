@@ -25,7 +25,7 @@ Foi executada análise de nulos por coluna:
 
 #### 📌 Análise de Nulos
 
-![Análise de nulos](../assets/prints/data_quality_nulls.jpg)
+![Análise de nulos](../assets/prints/09_data_quality_01_null_analysis.jpg)
 
 ## 📈 Análise de Distribuição
 
@@ -44,11 +44,11 @@ Foi executada análise de nulos por coluna:
 
 #### 📌 Distribuição de Preços
 
-![Distribuição de Preços](../assets/prints/distribuicao_preco.jpg)
+![Distribuição de Preços](../assets/prints/03_gold_01_price_distribution.jpg)
 
 #### 📌 Distribuição de Ratings
 
-![Distribuição de Ratings](../assets/prints/distribuicao_rating.jpg)
+![Distribuição de Ratings](../assets/prints/03_gold_02_rating_distribution.jpg)
 
 ### 🔎 Validação de Domínio
 

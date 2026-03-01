@@ -18,9 +18,9 @@ Os arquivos originais foram carregados utilizando o módulo **Coletar** da Dados
 
 ### 📸 Evidências:
 
-- Uploads no catálogo da Dadosfera
+- Upload no catálogo da Dadosfera
 
-![Uploads de arquivos raw](../assets/prints/raw_ecommerce_amazon_uploads.jpg)
+![Uploads de arquivos raw](../assets/prints/07_dadosfera_03_raw_upload_confirmation.jpg)
 
 > [!WARNING]
 > A plataforma aceita arquivos com limite de até **250MB** por upload.
@@ -72,9 +72,9 @@ Após o carregamento, foram aplicadas boas práticas de governança de dados:
 
 #### 📌 Descrição dos ativos
 
-![Catalogação dos produtos](../assets/prints/raw_ecommerce_amazon_produtos.jpg)
+![Catalogação dos produtos](../assets/prints/07_dadosfera_02_raw_products_catalog.jpg)
 
-![Catalogação das categorias](../assets/prints/raw_ecommerce_amazon_categorias.jpg)
+![Catalogação das categorias](../assets/prints/07_dadosfera_01_raw_categories_catalog.jpg)
 
 ## 🗂️ Organização em Camadas (Data Lake)
 
@@ -123,11 +123,11 @@ Essas análises subsidiaram decisões de:
 
 #### 📌 Gráfico de distribuição de preços
 
-![Distribuição de Preços](../assets/prints/distribuicao_preco.jpg)
+![Distribuição de Preços](../assets/prints/03_gold_01_price_distribution.jpg)
 
 #### 📌 Gráfico de distribuição de ratings
 
-![Distribuição de Ratings](../assets/prints/distribuicao_rating.jpg)
+![Distribuição de Ratings](../assets/prints/03_gold_02_rating_distribution.jpg)
 
 ## 🧹 Tratamento e Padronização (Camada Silver)
 
@@ -173,8 +173,8 @@ DataFrame final estruturado:
 
 #### 📌 Estrutura final (.info)
 
-![Estrutura do dataset (.info())](../assets/prints/final_dataset_info.jpg)
+![Estrutura do dataset (.info())](../assets/prints/03_gold_04_final_dataset_info.jpg)
 
 #### 📌 Head do DataFrame Silver
 
-![Head do dataset](../assets/prints/final_dataset_head.jpg)
+![Head do dataset](../assets/prints/03_gold_03_final_dataset_head.jpg)

@@ -84,12 +84,12 @@ Abaixo, evidências da ingestão e estrutura do dataset no Google Colab:
 
 ### 📌 Leitura do dataset:
 
-![Leitura do dataset](../assets/prints/base_dataset_read.jpg)
+![Leitura do dataset](../assets/prints/01_integrar_03_base_dataset_read_confirmation.jpg)
 
 ### 📌 Head do dataset
 
-![Head do dataset](../assets/prints/base_dataset_head.jpg)
+![Head do dataset](../assets/prints/01_integrar_01_base_dataset_head.jpg)
 
 ### 📌 Informações do dataset
 
-![Estrutura do dataset (.info())](../assets/prints/base_dataset_info.jpg)
+![Estrutura do dataset (.info())](../assets/prints/01_integrar_02_base_dataset_info.jpg)

@@ -1,10 +1,10 @@
 # Planejamento do Projeto (PMBOK)
 
-## 🎯 Objetivo do Projeto
+## 🎯 Objetivo
 
 Construir uma Plataforma de Dados para centralizar, estruturar e enriquecer um catálogo de e-commerce com mais de 1 milhão de produtos, permitindo análises estratégicas e uso de IA para geração de valor.
 
-## 📌 Escopo do Projeto
+## 📌 Escopo
 
 **Inclui:**
 
@@ -24,7 +24,7 @@ Construir uma Plataforma de Dados para centralizar, estruturar e enriquecer um c
 - Integração com ERP/CRM externo
 - Monitoramento contínuo em produção
 
-## 📂 Estrutura Analítica do Projeto (WBS)
+## 📂 Estrutura Analítica
 
 1. Planejamento
 2. Ingestão e Integração
@@ -49,26 +49,21 @@ O planejamento foi estruturado seguindo as fases:
 
 ## 📌 Metodologia de Gestão
 
-O projeto foi estruturado utilizando abordagem Agile, com organização em Epics, Features e Tasks no Azure Devops.
+O projeto foi estruturado utilizando abordagem Agile/Kanban, com organização em Epics, Features e Tasks no Azure Devops.
 
-**Colunas utilizadas:**
-
-- New
-- Active
-- Resolved
-- Closed
+**Colunas utilizadas:** `New | Active | Resolved | Closed`
 
 > [!NOTE]
 > A organização por Epics permitiu controle incremental da entrega e mitigação de riscos dentro do prazo de 4 dias.
 
-## 📅 Cronograma Executivo
+## 📅 Cronograma
 
-| Dia   | Entregas                                 |
-| ----- | ---------------------------------------- |
-| Dia 1 | Ingestão + Silver                        |
-| Dia 2 | Gold + Modelagem + Documentação + DevOps |
-| Dia 3 | LLM + Dashboard + Pipeline               |
-| Dia 4 | Data App + Vídeo + Consolidação Final    |
+| Dia   | Entregas                                  |
+| ----- | ----------------------------------------- |
+| Dia 1 | Ingestão + Silver + Documentação          |
+| Dia 2 | Gold + Modelagem + DevOps + Documentação  |
+| Dia 3 | LLM + Dashboard + Pipeline + Documentação |
+| Dia 4 | Data App + Vídeo + Consolidação Final     |
 
 ## ⚠️ Análise de Riscos
 
@@ -125,7 +120,7 @@ O projeto será considerado bem-sucedido se:
 - Pipeline cadastrado e executável
 - Data App funcional publicado
 
-## 🎯 Pontos Críticos do Projeto
+## 🎯 Pontos Críticos
 
 Os pontos críticos representam fatores que podem comprometer qualidade, clareza arquitetural ou avaliação técnica do case. Estes pontos foram monitorados ao longo do projeto como critérios de controle de qualidade.
 
@@ -167,20 +162,16 @@ O planejamento foi estruturado para demonstrar como a Dadosfera pode reduzir com
 
 ## 📷 Evidência de Gestão no Azure DevOps
 
-O projeto foi estruturado em Azure DevOps utilizando abordagem Kanban, permitindo controle incremental das entregas dentro do prazo de 4 dias. Abaixo estão evidências da organização e execução do projeto.
-
-### 📋 Ferramenta de Gestão Utilizada
-
-**Azure DevOps (Kanban)**
+Abaixo estão evidências da organização e execução do projeto:
 
 #### 📌 Épicos Criados
 
-![Épicos no Azure DevOps](../assets/prints/devops_epics.jpg)
+![Épicos no Azure DevOps](../assets/prints/08_devops_02_epics_overview.jpg)
 
 #### 📌 Hierarquia (Epic → Features → Tasks)
 
-![Hierarquia do Épico Engenharia](../assets/prints/devops_hierarchy_epic_engineering.jpg)
+![Hierarquia do Épico Engenharia](../assets/prints/08_devops_03_epic_hierarchy_engineering.jpg)
 
 #### 📌 Estrutura do Épico com 5W
 
-![Épico estruturado com 5W](../assets/prints/devops_epic_5w.jpg)
+![Épico estruturado com 5W](../assets/prints/08_devops_01_epic_5w_definition.jpg)
