@@ -10,7 +10,7 @@ Garantir que o dataset esteja consistente, íntegro e adequado para:
 - Construção de métricas analíticas
 - Enriquecimento via LLM
 
-## 📊 1. Análise de Completude (Nulos)
+## 📊 Análise de Completude (Nulos)
 
 ### 🔍 Verificação de valores ausentes
 
@@ -21,13 +21,13 @@ Foi executada análise de nulos por coluna:
 - rating → presença de valores zero
 - demais colunas → sem nulos relevantes
 
-### 🖼 Evidência
+### 📷 Evidência
 
 #### 📌 Análise de Nulos
 
 ![Análise de nulos](../assets/prints/data_quality_nulls.jpg)
 
-## 📈 2. Análise de Distribuição
+## 📈 Análise de Distribuição
 
 ### 💰 Preço
 
@@ -40,7 +40,7 @@ Foi executada análise de nulos por coluna:
 - Alta concentração entre 4.0 e 5.0
 - 131.023 produtos com rating zero
 
-### 🖼 Evidências
+### 📷 Evidências
 
 #### 📌 Distribuição de Preços
 
@@ -55,7 +55,7 @@ Foi executada análise de nulos por coluna:
 - rating dentro do intervalo esperado (0 a 5)
 - price ≥ 0
 
-## 🧮 3. Consistência de Tipos
+## 🧮 Consistência de Tipos
 
 **Foram aplicadas otimizações:**
 
@@ -69,13 +69,13 @@ Foi executada análise de nulos por coluna:
 - Redução de uso de memória
 - Melhor performance em processamento
 
-## 🏷️ 4. Análise de Integridade
+## 🏷️ Análise de Integridade
 
 - product_id validado como chave única (sem duplicidade)
 - category_id consistente com tabela de categorias (merge validado)
 - Nenhum registro duplicado após tratamento
 
-## ⚠️ 5. Pontos de Atenção
+## ⚠️ Pontos de Atenção
 
 - Produtos com preço zero podem representar:
   - Produtos descontinuados
@@ -83,7 +83,7 @@ Foi executada análise de nulos por coluna:
 - Rating zero pode indicar ausência de avaliações
 - Dataset não possui data real
 
-## ✅ 6. Conclusão da Qualidade
+## ✅ Conclusão da Qualidade
 
 Após as verificações realizadas, o dataset apresenta:
 
@@ -98,5 +98,5 @@ Após as verificações realizadas, o dataset apresenta:
 
 ## 🔁 Reprodutibilidade
 
-Todas as verificações foram executadas via notebook [01_etl_ingestao_limpeza_silver.ipynb](../notebooks/01_etl_ingestao_limpeza_silver.ipynb),
+Todas as verificações foram executadas via notebook [ETL de Ingestão e Limpeza](../notebooks/01_etl_ingestao_limpeza_silver.ipynb),
 permitindo reprocessamento e auditoria completa.

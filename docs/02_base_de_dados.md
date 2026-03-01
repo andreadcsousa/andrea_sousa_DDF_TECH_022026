@@ -74,7 +74,7 @@ Esse cenário é compatível com o desafio proposto no case, que exige centraliz
 - O enriquecimento via IA habilita segmentação inteligente
 - A centralização de dados reduz complexidade arquitetural
 
-## 🖼 Evidências da Base
+## 📷 Evidências da Base
 
 - Print da leitura do dataset no Google Colab
 - Print do `.info()` demonstrando volume e tipagem

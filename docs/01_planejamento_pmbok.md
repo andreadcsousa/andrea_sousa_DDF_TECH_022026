@@ -24,7 +24,7 @@ Construir uma Plataforma de Dados para centralizar, estruturar e enriquecer um c
 - Integração com ERP/CRM externo
 - Monitoramento contínuo em produção
 
-## 🗂 Estrutura Analítica do Projeto (WBS)
+## 📂 Estrutura Analítica do Projeto (WBS)
 
 1. Planejamento
 2. Ingestão e Integração
@@ -118,12 +118,12 @@ O fluxo de dependências segue a lógica das camadas analíticas e do ciclo de v
 
 O projeto será considerado bem-sucedido se:
 
-- ✔ Dados estruturados em camadas Bronze, Silver e Gold
-- ✔ Modelo dimensional validado (DDL executado com sucesso)
-- ✔ Dashboard contendo no mínimo 5 visualizações distintas
-- ✔ LLM gerando atributos estruturados reutilizáveis
-- ✔ Pipeline cadastrado e executável
-- ✔ Data App funcional publicado
+- Dados estruturados em camadas Bronze, Silver e Gold
+- Modelo dimensional validado (DDL executado com sucesso)
+- Dashboard contendo no mínimo 5 visualizações distintas
+- LLM gerando atributos estruturados reutilizáveis
+- Pipeline cadastrado e executável
+- Data App funcional publicado
 
 ## 🎯 Pontos Críticos do Projeto
 
@@ -165,7 +165,7 @@ O projeto deve permitir que um avaliador:
 
 O planejamento foi estruturado para demonstrar como a Dadosfera pode reduzir complexidade arquitetural, centralizando ingestão, processamento, modelagem, IA e visualização em uma única plataforma.
 
-## 🗂 Evidência de Gestão no Azure DevOps
+## 📷 Evidência de Gestão no Azure DevOps
 
 O projeto foi estruturado em Azure DevOps utilizando abordagem Kanban, permitindo controle incremental das entregas dentro do prazo de 4 dias. Abaixo estão evidências da organização e execução do projeto.
 
@@ -173,16 +173,14 @@ O projeto foi estruturado em Azure DevOps utilizando abordagem Kanban, permitind
 
 **Azure DevOps (Kanban)**
 
-<br>
-
-### 📌 Épicos Criados
+#### 📌 Épicos Criados
 
 ![Épicos no Azure DevOps](../assets/prints/devops_epics.jpg)
 
-### 📌 Hierarquia (Epic → Features → Tasks)
+#### 📌 Hierarquia (Epic → Features → Tasks)
 
 ![Hierarquia do Épico Engenharia](../assets/prints/devops_hierarchy_epic_engineering.jpg)
 
-### 📌 Estrutura do Épico com 5W
+#### 📌 Estrutura do Épico com 5W
 
 ![Épico estruturado com 5W](../assets/prints/devops_epic_5w.jpg)

@@ -18,8 +18,8 @@ A modelagem foi estruturada seguindo os princípios de **Ralph Kimball (modelo d
 
 O modelo foi estruturado em formato Star Schema, com fatos centralizados e dimensões desnormalizadas para otimização analítica. O modelo foi dividido em duas visões complementares:
 
-**1. Snapshot por Produto →** análise de performance individual.  
-**2. Série Temporal Agregada →** análise estratégica por categoria e segmento.
+1. **Snapshot por Produto →** análise de performance individual.
+2. **Série Temporal Agregada →** análise estratégica por categoria e segmento.
 
 ## 🔎 Visão 1 – Catálogo e Performance (Snapshot por Produto)
 
@@ -53,8 +53,8 @@ O modelo foi estruturado em formato Star Schema, com fatos centralizados e dimen
 
 > fact_product_snapshot
 
-📏 Granularidade: **1 linha = 1 produto**  
-🔑 Chave Primária: **product_id**
+- Granularidade: **1 linha = 1 produto**
+- Chave Primária: **product_id**
 
 | Métrica               |
 | --------------------- |
@@ -76,7 +76,7 @@ O modelo foi estruturado em formato Star Schema, com fatos centralizados e dimen
 
 > 📅 dim_date
 
-📏 Granularidade: **1 linha = 1 mês**
+- Granularidade: **1 linha = 1 mês**
 
 | Campo        |
 | ------------ |
@@ -106,8 +106,8 @@ A dimensão de categoria é compartilhada entre os fatos, garantindo consistênc
 
 > fact_category_monthly
 
-📏 Granularidade: **1 linha = 1 mês + 1 categoria + 1 price_segment + 1 popularity_tier**  
-🔑 Chave Primária composta: **date_id, category_id, price_segment, popularity_tier**
+- Granularidade: **1 linha = 1 mês + 1 categoria + 1 price_segment + 1 popularity_tier**
+- Chave Primária composta: **date_id, category_id, price_segment, popularity_tier**
 
 | Métrica      |
 | ------------ |
@@ -125,12 +125,12 @@ A dimensão de categoria é compartilhada entre os fatos, garantindo consistênc
 > [!IMPORTANT]
 > **Observação:** Como o dataset não possui data real, a série temporal foi gerada de forma sintética e reprodutível (seed fixa), ancorada em `units_sold_last_month` e sazonalidade típica de e-commerce.
 
-## 🗺 Diagrama ERD
+## ➿ Diagrama ERD
 
 - Ferramenta utilizada: **dbdesigner (ERD)**
 - Validação do DDL: **DBeaver + DuckDB**
 
-### 📌 Modelo Kimball
+#### 📌 Modelo Kimball
 
 ![Modelo Kimball](../assets/diagrams/modelo_kimball.png)
 
@@ -150,7 +150,7 @@ A validação estrutural assegura que o modelo pode ser implantado em qualquer e
 - Chaves estrangeiras
 - Integridade relacional
 
-### 📌 DDL no Dbeaver
+#### 📌 DDL no Dbeaver
 
 ![Kimball DDL](../assets/prints/kimball_ddl.jpg)
 

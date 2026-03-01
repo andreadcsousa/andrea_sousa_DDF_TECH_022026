@@ -1,102 +1,180 @@
 # Integrar e Explorar
 
-Este documento descreve as etapas de ingestão, padronização e exploração inicial do dataset de e-commerce.
+Este documento descreve as etapas de integração na plataforma Dadosfera, governança, ingestão técnica, exploração e construção da camada Silver do dataset de e-commerce.
 
-## 🔌 Integração na Plataforma Dadosfera
+## 🔌 Integração na Plataforma Dadosfera (Zona RAW)
 
-Os arquivos originais foram carregados utilizando o módulo **Coletar** da Dadosfera, conforme solicitado no case.
+Os arquivos originais foram carregados utilizando o módulo **Coletar** da Dadosfera, conforme solicitado no case técnico. Foram realizadas as seguintes ações:
 
-- Upload dos arquivos originais
+- Upload dos arquivos originais (Produtos e Categorias)
 - Criação automática de ativos no **Catálogo**
-- Organização inicial na zona **RAW**
+- Padronização dos nomes técnicos dos ativos
+- Classificação na zona **RAW** do Data Lake
 
-### 🖼 Evidência:
+### 📂 Ativos Criados
 
-#### 📌 Uploads no catálogo da Dadosfera
+- `RAW_ECOMMERCE_AMAZON_PRODUCTS`
+- `RAW_ECOMMERCE_AMAZON_CATEGORIES`
+
+### 📸 Evidências:
+
+- Uploads no catálogo da Dadosfera
 
 ![Uploads de arquivos raw](../assets/prints/raw_ecommerce_amazon_uploads.jpg)
 
 > [!WARNING]
 > A plataforma aceita arquivos com limite de até **250MB** por upload.
 >
-> O arquivo CSV principal de produtos ultrapassava esse tamanho.  
-> Para viabilizar o carregamento, foi realizada a conversão do arquivo para formato **Parquet**, utilizando a ferramenta:
+> O arquivo CSV principal de produtos ultrapassava esse tamanho.
+> Para viabilizar o carregamento, foi realizada a conversão para formato **Parquet**, utilizando a ferramenta:
 > https://observablehq.com/@observablehq/csv-to-parquet
 >
-> A conversão reduziu significativamente o tamanho do arquivo, permitindo o upload no catálogo sem perda de estrutura.
+> A conversão reduziu significativamente o tamanho do arquivo, permitindo o upload sem perda estrutural.
 
 > [!TIP]
-> A escolha pelo formato Parquet também está alinhada com boas práticas de Data Lake, por ser colunar, comprimido e mais eficiente para processamento analítico.
+> O uso de Parquet está alinhado com boas práticas de Data Lake, por ser um formato colunar, comprimido e otimizado para processamento analítico.
 
-### 🏷️ Catalogação e Governança
+## 🏷️ Catalogação e Governança
 
-Após o carregamento, foram aplicadas boas práticas de governança:
+Após o carregamento, foram aplicadas boas práticas de governança de dados:
 
-- Descrição do ativo preenchida
-- Tags aplicadas (ecommerce, raw, amazon, case-dadosfera)
-- Owner definido
-- Dicionário de Dados documentado
+- Descrição detalhada do ativo preenchida
+- Aplicação de tags (ecommerce, raw, catalog, case-tecnico)
+- Definição de owner
+- Documentação do **Dicionário de Dados** (descrição das colunas)
 
-### 🖼 Evidência:
+### 📘 Dicionário de Dados – Products
 
-- Print da tela de edição do ativo
-- Print da descrição de uma coluna
+| Coluna                 | Descrição                                |
+| ---------------------- | ---------------------------------------- |
+| ASIN                   | Identificador único do produto na Amazon |
+| TITLE                  | Nome do produto                          |
+| IMGURL                 | URL da imagem principal                  |
+| PRODUCTURL             | URL da página do produto                 |
+| STARS                  | Avaliação média do produto (0 a 5)       |
+| REVIEWS                | Quantidade total de avaliações           |
+| PRICE                  | Preço atual em USD                       |
+| LISTPRICE              | Preço original antes de desconto         |
+| CATEGORY_ID            | Identificador da categoria               |
+| ISBESTSELLER           | Indicador booleano de best seller        |
+| BOUGHTINLASTMONTH      | Volume estimado de vendas no último mês  |
+| \_PROCESSING_TIMESTAMP | Timestamp interno gerado pela plataforma |
+
+### 📘 Dicionário de Dados – Categories
+
+| Coluna                 | Descrição                                |
+| ---------------------- | ---------------------------------------- |
+| ID                     | Identificador único da categoria         |
+| CATEGORY_NAME          | Nome textual da categoria                |
+| \_PROCESSING_TIMESTAMP | Timestamp interno gerado pela plataforma |
+
+### 📸 Evidências:
+
+#### 📌 Descrição dos ativos
+
+![Catalogação dos produtos](../assets/prints/raw_ecommerce_amazon_produtos.jpg)
+
+![Catalogação das categorias](../assets/prints/raw_ecommerce_amazon_categorias.jpg)
+
+## 🗂️ Organização em Camadas (Data Lake)
+
+Os dados foram organizados seguindo o padrão clássico de Data Lake:
+
+- **RAW** → Dados brutos carregados diretamente da fonte (Kaggle), sem transformação
+- **SILVER** → Dados tratados, padronizados e tipados (processados via Python)
+- **GOLD** → Dados agregados e prontos para consumo analítico
+
+> [!NOTE]
+> Os ativos presentes na Dadosfera representam a camada **RAW**.
 
 ## 📥 Ingestão Técnica (Colab)
 
-- Fonte Kaggle
-- Ambiente
-- Leitura CSV
-- Estrutura Inicial (.info + head)
+### 📌 Fonte de Dados
 
-### 🔎 Exploração Inicial
+- Dataset: Amazon Products Dataset 2023
+- Origem: Kaggle
+- Formato original: CSV
+- Volume: 1.426.337 registros
+
+### 🛠️ Ambiente Utilizado
+
+- Google Colab
+- Python (pandas, pyarrow)
+- Persistência em Parquet
+
+## 🔎 Exploração Inicial (EDA)
+
+Foram realizadas análises exploratórias para compreender qualidade e distribuição dos dados:
 
 - Distribuição de preços
 - Distribuição de ratings
-- Produtos sem preço
-- Produtos rating zero
-- Decisões tomadas
+- Identificação de produtos sem preço
+- Identificação de produtos com rating zero
+- Análise de cardinalidade por categoria
 
-### 🧹 Tratamento e Padronização (Silver)
+Essas análises subsidiaram decisões de:
 
-- Padronização de nomes
-- Otimização de tipos
-- Novas variáveis
-- Organização em camadas
+- Segmentação de preço
+- Estratégia de ranking
+- Definição de métricas de popularidade
+- Estratégia de amostragem para LLM
 
-### 🔁 Garantia de Reprocessamento
+### 📸 Evidências:
+
+#### 📌 Gráfico de distribuição de preços
+
+![Distribuição de Preços](../assets/prints/distribuicao_preco.jpg)
+
+#### 📌 Gráfico de distribuição de ratings
+
+![Distribuição de Ratings](../assets/prints/distribuicao_rating.jpg)
+
+## 🧹 Tratamento e Padronização (Camada Silver)
+
+### 🔤 Padronização de Nomes
+
+- asin → product_id
+- title → product_title
+- reviews → review_count
+- boughtInLastMonth → units_sold_last_month
+
+### 🧮 Otimização de Tipos
+
+- float64 → float32
+- int64 → int32
+- object → string
+- Criação de colunas booleanas
+
+### 📊 Criação de Novas Variáveis
+
+- price_segment
+- has_rating
+- weighted_score
+- popularity_tier
+
+## 🔁 Garantia de Reprocessamento
+
+Antes da persistência, o diretório Parquet é removido para evitar duplicidade de dados. Essa estratégia garante:
 
 - Overwrite controlado
-- Idempotência
-
-## 🗂 Estrutura Inicial
-
-Após ingestão, o dataset apresentou:
-
-- 1.426.337 registros
-- 11 colunas principais
-- Tipos mistos (object, float64, int64)
-
-### 🖼 Evidências
-
-#### 📌 Estrutura inicial (RAW)
-
-![Head do dataset](../assets/prints/base_dataset_head.jpg)
-
-![Estrutura do dataset (.info())](../assets/prints/base_dataset_info.jpg)
+- Idempotência do pipeline
+- Reprocessamento seguro
 
 ## 📤 Saída da Camada Silver
 
-DataFrame final:
+DataFrame final estruturado:
 
-- 1.379.629 registros
-- 17 colunas
+- 1.379.629 registros válidos
+- 17 colunas estruturadas
 - Tipagem otimizada
+- Sem nulos críticos
 
-### 🖼 Evidências
+### 📸 Evidências:
 
-#### 📌 Estrutura final (Silver)
-
-![Head do dataset](../assets/prints/final_dataset_head.jpg)
+#### 📌 Estrutura final (.info)
 
 ![Estrutura do dataset (.info())](../assets/prints/final_dataset_info.jpg)
+
+#### 📌 Head do DataFrame Silver
+
+![Head do dataset](../assets/prints/final_dataset_head.jpg)
