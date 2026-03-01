@@ -1,0 +1,69 @@
+# -----------------------
+# Python
+# -----------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+*.egg-info/
+dist/
+build/
+pip-wheel-metadata/
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# -----------------------
+# Envs / Secrets
+# -----------------------
+.env
+.env.*
+*.env
+secrets.toml
+*.key
+*.pem
+.streamlit/secrets.toml
+
+# -----------------------
+# Jupyter / Colab
+# -----------------------
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# -----------------------
+# OS / IDE
+# -----------------------
+Thumbs.db
+.DS_Store
+.vscode/
+.idea/
+*.code-workspace
+
+# -----------------------
+# Data
+# -----------------------
+# Ignore everything inside data/
+data/*
+
+# But keep sample folder
+!data/sample/
+!data/sample/**
+
+# Ignore large data files anywhere
+*.csv
+*.parquet
+*.pq
+*.feather
+*.pkl
+*.pickle
+*.joblib
+*.zip
+*.gz
+*.7z
+
+# Keep sample files even if csv/parquet
+!data/sample/*.csv
+!data/sample/*.parquet
