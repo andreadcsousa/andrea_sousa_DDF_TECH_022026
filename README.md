@@ -17,7 +17,7 @@ A empresa possui mais de 1 milhão de produtos cadastrados com:
 
 A solução proposta centraliza, estrutura e enriquece o catálogo utilizando engenharia de dados e GenAI.
 
-## 🏗 Arquitetura do Projeto
+## 🗃️ Arquitetura do Projeto
 
 Camadas implementadas:
 
@@ -32,6 +32,7 @@ Camadas implementadas:
 ```
 app/
 assets/
+dashboard/
 data/
 docs/
 notebooks/
@@ -48,9 +49,9 @@ notebooks/
 | 4    | Data Quality         | ✅     |
 | 5    | GenAI / LLM          | ✅     |
 | 6    | Modelagem de Dados   | ✅     |
-| 7    | Análise / Dashboard  | ⏳     |
+| 7    | Análise / Dashboard  | ✅     |
 | 8    | Pipelines            | ⏳     |
-| 9    | Data App             | ⏳     |
+| 9    | Data App             | ✅     |
 | 10   | Apresentação         | ⏳     |
 
 ## 🧠 Tecnologias e Ferramentas
@@ -69,19 +70,21 @@ notebooks/
 
 ### Visualização
 
+- Power BI
 - Metabase (via Dadosfera)
 
 ### Plataforma de Dados
 
 - Dadosfera SaaS
 
-### Aplicação
+### Data App (Streamlit)
 
-- Streamlit
+Aplicação interativa para explorar o catálogo (Silver + Enriched LLM).
 
 ### Ambiente de Desenvolvimento
 
 - Google Colab
+- Visual Studio Code
 
 ### Versionamento e Documentação
 

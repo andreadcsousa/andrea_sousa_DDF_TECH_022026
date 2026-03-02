@@ -44,7 +44,9 @@ Essa abordagem garante:
 3. Escalabilidade do modelo
 4. Manutenção simplificada
 
-#### 📷 Evidências
+### 📷 Evidências
+
+#### 📌 Modelo Semântico
 
 ![Modelo Semântico](../assets/prints/07_dashboard_04_data_model_relationships.jpg)
 
@@ -54,95 +56,76 @@ O dashboard foi estruturado em três níveis analíticos.
 
 ### 🟣 Página 01 – Visão Executiva
 
-**Objetivo**
+- **Objetivo:** Fornecer um panorama geral da saúde e estrutura do catálogo.
+- **Principais Indicadores:**
+  - Total de produtos
+  - Total de itens best seller
+  - Preço médio do catálogo
+  - Avaliação média do catálogo
+- **Análises complementares:**
+  - Distribuição de produtos por categoria
+  - Categorias com maior volume de best sellers
+  - Mapa de performance (Preço vs Avaliação)
+  - Produto líder com narrativa dinâmica
 
-Fornecer um panorama geral da saúde e estrutura do catálogo.
-
-**Principais Indicadores**
-
-- Total de produtos
-- Total de itens best seller
-- Preço médio do catálogo
-- Avaliação média do catálogo
-
-**Análises complementares**
-
-- Distribuição de produtos por categoria
-- Categorias com maior volume de best sellers
-- Mapa de performance (Preço vs Avaliação)
-- Produto líder com narrativa dinâmica
-
-**Pergunta que responde**
-
+> [!TIP]
+> **Pergunta que responde:**  
 > Como está o desempenho geral do catálogo?
 
-#### 📷 Evidências:
+### 📷 Evidências:
+
+#### 📌 Página 1 - Executive Overview
 
 ![Executive Overview](../assets/prints/07_dashboard_01_page01_executive_overview.jpg)
 
 ### 🟠 Página 02 – Segmentação de Mercado
 
-**Objetivo**
+- **Objetivo:** Analisar o posicionamento estrutural do catálogo por segmento de preço e popularidade.
+- **Componentes principais**
+  - Heatmap de mix por categoria e price segment
+  - Indicador de Revenue Proxy
+  - Segmento dominante
+  - Tier de popularidade dominante
+  - Matriz de posicionamento (Preço vs Avaliação)
+  - Alternância dinâmica entre Preço Médio e Revenue Proxy (Field Parameter)
+- **Revenue Proxy:**
+  - Métrica estimada como: `Receita Proxy = Σ (Preço médio × Unidades vendidas)`
+  - Utilizada como sinal direcional de monetização, não como receita contábil oficial.
 
-Analisar o posicionamento estrutural do catálogo por segmento de preço e popularidade.
-
-**Componentes principais**
-
-- Heatmap de mix por categoria e price segment
-- Indicador de Revenue Proxy
-- Segmento dominante
-- Tier de popularidade dominante
-- Matriz de posicionamento (Preço vs Avaliação)
-- Alternância dinâmica entre Preço Médio e Revenue Proxy (Field Parameter)
-
-**Revenue Proxy**
-
-Métrica estimada como:
-
-`Receita Proxy = Σ (Preço médio × Unidades vendidas)`
-
-Utilizada como sinal direcional de monetização, não como receita contábil oficial.
-
-**Pergunta que responde**
-
+> [!TIP]
+> **Pergunta que responde:**  
 > Como o catálogo está distribuído estruturalmente em termos de valor e popularidade?
 
-#### 📷 Evidências:
+### 📷 Evidências:
+
+#### 📌 Página 2 - Segmentation
 
 ![Segmentation](../assets/prints/07_dashboard_02_page02_segmentation.jpg)
 
 ### 🔵 Página 03 – Inteligência Estratégica com IA
 
-**Objetivo**
+- **Objetivo:** Traduzir o enriquecimento via LLM em inteligência acionável.
+- **Variáveis derivadas por IA:**
+  - llm_product_type
+  - llm_brand_guess
+  - Classificação semântica de produtos
+  - Consolidação por tipo inferido
+- **Componentes principais:**
+  - Mix de tipos de produto identificados pela IA
+  - Marcas inferidas com maior volume
+  - Matriz estratégica de posicionamento (Preço vs Avaliação)
+  - Mapa de concentração por segmento de preço
+  - Texto estratégico dinâmico com recomendação de ação
+- **Papel estratégico:**
+  - Conectar: `Dados → Sinal → Interpretação → Ação recomendada`
 
-Traduzir o enriquecimento via LLM em inteligência acionável.
-
-**Variáveis derivadas por IA**
-
-- llm_product_type
-- llm_brand_guess
-- Classificação semântica de produtos
-- Consolidação por tipo inferido
-
-**Componentes principais**
-
-- Mix de tipos de produto identificados pela IA
-- Marcas inferidas com maior volume
-- Matriz estratégica de posicionamento (Preço vs Avaliação)
-- Mapa de concentração por segmento de preço
-- Texto estratégico dinâmico com recomendação de ação
-
-**Papel estratégico**
-
-Conectar:
-
-`Dados → Sinal → Interpretação → Ação recomendada`
-
-**Pergunta que responde**
-
+> [!TIP]
+> **Pergunta que responde:**  
 > Onde a IA identifica concentração de demanda e quais decisões estratégicas são recomendadas?
 
-#### 📷 Evidências:
+### 📷 Evidências:
+
+#### 📌 Página 3 - AI Insights
 
 ![AI Insights](../assets/prints/07_dashboard_03_page03_ai_insights.jpg)
 
@@ -157,7 +140,9 @@ As medidas foram organizadas em pastas:
 > [!NOTE]
 > Todas as métricas estratégicas são implementadas via DAX, evitando agregações diretas na camada visual.
 
-#### 📷 Evidências:
+### 📷 Evidências:
+
+#### 📌 Organização de medidas em subpastas
 
 ![Métricas (DAX)](../assets/prints/07_dashboard_05_measures_organization.jpg)
 
@@ -169,45 +154,62 @@ As medidas foram organizadas em pastas:
 - Consistência de métricas e moeda
 - Separação entre camada semântica e visual
 
-#### 📷 Evidências:
+### 📷 Evidências:
+
+#### 📌 Texto dinâmico com DAX
 
 ![Texto Dinâmico](../assets/prints/07_dashboard_06_dynamic_text_insight_example.jpg)
 
 O texto foi criado para alterar, dinamicamente, a partir de qualquer filtro ou seleção feita na página:
 
 ```java
-  AI Strategic Insight (Text) =
-  VAR TopRow = TOPN(1, ALLSELECTED(dash_ai_segment_analysis), dash_ai_segment_analysis[total_units], DESC)
-  VAR TopType = MAXX(TopRow, dash_ai_segment_analysis[llm_product_type])
-  VAR TopUnits = MAXX(TopRow, dash_ai_segment_analysis[total_units])
-  VAR AvgPrice = MAXX(TopRow, dash_ai_segment_analysis[avg_price])
-  VAR AvgRating = MAXX(TopRow, dash_ai_segment_analysis[avg_rating])
+AI Strategic Insight (Text) =
+VAR TopRow = TOPN(1, ALLSELECTED(dash_ai_segment_analysis), dash_ai_segment_analysis[total_units], DESC)
+VAR TopType = MAXX(TopRow, dash_ai_segment_analysis[llm_product_type])
+VAR TopUnits = MAXX(TopRow, dash_ai_segment_analysis[total_units])
+VAR AvgPrice = MAXX(TopRow, dash_ai_segment_analysis[avg_price])
+VAR AvgRating = MAXX(TopRow, dash_ai_segment_analysis[avg_rating])
 
-  VAR Interpretation = SWITCH(TRUE(),
-          ISBLANK(AvgRating), "Quality perception cannot be validated due to limited reviews.",
-          AvgRating >= 4.6, "This indicates exceptional customer satisfaction and strong product–market fit.",
-          AvgRating >= 4.2, "This suggests consistent customer satisfaction and a reliable demand signal.",
-          AvgRating >= 3.8, "This suggests solid demand with room to improve customer experience.",
-          AvgRating >= 3.3, "This suggests moderate satisfaction and potential friction points to address.",
-          "This suggests demand may be price-driven, with potential quality and conversion risks."
-  )
+VAR Interpretation = SWITCH(TRUE(),
+        ISBLANK(AvgRating),
+        "Quality perception cannot be validated due to limited reviews.",
+        AvgRating >= 4.6,
+        "This indicates exceptional customer satisfaction and strong product–market fit.",
+        AvgRating >= 4.2,
+        "This suggests consistent customer satisfaction and a reliable demand signal.",
+        AvgRating >= 3.8,
+        "This suggests solid demand with room to improve customer experience.",
+        AvgRating >= 3.3,
+        "This suggests moderate satisfaction and potential friction points to address.",
+        "This suggests demand may be price-driven, with potential quality and conversion risks."
+)
 
-  VAR NextAction = SWITCH(TRUE(),
-          ISBLANK(AvgRating), "Action: prioritize review collection to validate quality before scaling.",
-          AvgRating >= 4.6, "Action: scale visibility (search/ads/recommendations) and protect availability.",
-          AvgRating >= 4.2, "Action: scale distribution and maintain pricing discipline.",
-          AvgRating >= 3.8, "Action: optimize listing content and post-purchase experience to lift ratings.",
-          AvgRating >= 3.3, "Action: investigate complaints/returns and remove key friction points.",
-          "Action: investigate quality issues and returns risk before increasing exposure."
-  )
+VAR NextAction = SWITCH(TRUE(),
+        ISBLANK(AvgRating),
+        "Action: prioritize review collection to validate quality before scaling.",
+        AvgRating >= 4.6,
+        "Action: scale visibility (search/ads/recommendations) and protect availability.",
+        AvgRating >= 4.2,
+        "Action: scale distribution and maintain pricing discipline.",
+        AvgRating >= 3.8,
+        "Action: optimize listing content and post-purchase experience to lift ratings.",
+        AvgRating >= 3.3,
+        "Action: investigate complaints/returns and remove key friction points.",
+        "Action: investigate quality issues and returns risk before increasing exposure."
+)
 
-  RETURN
-    "Within the AI-enriched sample, '" & TopType & "' leads demand with " & FORMAT(TopUnits, "#,0", "en-US") & " units sold. " &
-    "It is priced at $" & FORMAT(AvgPrice, "0.00", "en-US") & " with an average rating of " & FORMAT(AvgRating, "0.0", "en-US") & "★. " &
-    UNICHAR(10) & UNICHAR(10) & Interpretation & " " & "Demand concentration suggests category-level dominance potential. " & NextAction
+RETURN
+"Within the AI-enriched sample, '" & TopType &
+"' leads demand with " & FORMAT(TopUnits, "#,0", "en-US") & " units sold. " &
+"It is priced at $" & FORMAT(AvgPrice, "0.00", "en-US") &
+" with an average rating of " & FORMAT(AvgRating, "0.0", "en-US") & "★. " &
+UNICHAR(10) & UNICHAR(10) & Interpretation & " " &
+"Demand concentration suggests category-level dominance potential. " & NextAction
 ```
 
 ## 🏁 Resultado
+
+#### 📌 Dashboard publicado no [Power BI Online](https://app.powerbi.com/view?r=eyJrIjoiNjhmNDg5MWMtMGU0Yi00ZjI5LTg5MTMtNTRiNTM5Y2RkOTAzIiwidCI6ImEzZTU3Zjc1LTU5YTktNDFkOS05ZGIwLTA0YmM0ODg2YWY3NyJ9&pageName=5f22c10194a1a41d956c)
 
 O dashboard permite:
 
@@ -216,4 +218,4 @@ O dashboard permite:
 - Avaliação de concentração de monetização
 - Integração prática de IA em decisões de negócio
 
-Ele consolida a transição da camada analítica tradicional para uma camada de inteligência aumentada.
+Consolida a transição da camada analítica tradicional para uma camada de inteligência aumentada.

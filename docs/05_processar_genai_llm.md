@@ -64,7 +64,7 @@ Parâmetros utilizados nesta execução:
 
 #### 📌 Shape do sample:
 
-![Shape do sample](../assets/prints/05_llm_01_sample_dataset_shape.jpg)
+![Shape do sample](../assets/prints/05_llm_02_sample_dataset_shape.jpg)
 
 ## 🧾 Prompt Engineering
 
@@ -136,7 +136,7 @@ Essa camada pode ser:
 
 #### 📌 Parquet Saved Confirmation:
 
-![Parquet Saved Confirmation](../assets/prints/05_llm_10_parquet_saved_confirmation.jpg)
+![Parquet Saved Confirmation](../assets/prints/05_llm_11_parquet_saved_confirmation.jpg)
 
 ## 🧱 Organização no Data Lake
 
@@ -150,8 +150,7 @@ Após esta etapa, o fluxo de dados passa a ser:
 
 ## 🔁 Reprodutibilidade
 
-O processo é totalmente reexecutável via notebook:  
-[Processar GenAI LLM Features](../notebooks/03_processar_genai_llm_features.ipynb)
+O processo é totalmente reexecutável via notebook: [Processar GenAI LLM Features](../notebooks/03_processar_genai_llm_features.ipynb)
 
 A execução inclui:
 
@@ -201,7 +200,7 @@ A execução inclui:
 
 #### 📌 Cost Estimation Output:
 
-![Cost Estimation Output](../assets/prints/05_llm_12_cost_estimation_output.jpg)
+![Cost Estimation Output](../assets/prints/05_llm_13_cost_estimation_output.jpg)
 
 ## ✅ Resultado
 

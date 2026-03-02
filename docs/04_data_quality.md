@@ -25,7 +25,7 @@ Foi executada análise de nulos por coluna:
 
 #### 📌 Análise de Nulos
 
-![Análise de nulos](../assets/prints/09_data_quality_01_null_analysis.jpg)
+![Análise de nulos](../assets/prints/04_data_quality_01_null_analysis.jpg)
 
 ## 📈 Análise de Distribuição
 
@@ -98,5 +98,4 @@ Após as verificações realizadas, o dataset apresenta:
 
 ## 🔁 Reprodutibilidade
 
-Todas as verificações foram executadas via notebook [ETL de Ingestão e Limpeza](../notebooks/01_etl_ingestao_limpeza_silver.ipynb),
-permitindo reprocessamento e auditoria completa.
+Todas as verificações foram executadas via notebook [ETL de Ingestão e Limpeza](../notebooks/01_etl_ingestao_limpeza_silver.ipynb), permitindo reprocessamento e auditoria completa.

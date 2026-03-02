@@ -18,9 +18,9 @@ Os arquivos originais foram carregados utilizando o módulo **Coletar** da Dados
 
 ### 📸 Evidências:
 
-- Upload no catálogo da Dadosfera
+#### 📌 Upload no catálogo da Dadosfera
 
-![Uploads de arquivos raw](../assets/prints/07_dadosfera_03_raw_upload_confirmation.jpg)
+![Uploads de arquivos raw](../assets/prints/03_dadosfera_03_raw_upload_confirmation.jpg)
 
 > [!WARNING]
 > A plataforma aceita arquivos com limite de até **250MB** por upload.
@@ -72,9 +72,9 @@ Após o carregamento, foram aplicadas boas práticas de governança de dados:
 
 #### 📌 Descrição dos ativos
 
-![Catalogação dos produtos](../assets/prints/07_dadosfera_02_raw_products_catalog.jpg)
+![Catalogação dos produtos](../assets/prints/03_dadosfera_02_raw_products_catalog.jpg)
 
-![Catalogação das categorias](../assets/prints/07_dadosfera_01_raw_categories_catalog.jpg)
+![Catalogação das categorias](../assets/prints/03_dadosfera_01_raw_categories_catalog.jpg)
 
 ## 🗂️ Organização em Camadas (Data Lake)
 

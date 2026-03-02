@@ -166,12 +166,12 @@ Abaixo estão evidências da organização e execução do projeto:
 
 #### 📌 Épicos Criados
 
-![Épicos no Azure DevOps](../assets/prints/08_devops_02_epics_overview.jpg)
+![Épicos no Azure DevOps](../assets/prints/01_devops_02_epics_overview.jpg)
 
 #### 📌 Hierarquia (Epic → Features → Tasks)
 
-![Hierarquia do Épico Engenharia](../assets/prints/08_devops_03_epic_hierarchy_engineering.jpg)
+![Hierarquia do Épico Engenharia](../assets/prints/01_devops_03_epic_hierarchy_engineering.jpg)
 
 #### 📌 Estrutura do Épico com 5W
 
-![Épico estruturado com 5W](../assets/prints/08_devops_01_epic_5w_definition.jpg)
+![Épico estruturado com 5W](../assets/prints/01_devops_01_epic_5w_definition.jpg)

@@ -10,7 +10,7 @@ Este documento centraliza todos os links, evidências e ativos exigidos para ava
 ✔ GenAI  
 ✔ Dashboard  
 ⏳ Pipeline  
-⏳ Data App  
+✔ Data App  
 ⏳ Apresentação
 
 ## 1️⃣ Planejamento (PMBOK)
@@ -25,7 +25,7 @@ Este documento centraliza todos os links, evidências e ativos exigidos para ava
 - **Documento:** [Base de Dados](../docs/02_base_de_dados.md)
 - **Link Dataset:** [Amazon Products Dataset 2023](https://www.kaggle.com/datasets/asaniczka/amazon-products-dataset-2023-1-4m-products)
 - **Evidências:**
-  - Leitura, head e info do dataset
+  - Leitura, head e info do dataset base
 
 ## 3️⃣ Integrar e Explorar
 
@@ -76,6 +76,7 @@ Este documento centraliza todos os links, evidências e ativos exigidos para ava
   - Páginas: Executive Overview, Segmentation, AI Insights
   - Relacionamentos e Modelos de Pasta de Exibição
   - Métrica para texto dinâmico
+  - Dashboard publicado no Power BI Online
 
 ## 8️⃣ Pipeline
 
@@ -91,8 +92,10 @@ Este documento centraliza todos os links, evidências e ativos exigidos para ava
 
 - **Documento:** [Data APP](../docs/09_data_app.md)
 - **Notebook:** [Data APP Streamlit](../notebooks/04_data_app_streamlit.ipynb)
-- **Link Streamlit:** [Inserir link]()
+- **Link Streamlit:** [Amazon Catalog Intelligence]()
 - **Evidências:**
+  - Páginas da aplicação
+  - Streamlit Data APP
 
 ## 🔟 Apresentação
 
