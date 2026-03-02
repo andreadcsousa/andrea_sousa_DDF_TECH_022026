@@ -67,3 +67,4 @@ data/*
 # Keep sample files even if csv/parquet
 !data/sample/*.csv
 !data/sample/*.parquet
+!app/*.parquet
