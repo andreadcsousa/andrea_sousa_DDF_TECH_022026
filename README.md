@@ -46,7 +46,7 @@ notebooks/
 | 2    | Integrar             | ✅     |
 | 3    | Explorar             | ✅     |
 | 4    | Data Quality         | ✅     |
-| 5    | GenAI / LLM          | ⏳     |
+| 5    | GenAI / LLM          | ✅     |
 | 6    | Modelagem de Dados   | ✅     |
 | 7    | Análise / Dashboard  | ⏳     |
 | 8    | Pipelines            | ⏳     |

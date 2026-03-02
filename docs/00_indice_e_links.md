@@ -8,7 +8,7 @@ Este documento centraliza todos os links, evidências e ativos exigidos para ava
 ✔ Engenharia  
 ✔ Modelagem  
 ✔ GenAI  
-⏳ Dashboard  
+✔ Dashboard  
 ⏳ Pipeline  
 ⏳ Data App  
 ⏳ Apresentação
@@ -71,11 +71,11 @@ Este documento centraliza todos os links, evidências e ativos exigidos para ava
 ## 7️⃣ Dashboard
 
 - **Documento:** [Analisar Dashboard](../docs/07_analisar_dashboard.md)
-- **Coleção:** <Nome Sobrenome - Mes_Ano>
-- **SQL utilizada:** [Dashboard Queries SQL](../assets/sql/dashboard_queries.sql)
+- **Dashboard:** [Amazon Catalog Intelligence & Strategic Analytics](../dashboard/amazon_catalog_intelligence.pbix)
 - **Evidências:**
-  - 5 visualizações distintas
-  - Evidência de coleção criada
+  - Páginas: Executive Overview, Segmentation, AI Insights
+  - Relacionamentos e Modelos de Pasta de Exibição
+  - Métrica para texto dinâmico
 
 ## 8️⃣ Pipeline
 
