@@ -30,7 +30,7 @@ Camada de consumo interativo (Data App) que complementa o dashboard executivo:
 
 ### Saída
 
-#### 📌 Aplicação Streamlit: [Amazon Catalog Intelligence]()
+#### 📌 Aplicação Streamlit: [Amazon Catalog Intelligence](https://acs-amazon-catalog-app.streamlit.app/)
 
 O notebook no Google Colab gera o arquivo parquet. Esse arquivo é utilizado no script do app para executar a aplicação via Streamlit localmente.
 

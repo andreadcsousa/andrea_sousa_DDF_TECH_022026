@@ -1,6 +1,7 @@
 # Instalar dependências no terminal:
 # pip install streamlit pandas pyarrow plotly
 
+import os
 import pandas as pd
 import streamlit as st
 import plotly.express as px
@@ -16,14 +17,15 @@ def load_data(path: str) -> pd.DataFrame:
             df[c] = pd.to_numeric(df[c], errors="coerce")
     return df
 
-# Título e descrição
 st.title("Amazon Catalog Intelligence & Strategic Analytics")
 st.caption("Data App (Streamlit) — camada interativa sobre Silver + Enriched (LLM)")
 
-# Barra lateral
+current_dir = os.path.dirname(__file__)
+default_path = os.path.join(current_dir, "amazon_catalog_app.parquet")
+
 DATA_PATH = st.sidebar.text_input(
     "Path do dataset (parquet)",
-    value="amazon_catalog_app.parquet"
+    value=default_path
 )
 
 try:

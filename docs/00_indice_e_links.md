@@ -92,7 +92,7 @@ Este documento centraliza todos os links, evidências e ativos exigidos para ava
 
 - **Documento:** [Data APP](../docs/09_data_app.md)
 - **Notebook:** [Data APP Streamlit](../notebooks/04_data_app_streamlit.ipynb)
-- **Link Streamlit:** [Amazon Catalog Intelligence]()
+- **Link Streamlit:** [Amazon Catalog Intelligence](https://acs-amazon-catalog-app.streamlit.app/)
 - **Evidências:**
   - Páginas da aplicação
   - Streamlit Data APP
