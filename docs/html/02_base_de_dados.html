@@ -141,19 +141,22 @@
             <h1 id="base-de-dados">Base de Dados</h1>
 <h2 id="-dataset-selecionado">📊 Dataset Selecionado</h2>
 <p><strong>Amazon Products Dataset 2023</strong></p>
+<p>O dataset foi utilizado como base para construção de um ambiente analítico completo, incluindo ingestão, tratamento, enriquecimento com IA, modelagem dimensional e consumo analítico via dashboards e Data App.</p>
 <ul>
 <li><strong>Total de registros:</strong> 1.426.337 produtos</li>
-<li><strong>Volume validado na ingestão na Dadosfera:</strong> &gt; 1.400.000 registros carregados na camada RAW</li>
-<li><strong>Domínio:</strong> E-commerce</li>
-<li><strong>Fonte:</strong> Kaggle (Dataset público)</li>
-<li><strong>Formato original:</strong> CSV</li>
+<li><strong>Volume validado na ingestão:</strong> &gt; 1.400.000 registros carregados na camada RAW</li>
+<li><strong>Domínio:</strong> E-commerce (Catálogo de Produtos)</li>
+<li><strong>Fonte:</strong> Kaggle (dataset público)</li>
+<li><strong>Formato original:</strong> CSV estruturado</li>
+<li><strong>Granularidade:</strong> 1 linha por produto</li>
+<li><strong>Principais atributos:</strong> título, descrição, categoria, preço, avaliação (rating), número de reviews</li>
 </ul>
 <h2 id="-justificativa-da-escolha">🎯 Justificativa da Escolha</h2>
 <p>O dataset foi selecionado por:</p>
 <ul>
-<li>Escala adequada (&gt; 1 milhão de registros)</li>
-<li>Representação realista de um grande catálogo de e-commerce</li>
-<li>Presença de variáveis relevantes para análise estratégica:
+<li>Escala adequada (&gt; 1 milhão de registros), permitindo simulação realista de ambiente corporativo</li>
+<li>Representação consistente de um grande catálogo de e-commerce</li>
+<li>Presença de variáveis estratégicas para análise e modelagem:
 <ul>
 <li>Preço</li>
 <li>Avaliações (rating)</li>
@@ -162,9 +165,10 @@
 <li>Indicador de Best Seller</li>
 </ul>
 </li>
-<li>Campo textual (product_title) adequado para enriquecimento via LLM</li>
-<li>Compatibilidade com arquitetura transacional (PostgreSQL) para simulação de sistema operacional real</li>
-<li>Adequação ao cenário proposto no case (empresa de e-commerce buscando centralização e IA)</li>
+<li>Campo textual (product_title e product_description) adequado para enriquecimento semântico via LLM</li>
+<li>Estrutura compatível com modelagem analítica dimensional (produto, categoria e métricas derivadas)</li>
+<li>Compatibilidade com arquitetura transacional (PostgreSQL) para simulação de sistema operacional</li>
+<li>Aderência ao cenário do case: centralização de dados, analytics e aplicação de IA em contexto de e-commerce</li>
 </ul>
 <h2 id="-estrutura-dos-dados">🧱 Estrutura dos Dados</h2>
 <p>Principais colunas utilizadas no projeto:</p>
@@ -180,17 +184,17 @@
 <tr>
 <td>product_id</td>
 <td>string</td>
-<td>Identificador único do produto</td>
+<td>Identificador único do produto (chave da dimensão)</td>
 </tr>
 <tr>
 <td>product_title</td>
 <td>string</td>
-<td>Texto para enriquecimento via LLM</td>
+<td>Texto base para enriquecimento semântico via LLM</td>
 </tr>
 <tr>
 <td>category_id</td>
 <td>integer</td>
-<td>Chave de categorização</td>
+<td>Chave de categorização (dimensão categoria)</td>
 </tr>
 <tr>
 <td>category_name</td>
@@ -200,76 +204,82 @@
 <tr>
 <td>price</td>
 <td>float</td>
-<td>Preço atual</td>
+<td>Preço atual (métrica analítica)</td>
 </tr>
 <tr>
 <td>list_price</td>
 <td>float</td>
-<td>Preço original</td>
+<td>Preço original para cálculo de desconto</td>
 </tr>
 <tr>
 <td>rating</td>
 <td>float</td>
-<td>Avaliação média</td>
+<td>Avaliação média do produto</td>
 </tr>
 <tr>
 <td>review_count</td>
 <td>integer</td>
-<td>Volume de avaliações</td>
+<td>Volume de avaliações (proxy de popularidade)</td>
 </tr>
 <tr>
 <td>units_sold_last_month</td>
 <td>integer</td>
-<td>Indicador de vendas</td>
+<td>Indicador recente de vendas (métrica de desempenho)</td>
 </tr>
 <tr>
 <td>is_best_seller</td>
 <td>boolean</td>
-<td>Indicador estratégico</td>
+<td>Indicador estratégico de destaque comercial</td>
 </tr>
 </tbody>
 </table>
 <h3 id="-volume-e-complexidade">🧮 Volume e Complexidade</h3>
-<p>A base apresenta características que impactam diretamente a engenharia de dados:</p>
+<p>A base apresenta características que impactam diretamente a engenharia e modelagem analítica:</p>
 <ul>
-<li>1,4M registros</li>
-<li>10+ colunas relevantes</li>
-<li>Campo textual com alta cardinalidade</li>
+<li>~1,4M registros</li>
+<li>10+ colunas relevantes para análise</li>
+<li>Campos textuais com alta cardinalidade (título e descrição)</li>
 <li>248 categorias distintas</li>
-<li>Necessidade de processamento incremental para viabilizar pipelines escaláveis</li>
+<li>Necessidade de estratégia de processamento escalável para suportar crescimento do volume de dados</li>
 </ul>
 <p>Essas características demandam:</p>
 <ul>
-<li>Otimização de tipos (float32 / int32)</li>
-<li>Estruturação em camadas (RAW → STANDARDIZED → CURATED)</li>
-<li>Estratégia controlada de amostragem para LLM</li>
+<li>Otimização de tipos numéricos (float32 / int32) para eficiência de memória</li>
+<li>Organização em camadas (RAW → Standardized → Curated)</li>
+<li>Estratégia controlada de amostragem e processamento em batch para LLM</li>
+<li>Separação entre dados transacionais e dados analíticos</li>
 </ul>
 <h2 id="-potencial-analítico">🔎 Potencial Analítico</h2>
 <p>O dataset suporta múltiplas camadas analíticas:</p>
 <ul>
 <li>Identificação de categorias estratégicas e produtos de alto desempenho</li>
-<li>Segmentação por faixa de preço</li>
-<li>Performance por categoria</li>
-<li>Geração de série temporal sintética</li>
-<li>Enriquecimento via GenAI</li>
+<li>Segmentação por faixa de preço e análise de elasticidade</li>
+<li>Análise de performance por categoria (vendas, rating e volume de reviews)</li>
+<li>Construção de indicadores derivados (ticket médio, desconto percentual, popularidade)</li>
+<li>Geração de série temporal sintética para análise evolutiva</li>
+<li>Enriquecimento semântico via GenAI para criação de atributos estruturados</li>
+<li>Base para futuros modelos preditivos (ranking, recomendação ou propensão)</li>
 </ul>
 <h2 id="-conexão-com-o-problema-de-negócio">🏢 Conexão com o Problema de Negócio</h2>
-<p>Esse cenário é compatível com o desafio proposto no case, que exige centralização, governança e aplicação de IA em escala.</p>
+<p>O cenário modelado é compatível com o desafio proposto, que demanda centralização, governança e aplicação de IA em escala em contexto de e-commerce.</p>
 <ul>
-<li>A padronização do catálogo é crítica</li>
-<li>A análise por categoria impacta estratégia comercial</li>
-<li>O enriquecimento via IA habilita segmentação inteligente</li>
-<li>A centralização de dados reduz complexidade arquitetural</li>
+<li>A padronização do catálogo é crítica para consistência analítica e redução de retrabalho</li>
+<li>A análise por categoria impacta diretamente estratégia comercial e priorização de portfólio</li>
+<li>O enriquecimento via IA habilita segmentação inteligente e melhoria na descoberta de produtos</li>
+<li>A consolidação das métricas em camada analítica suporta decisões orientadas a dados</li>
+<li>A centralização reduz complexidade arquitetural e dependência de múltiplos serviços desacoplados</li>
 </ul>
-<p>A escala e diversidade da base reforçam a necessidade de uma Plataforma de Dados centralizada como a Dadosfera.</p>
+<p>A escala e diversidade da base reforçam a necessidade de uma Plataforma de Dados integrada e governável para suportar crescimento sustentável e geração contínua de valor.</p>
 <h2 id="-estratégia-de-integração">🔌 Estratégia de Integração</h2>
-<p>A base foi estruturada em PostgreSQL público (cloud), simulando ambiente transacional real, permitindo conexão direta via módulo de Conexões da Dadosfera.</p>
+<p>Para simular um ambiente transacional real, a base foi estruturada em um banco PostgreSQL público (cloud).</p>
+<p>Paralelamente, a ingestão na plataforma também foi demonstrada via upload direto de arquivos estruturados (Parquet), permitindo evidenciar diferentes estratégias de integração suportadas pela plataforma.</p>
 <p><strong>Essa abordagem viabiliza:</strong></p>
 <ul>
-<li>Integração via módulo de Coleta</li>
-<li>Aplicação de microtransformações</li>
-<li>Criação de pipelines escaláveis</li>
-<li>Organização em camadas (RAW → STANDARDIZED → CURATED)</li>
+<li>Integração via módulo de Coleta a partir de fonte relacional</li>
+<li>Aplicação de microtransformações ainda na camada de ingestão</li>
+<li>Criação de pipelines escaláveis com separação entre origem e camada analítica</li>
+<li>Organização em camadas (RAW → Standardized → Curated)</li>
+<li>Simulação de fluxo próximo ao cenário corporativo (sistema operacional → plataforma analítica)</li>
 </ul>
 <h2 id="-evidências-da-base">📷 Evidências da Base</h2>
 <p>Evidências da ingestão e estrutura do dataset no Google Colab:</p>

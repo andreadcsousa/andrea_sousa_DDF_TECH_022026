@@ -140,23 +140,23 @@
         <body class="vscode-body vscode-light">
             <h1 id="modelagem-de-dados">Modelagem de Dados</h1>
 <h2 id="-abordagem-escolhida-kimball">📐 Abordagem escolhida: Kimball</h2>
-<p>A modelagem foi estruturada seguindo os princípios de <strong>Ralph Kimball (modelo dimensional)</strong>, organizando o domínio em:</p>
+<p>A modelagem foi estruturada seguindo os princípios de <strong>Ralph Kimball (modelo dimensional)</strong>, organizando o domínio em esquema estrela (Star Schema):</p>
 <ul>
-<li><strong>Dimensões</strong> → contexto e atributos descritivos</li>
-<li><strong>Fatos</strong> → métricas e eventos mensuráveis</li>
+<li><strong>Dimensões</strong> → contexto, atributos descritivos e classificações</li>
+<li><strong>Fatos</strong> → métricas quantitativas e indicadores de desempenho</li>
 </ul>
-<p>A modelagem foi aplicada sobre a camada CURATED, derivada da camada STANDARDIZED enriquecida com features via LLM.</p>
+<p>A modelagem foi aplicada sobre a camada Curated, derivada da camada Standardized enriquecida com features semânticas via LLM.</p>
 <h3 id="-justificativa-da-escolha">🎯 Justificativa da Escolha</h3>
 <ul>
-<li>Foco em análise e BI (Metabase / Dadosfera)</li>
-<li>Clareza na definição de granularidade</li>
+<li>Foco analítico e orientação a BI (Metabase / módulo de Visualização)</li>
+<li>Clareza na definição de granularidade (1 linha por produto)</li>
+<li>Separação explícita entre contexto (dimensões) e métricas (fatos)</li>
 <li>Facilidade de expansão futura (GenAI, similaridade, recomendação)</li>
-<li>Desempenho em consultas analíticas (Star Schema)</li>
-<li>Adequação ao módulo de Visualização da Dadosfera (consultas SQL analíticas)</li>
-<li>Simplicidade de manutenção frente a arquiteturas complexas (ex: Data Vault) para escopo de BI</li>
+<li>Desempenho otimizado para consultas analíticas (Star Schema)</li>
+<li>Simplicidade de manutenção frente a arquiteturas mais complexas (ex: Data Vault) para escopo de BI</li>
 </ul>
 <h2 id="-princípio-de-modelagem">📌 Princípio de Modelagem</h2>
-<p>O modelo foi estruturado em formato Star Schema, com fatos centralizados e dimensões desnormalizadas para otimização analítica. O modelo foi dividido em dois Data Marts analíticos complementares::</p>
+<p>O modelo foi estruturado em formato Star Schema, com fatos centralizados e dimensões desnormalizadas para otimização analítica. O modelo foi dividido em dois Data Marts analíticos complementares:</p>
 <ol>
 <li><strong>Snapshot por Produto →</strong> análise de performance individual.</li>
 <li><strong>Série Temporal Agregada →</strong> análise estratégica por categoria e segmento.</li>
@@ -175,7 +175,11 @@
 </thead>
 <tbody>
 <tr>
-<td>product_id (PK)</td>
+<td>product_sk (PK)</td>
+<td>integer</td>
+</tr>
+<tr>
+<td>product_id (NK)</td>
 <td>text</td>
 </tr>
 <tr>
@@ -192,6 +196,10 @@
 </tr>
 <tr>
 <td>list_price</td>
+<td>numeric</td>
+</tr>
+<tr>
+<td>discount_percentage</td>
 <td>numeric</td>
 </tr>
 <tr>
@@ -215,6 +223,14 @@
 <td>boolean</td>
 </tr>
 <tr>
+<td>llm_brand_guess</td>
+<td>text</td>
+</tr>
+<tr>
+<td>llm_product_type</td>
+<td>text</td>
+</tr>
+<tr>
 <td>image_url</td>
 <td>text</td>
 </tr>
@@ -224,7 +240,8 @@
 </tr>
 </tbody>
 </table>
-<div class="markdown-alert markdown-alert-note"><p class="markdown-alert-title"><svg class="octicon octicon-info mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p><p>A inclusão de atributos como price e rating na dimensão foi adotada por se tratar de snapshot descritivo do estado atual do produto, não representando eventos históricos.</p>
+<div class="markdown-alert markdown-alert-note"><p class="markdown-alert-title"><svg class="octicon octicon-info mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p><p>O atributo <code>discount_percentage</code> é derivado de <code>price</code> e <code>list_price</code>, calculado na camada Standardized durante o processo de padronização dos dados.</p>
+<p>A inclusão de atributos como price, rating e atributos enriquecidos via LLM (<code>llm_brand_guess</code> e <code>llm_product_type</code>) na dimensão foi adotada por se tratar de snapshot descritivo do estado atual do produto, integrando dados estruturais da camada Standardized e atributos semânticos provenientes da camada Enriched.</p>
 </div>
 <blockquote>
 <p>📂 dim_category</p>
@@ -254,6 +271,7 @@
 <ul>
 <li>Granularidade: <strong>1 linha = 1 produto</strong></li>
 <li>Chave Primária: <strong>product_id</strong></li>
+<li>Chave Estrangeira: <strong>product_sk (surrogate key)</strong></li>
 </ul>
 <table>
 <thead>
@@ -279,13 +297,16 @@
 </tr>
 </tbody>
 </table>
+<div class="markdown-alert markdown-alert-note"><p class="markdown-alert-title"><svg class="octicon octicon-info mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p><p>O uso de <code>product_sk</code> (surrogate key) permite estabilidade de relacionamento e facilita evolução do modelo, mesmo se <code>product_id</code> mudar na origem.</p>
+</div>
 <blockquote>
 <p>💼 Uso Principal</p>
 </blockquote>
 <ul>
-<li>Top produtos por categoria</li>
-<li>Priorização de catálogo</li>
+<li>Identificação de top produtos por categoria</li>
+<li>Priorização estratégica de catálogo</li>
 <li>Comparação de performance intra-categoria</li>
+<li>Base para ranking e recomendação futura</li>
 </ul>
 <h2 id="-visão-2--série-temporal-mensal-por-categoria--segmentações">📈 Visão 2 – Série Temporal (Mensal por Categoria + Segmentações)</h2>
 <p>Essa abordagem foi adotada exclusivamente para fins analíticos e demonstração de modelagem temporal.</p>
@@ -294,7 +315,7 @@
 <p>📅 dim_date</p>
 </blockquote>
 <ul>
-<li>Granularidade: 1 linha = 1 mês por combinação de categoria, price_segment e popularity_tier.</li>
+<li>Granularidade: 1 linha = 1 mês.</li>
 </ul>
 <table>
 <thead>
@@ -356,7 +377,7 @@
 <p>A dimensão de categoria é compartilhada entre os fatos, garantindo consistência analítica entre análises de produto e análises temporais.</p>
 <h3 id="-fatos-1">📊 Fatos</h3>
 <blockquote>
-<p>fact_category_monthly</p>
+<p>🧾 fact_category_monthly</p>
 </blockquote>
 <ul>
 <li>Granularidade: <strong>1 linha = 1 mês + 1 categoria + 1 price_segment + 1 popularity_tier</strong></li>
@@ -383,6 +404,8 @@
 </tr>
 </tbody>
 </table>
+<div class="markdown-alert markdown-alert-note"><p class="markdown-alert-title"><svg class="octicon octicon-info mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p><p>As métricas <code>median_price</code> e <code>avg_price</code> são agregações calculadas a partir da dimensão de produtos durante a geração da série temporal sintética.</p>
+</div>
 <blockquote>
 <p>💼 Uso Principal</p>
 </blockquote>
@@ -391,15 +414,16 @@
 <li>Comparação entre segmentos (budget vs premium)</li>
 <li>Análise por faixa de popularidade</li>
 </ul>
-<div class="markdown-alert markdown-alert-important"><p class="markdown-alert-title"><svg class="octicon octicon-report mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v9.5A1.75 1.75 0 0 1 14.25 13H8.06l-2.573 2.573A1.458 1.458 0 0 1 3 14.543V13H1.75A1.75 1.75 0 0 1 0 11.25Zm1.75-.25a.25.25 0 0 0-.25.25v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25Zm7 2.25v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Important</p><p><strong>Observação:</strong> Como o dataset não possui data real, a série temporal foi gerada de forma sintética e reprodutível (seed fixa), ancorada em <code>units_sold_last_month</code> e sazonalidade típica de e-commerce.</p>
+<div class="markdown-alert markdown-alert-important"><p class="markdown-alert-title"><svg class="octicon octicon-report mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v9.5A1.75 1.75 0 0 1 14.25 13H8.06l-2.573 2.573A1.458 1.458 0 0 1 3 14.543V13H1.75A1.75 1.75 0 0 1 0 11.25Zm1.75-.25a.25.25 0 0 0-.25.25v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25Zm7 2.25v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Important</p><p><strong>Observação:</strong> Como o dataset não possui data real, a série temporal foi gerada de forma sintética e reprodutível (seed fixa), ancorada em <code>units_sold_last_month</code> e em um fator de sazonalidade parametrizado.</p>
 </div>
-<h2 id="-integração-com-dadosfera">🧠 Integração com Dadosfera</h2>
-<p>O modelo dimensional foi desenhado para ser materializado via pipeline na plataforma Dadosfera, utilizando a camada CURATED como base para dashboards e Data Apps.</p>
+<h2 id="-integração-com-a-plataforma-de-dados">🧠 Integração com a Plataforma de Dados</h2>
+<p>O modelo dimensional foi desenhado para ser materializado via pipeline na camada Curated, servindo como base estruturada para dashboards e Data Apps.</p>
 <p><strong>A arquitetura permite:</strong></p>
 <ul>
-<li>Execução de consultas SQL diretamente no módulo de Visualização</li>
-<li>Evolução para modelos de recomendação</li>
-<li>Integração com features enriquecidas via LLM</li>
+<li>Execução de consultas SQL analíticas diretamente no módulo de Visualização</li>
+<li>Evolução futura para modelos de recomendação e similaridade</li>
+<li>Integração direta com features enriquecidas via LLM</li>
+<li>Separação clara entre tratamento estrutural e consumo analítico</li>
 </ul>
 <h2 id="-diagrama-erd">➿ Diagrama ERD</h2>
 <ul>
@@ -415,17 +439,18 @@
 <li>Engine de validação: <strong>DuckDB (via DBeaver)</strong></li>
 </ul>
 <h3 id="-validação-do-modelo">✅ Validação do Modelo</h3>
-<p>A validação estrutural assegura que o modelo pode ser implantado em qualquer engine SQL compatível, reforçando a capacidade de substituição arquitetural. O modelo dimensional foi validado executando o DDL no DBeaver utilizando DuckDB como engine local.</p>
-<p><strong>Nesta etapa foi validada:</strong></p>
+<p>A validação estrutural assegura que o modelo pode ser implantado em engines SQL compatíveis, reforçando viabilidade arquitetural e portabilidade.</p>
+<p>O modelo dimensional foi validado executando o DDL no DBeaver utilizando DuckDB como engine local.</p>
+<p><strong>Nesta etapa foi validado:</strong></p>
 <ul>
 <li>Estrutura das tabelas</li>
-<li>Chaves primárias</li>
-<li>Chaves estrangeiras</li>
+<li>Definição de chaves primárias</li>
+<li>Definição de chaves estrangeiras</li>
 <li>Integridade relacional</li>
 </ul>
-<h4 id="-ddl-no-dbeaver">📌 DDL no Dbeaver</h4>
+<h4 id="-ddl-no-dbeaver">📌 DDL no DBeaver</h4>
 <p><img src="file:///c:\Users\Pink\Documents\GitHub\andrea_sousa_DDF_TECH_022026\assets\prints\06_modelagem_01_kimball_ddl.jpg" alt="Kimball DDL"></p>
-<div class="markdown-alert markdown-alert-warning"><p class="markdown-alert-title"><svg class="octicon octicon-alert mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Warning</p><p>A materialização efetiva ocorrerá via pipeline na plataforma, conforme descrito no Item 8.</p>
+<div class="markdown-alert markdown-alert-warning"><p class="markdown-alert-title"><svg class="octicon octicon-alert mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Warning</p><p>A materialização definitiva do modelo será realizada por meio de pipelines automatizados descritos na etapa de engenharia de dados do projeto.</p>
 </div>
 
             

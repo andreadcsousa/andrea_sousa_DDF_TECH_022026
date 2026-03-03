@@ -2,7 +2,7 @@
 
 ## 📌 Visão Geral
 
-Este repositório apresenta uma Prova de Conceito (PoC) para implementação de uma Plataforma de Dados utilizando a Dadosfera SaaS, aplicada a um cenário realista de e-commerce com mais de 1,5 milhão de registros (Amazon Products Dataset 2023).
+Este repositório apresenta uma Prova de Conceito (PoC) para implementação de uma Plataforma de Dados utilizando a Dadosfera SaaS, aplicada a um cenário realista de e-commerce com aproximadamente 1,4 milhão de registros (Amazon Products Dataset 2023).
 
 O objetivo é demonstrar como a Dadosfera pode atuar como camada central de integração, processamento, modelagem, IA e consumo analítico, reduzindo complexidade arquitetural e acelerando a geração de valor.
 
@@ -15,7 +15,7 @@ A empresa possui mais de 1 milhão de produtos cadastrados com:
 - Baixa capacidade de segmentação inteligente
 - Ausência de estrutura adequada para IA e recomendação
 
-Impacto estimado:
+**Impacto estimado:**
 
 - Perda de oportunidades de venda por baixa recomendação inteligente
 - Dificuldade em identificar categorias estratégicas
@@ -25,13 +25,17 @@ A solução proposta centraliza, estrutura e enriquece o catálogo utilizando en
 
 ## 🗃️ Arquitetura do Projeto
 
-Camadas implementadas (equivalente ao modelo de Data Lake da Dadosfera):
+Arquitetura de dados implementada no projeto:
 
-- **RAW (Bronze)** → Dados brutos importados via módulo de Coleta
-- **STANDARDIZED (Silver)** → Dados tratados e padronizados via pipelines
-- **CURATED (Gold)** → Modelagem analítica (Data Warehouse - Kimball)
-- **GenAI Layer** → Extração de features estruturadas via LLM
-- **Consumption Layer** → Dashboards (Metabase) e Data App (Streamlit)
+`RAW → Standardized → Enriched → Curated → Consumo Analítico`
+
+Descrição das camadas:
+
+- **RAW** → dados brutos ingeridos via módulo de Coleta da Dadosfera
+- **Standardized** → limpeza, padronização e criação de atributos derivados
+- **Enriched** → enriquecimento semântico via LLM
+- **Curated** → modelagem dimensional para análises analíticas
+- **Consumo Analítico** → dashboards e Data App
 
 ## 📂 Estrutura do Repositório
 
@@ -48,18 +52,18 @@ notebooks/ → ETL, LLM e análises exploratórias
 
 A documentação completa de cada etapa do case está disponível na pasta `docs/`, organizada conforme o template oficial da Dadosfera:
 
-| Item | Descrição            | Status      | Documentação                          |
-| ---- | -------------------- | ----------- | ------------------------------------- |
-| 1    | Planejamento (PMBOK) | Concluído   | [Ver](docs/01_planejamento_pmbok.md)  |
-| 2    | Base de Dados        | Concluído   | [Ver](docs/02_base_de_dados.md)       |
-| 3    | Integrar e Explorar  | Parcial     | [Ver](docs/03_integrar_explorar.md)   |
-| 4    | Data Quality         | Documentado | [Ver](docs/04_data_quality.md)        |
-| 5    | GenAI / LLM          | Concluído   | [Ver](docs/05_processar_genai_llm.md) |
-| 6    | Modelagem de Dados   | Concluído   | [Ver](docs/06_modelagem_dados.md)     |
-| 7    | Análise / Dashboard  | Pendente    | [Ver](docs/07_analisar_dashboard.md)  |
-| 8    | Pipelines            | Pendente    | [Ver](docs/08_pipelines.md)           |
-| 9    | Data App             | Concluído   | [Ver](docs/09_data_app.md)            |
-| 10   | Apresentação         | Pendente    | [Ver](docs/10_apresentacao.md)        |
+| Item | Descrição            | Status    | Documentação                          |
+| ---- | -------------------- | --------- | ------------------------------------- |
+| 1    | Planejamento (PMBOK) | Concluído | [Ver](docs/01_planejamento_pmbok.md)  |
+| 2    | Base de Dados        | Concluído | [Ver](docs/02_base_de_dados.md)       |
+| 3    | Integrar e Explorar  | Concluído | [Ver](docs/03_integrar_explorar.md)   |
+| 4    | Data Quality         | Concluído | [Ver](docs/04_data_quality.md)        |
+| 5    | GenAI / LLM          | Concluído | [Ver](docs/05_processar_genai_llm.md) |
+| 6    | Modelagem de Dados   | Concluído | [Ver](docs/06_modelagem_dados.md)     |
+| 7    | Dashboards           | Concluído | [Ver](docs/07_analisar_dashboard.md)  |
+| 8    | Pipelines            | Concluído | [Ver](docs/08_pipelines.md)           |
+| 9    | Data App             | Concluído | [Ver](docs/09_data_app.md)            |
+| 10   | Apresentação         | Concluído | [Ver](docs/10_apresentacao.md)        |
 
 ## 🧠 Tecnologias e Ferramentas
 
@@ -73,7 +77,7 @@ A documentação completa de cada etapa do case está disponível na pasta `docs
 - **Python (Google Colab):** Processamento e transformação dos dados.
 - **Pandas / PyArrow:** Manipulação e persistência em formato analítico.
 - **Parquet:** Armazenamento otimizado para análises.
-- **Estruturação em camadas:** RAW → STANDARDIZED → CURATED.
+- **Estruturação em camadas:** RAW → Standardized → Curated.
 
 ### 🧱 Modelagem de Dados
 
@@ -96,7 +100,7 @@ A documentação completa de cada etapa do case está disponível na pasta `docs
 
 ### 📱 Data App
 
-- **Streamlit:** Aplicação interativa para exploração do catálogo enriquecido (CURATED + GenAI Features).
+- **Streamlit:** Aplicação interativa para exploração do catálogo enriquecido (Standardized + Enriched).
 
 ### 💻 Ambiente de Desenvolvimento
 
@@ -118,14 +122,15 @@ A documentação completa de cada etapa do case está disponível na pasta `docs
 ### Passos
 
 1. Baixar o dataset via Kaggle
-2. Executar notebook 01 (ETL Silver)
-3. Executar notebook 02 (Gold)
-4. Executar notebook 03 (LLM)
-5. Rodar Streamlit em `app/app.py`
+2. Executar o notebook `01_etl_ingestao_limpeza.ipynb`
+3. Executar o notebook `02_series_temporal_e_metricas.ipynb`
+4. Executar o notebook `03_processar_genai_llm_features.ipynb`
+5. Gerar o dataset utilizado pelo Data App
+6. Executar a aplicação Streamlit em `app/app.py`
 
 ## 🎥 Apresentação
 
-O vídeo apresenta:
+**O vídeo apresenta:**
 
 - Problema de negócio
 - Arquitetura proposta
@@ -136,4 +141,4 @@ Link do vídeo (Unlisted): [Apresentação do Case]()
 
 ## 🚀 Conclusão
 
-A solução proposta demonstra como a Dadosfera pode substituir arquiteturas fragmentadas, centralizando integração, processamento, governança e IA em uma única plataforma, reduzindo custo operacional e tempo até geração de valor.
+A solução demonstra como a Dadosfera pode substituir arquiteturas fragmentadas, centralizando ingestão, processamento, governança, inteligência artificial e consumo analítico em uma única plataforma.

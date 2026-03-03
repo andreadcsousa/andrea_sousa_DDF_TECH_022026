@@ -17,6 +17,11 @@ htmlcov/
 .ruff_cache/
 
 # -----------------------
+# Streamlit
+# -----------------------
+.streamlit/cache/
+
+# -----------------------
 # Envs / Secrets
 # -----------------------
 .env
@@ -26,6 +31,12 @@ secrets.toml
 *.key
 *.pem
 .streamlit/secrets.toml
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
 
 # -----------------------
 # Jupyter / Colab
@@ -45,6 +56,7 @@ Thumbs.db
 # -----------------------
 # Data
 # -----------------------
+
 # Ignore everything inside data/
 data/*
 
@@ -67,4 +79,6 @@ data/*
 # Keep sample files even if csv/parquet
 !data/sample/*.csv
 !data/sample/*.parquet
+
+# Keep parquet used by Streamlit app
 !app/*.parquet

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>&Iacute;ndice Geral do Case</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="índice-geral-do-case">Índice Geral do Case</h1>
+<p>Este documento centraliza os links, evidências e ativos utilizados na construção do case técnico, funcionando como guia de navegação para avaliação da solução proposta.</p>
+<h2 id="-como-navegar-no-case">🧭 Como Navegar no Case</h2>
+<p>Este repositório foi estruturado para apresentar de forma progressiva a construção de uma plataforma analítica de dados.</p>
+<p>A leitura recomendada segue a ordem abaixo:</p>
+<ol>
+<li><strong>Planejamento</strong> — definição do escopo e estratégia do projeto</li>
+<li><strong>Base de Dados</strong> — entendimento do dataset utilizado</li>
+<li><strong>Integração e Exploração</strong> — ingestão e organização na plataforma</li>
+<li><strong>Qualidade de Dados</strong> — validações e consistência estrutural</li>
+<li><strong>Enriquecimento com IA</strong> — extração de atributos semânticos via LLM</li>
+<li><strong>Modelagem de Dados</strong> — construção do modelo dimensional analítico</li>
+<li><strong>Dashboards</strong> — visualização analítica e insights estratégicos</li>
+<li><strong>Pipeline</strong> — automação do fluxo de dados</li>
+<li><strong>Data App</strong> — exploração interativa do catálogo</li>
+<li><strong>Apresentação</strong> — visão executiva do projeto</li>
+</ol>
+<h3 id="-status-geral-do-projeto">🔎 Status Geral do Projeto:</h3>
+<p>✔️ Planejamento<br>
+✔️ Engenharia de Dados<br>
+✔️ Qualidade de Dados<br>
+✔️ Modelagem Dimensional<br>
+✔️ Enriquecimento com GenAI<br>
+✔️ Dashboards Analíticos<br>
+✔️ Pipeline de Dados<br>
+✔️ Data App<br>
+✔️ Documentação de Apresentação</p>
+<h2 id="-arquitetura-do-projeto">🧱 Arquitetura do Projeto</h2>
+<p>O fluxo de dados implementado segue a arquitetura:</p>
+<p><code>RAW → Standardized → Enriched → Curated → Camada de Consumo</code></p>
+<p>Esse fluxo conecta engenharia de dados, enriquecimento com IA e aplicações analíticas.</p>
+<h2 id="-repositório-do-projeto">🔗 Repositório do Projeto</h2>
+<p><a href="https://github.com/andreadcsousa/andrea_sousa_DDF_TECH_022026">GitHub - Amazon Catalog Intelligence</a></p>
+<h2 id="-acessos-principais">🌐 Acessos Principais</h2>
+<ul>
+<li>
+<p><strong>Dashboard Dadosfera (Metabase)</strong><br>
+<a href="http://metabase-treinamentos.dadosfera.ai/public/dashboard/395efcb8-bcda-45bf-8c7e-c4c26b53f866">http://metabase-treinamentos.dadosfera.ai/public/dashboard/395efcb8-bcda-45bf-8c7e-c4c26b53f866</a></p>
+</li>
+<li>
+<p><strong>Dashboard Power BI</strong><br>
+<a href="https://app.powerbi.com/view?r=eyJrIjoiNjhmNDg5MWMtMGU0Yi00ZjI5LTg5MTMtNTRiNTM5Y2RkOTAzIiwidCI6ImEzZTU3Zjc1LTU5YTktNDFkOS05ZGIwLTA0YmM0ODg2YWY3NyJ9&amp;pageName=5f22c10194a1a41d956c">https://app.powerbi.com/view?r=eyJrIjoiNjhmNDg5MWMtMGU0Yi00ZjI5LTg5MTMtNTRiNTM5Y2RkOTAzIiwidCI6ImEzZTU3Zjc1LTU5YTktNDFkOS05ZGIwLTA0YmM0ODg2YWY3NyJ9&amp;pageName=5f22c10194a1a41d956c</a></p>
+</li>
+<li>
+<p><strong>Data App (Streamlit)</strong><br>
+<a href="https://acs-amazon-catalog-app.streamlit.app/">https://acs-amazon-catalog-app.streamlit.app/</a></p>
+</li>
+</ul>
+<h2 id="1️⃣-planejamento-pmbok">1️⃣ Planejamento (PMBOK)</h2>
+<ul>
+<li><strong>Documento:</strong> <a href="../docs/01_planejamento_pmbok.html">Planejamento do Projeto (PMBOK)</a></li>
+<li><strong>Ferramenta de Gestão Utilizada:</strong> Azure DevOps (Agile/Kanban)</li>
+<li><strong>Evidências:</strong>
+<ul>
+<li>Estruturação em epics, features e tasks</li>
+</ul>
+</li>
+</ul>
+<h2 id="2️⃣-base-de-dados">2️⃣ Base de Dados</h2>
+<ul>
+<li><strong>Documento:</strong> <a href="../docs/02_base_de_dados.html">Base de Dados</a></li>
+<li><strong>Link Dataset:</strong> <a href="https://www.kaggle.com/datasets/asaniczka/amazon-products-dataset-2023-1-4m-products">Amazon Products Dataset 2023</a></li>
+<li><strong>Evidências:</strong>
+<ul>
+<li>Leitura, head e info do dataset base</li>
+</ul>
+</li>
+</ul>
+<h2 id="3️⃣-integrar-e-explorar">3️⃣ Integrar e Explorar</h2>
+<ul>
+<li><strong>Documento:</strong> <a href="../docs/03_integrar_explorar.html">Integrar e Explorar</a></li>
+<li><strong>Link da Dadosfera:</strong> <a href="https://app.dadosfera.ai/pt-BR/">app.dadosfera.ai</a></li>
+<li><strong>Notebooks:</strong>
+<ul>
+<li><a href="../notebooks/01_etl_ingestao_limpeza.ipynb">ETL de ingestão e limpeza</a></li>
+<li><a href="../notebooks/02_series_temporal_e_metricas.ipynb">Gold série temporal e métricas</a></li>
+</ul>
+</li>
+<li><strong>Evidências:</strong>
+<ul>
+<li>Upload no catálogo da Dadosfera</li>
+<li>Descrição dos ativos</li>
+<li>Análise exploratória</li>
+<li>Estrutura final da camada Standardized</li>
+</ul>
+</li>
+</ul>
+<h2 id="4️⃣-data-quality">4️⃣ Data Quality</h2>
+<ul>
+<li><strong>Documento:</strong> <a href="../docs/04_data_quality.html">Data Quality</a></li>
+<li><strong>Evidências:</strong>
+<ul>
+<li>Análise de nulos</li>
+<li>Distribuição de preços e rating</li>
+</ul>
+</li>
+</ul>
+<h2 id="5️⃣-genai--llm">5️⃣ GenAI / LLM</h2>
+<ul>
+<li><strong>Documento:</strong> <a href="../docs/05_processar_genai_llm.html">Processar com GenAI (LLM Feature Extraction)</a></li>
+<li><strong>Notebook:</strong> <a href="../notebooks/03_processar_genai_llm_features.ipynb">Processar GenAI LLM features</a></li>
+<li><strong>Modelo utilizado:</strong> OpenAI (gpt-4o-mini)</li>
+<li><strong>Evidências:</strong>
+<ul>
+<li>Shape do Sample</li>
+<li>Prompt Definition</li>
+<li>Enriched Dataframe Preview</li>
+<li>Parquet Saved Confirmation</li>
+<li>Execution Progress Bar e Summary</li>
+<li>Cost Estimation Output</li>
+</ul>
+</li>
+</ul>
+<h2 id="6️⃣-modelagem-de-dados">6️⃣ Modelagem de Dados</h2>
+<ul>
+<li><strong>Documento:</strong> <a href="../docs/06_modelagem_dados.html">Modelagem de Dados</a></li>
+<li><strong>Notebook:</strong> <a href="../notebooks/02_series_temporal_e_metricas.ipynb">Gold série temporal e métricas</a></li>
+<li><strong>Evidências:</strong>
+<ul>
+<li>Diagrama ERD</li>
+<li>Kimball DDL</li>
+</ul>
+</li>
+</ul>
+<h2 id="7️⃣-dashboards-analíticos">7️⃣ Dashboards Analíticos</h2>
+<ul>
+<li><strong>Documento:</strong> <a href="../docs/07_analisar_dashboard.html">Analisar Dashboard</a></li>
+<li><strong>Dashboard:</strong> <a href="../dashboard/amazon_catalog_intelligence.pbix">Amazon Catalog Intelligence &amp; Strategic Analytics</a></li>
+<li><strong>Evidências:</strong>
+<ul>
+<li>Páginas: Executive Overview, Segmentation, AI Insights</li>
+<li>Relacionamentos e Modelos de Pasta de Exibição</li>
+<li>Métrica para texto dinâmico</li>
+<li>Dashboard publicado no Power BI Online e dashboard analítico construído na plataforma Dadosfera (Metabase)</li>
+</ul>
+</li>
+</ul>
+<h2 id="8️⃣-pipeline">8️⃣ Pipeline</h2>
+<ul>
+<li><strong>Documento:</strong> <a href="../docs/08_pipelines.html">Pipelines</a></li>
+<li><strong>Ativos utilizados no pipeline:</strong>
+<ul>
+<li>Produtos</li>
+<li>Categorias</li>
+<li>Tabelas analíticas da camada Curated</li>
+</ul>
+</li>
+<li><strong>Evidências:</strong>
+<ul>
+<li>Print do pipeline</li>
+<li>Evidência de execução</li>
+</ul>
+</li>
+</ul>
+<h2 id="9️⃣-data-app">9️⃣ Data App</h2>
+<ul>
+<li><strong>Documento:</strong> <a href="../docs/09_data_app.html">Data APP</a></li>
+<li><strong>Notebook:</strong> <a href="../notebooks/04_data_app_streamlit.ipynb">Data APP Streamlit</a></li>
+<li><strong>Link Streamlit:</strong> <a href="https://acs-amazon-catalog-app.streamlit.app/">Amazon Catalog Intelligence</a></li>
+<li><strong>Evidências:</strong>
+<ul>
+<li>Páginas da aplicação</li>
+<li>Aplicação Streamlit para exploração interativa do catálogo</li>
+</ul>
+</li>
+</ul>
+<h2 id="-apresentação">🔟 Apresentação</h2>
+<ul>
+<li><strong>Documento:</strong> <a href="../docs/10_apresentacao.html">Apresentação</a></li>
+<li><strong>Vídeo de apresentação (YouTube - Unlisted):</strong> <a href="">Inserir link da gravação</a></li>
+</ul>
+
+            
+            
+        </body>
+        </html>

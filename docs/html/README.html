@@ -140,7 +140,7 @@
         <body class="vscode-body vscode-light">
             <h1 id="case-técnico--plataforma-de-dados-com-ia-dadosfera">Case Técnico – Plataforma de Dados com IA (Dadosfera)</h1>
 <h2 id="-visão-geral">📌 Visão Geral</h2>
-<p>Este repositório apresenta uma Prova de Conceito (PoC) para implementação de uma Plataforma de Dados utilizando a Dadosfera SaaS, aplicada a um cenário realista de e-commerce com mais de 1,5 milhão de registros (Amazon Products Dataset 2023).</p>
+<p>Este repositório apresenta uma Prova de Conceito (PoC) para implementação de uma Plataforma de Dados utilizando a Dadosfera SaaS, aplicada a um cenário realista de e-commerce com aproximadamente 1,4 milhão de registros (Amazon Products Dataset 2023).</p>
 <p>O objetivo é demonstrar como a Dadosfera pode atuar como camada central de integração, processamento, modelagem, IA e consumo analítico, reduzindo complexidade arquitetural e acelerando a geração de valor.</p>
 <h2 id="-problema-de-negócio">🎯 Problema de Negócio</h2>
 <p>A empresa possui mais de 1 milhão de produtos cadastrados com:</p>
@@ -150,7 +150,7 @@
 <li>Baixa capacidade de segmentação inteligente</li>
 <li>Ausência de estrutura adequada para IA e recomendação</li>
 </ul>
-<p>Impacto estimado:</p>
+<p><strong>Impacto estimado:</strong></p>
 <ul>
 <li>Perda de oportunidades de venda por baixa recomendação inteligente</li>
 <li>Dificuldade em identificar categorias estratégicas</li>
@@ -158,13 +158,15 @@
 </ul>
 <p>A solução proposta centraliza, estrutura e enriquece o catálogo utilizando engenharia de dados e GenAI.</p>
 <h2 id="️-arquitetura-do-projeto">🗃️ Arquitetura do Projeto</h2>
-<p>Camadas implementadas (equivalente ao modelo de Data Lake da Dadosfera):</p>
+<p>Arquitetura de dados implementada no projeto:</p>
+<p><code>RAW → Standardized → Enriched → Curated → Consumo Analítico</code></p>
+<p>Descrição das camadas:</p>
 <ul>
-<li><strong>RAW (Bronze)</strong> → Dados brutos importados via módulo de Coleta</li>
-<li><strong>STANDARDIZED (Silver)</strong> → Dados tratados e padronizados via pipelines</li>
-<li><strong>CURATED (Gold)</strong> → Modelagem analítica (Data Warehouse - Kimball)</li>
-<li><strong>GenAI Layer</strong> → Extração de features estruturadas via LLM</li>
-<li><strong>Consumption Layer</strong> → Dashboards (Metabase) e Data App (Streamlit)</li>
+<li><strong>RAW</strong> → dados brutos ingeridos via módulo de Coleta da Dadosfera</li>
+<li><strong>Standardized</strong> → limpeza, padronização e criação de atributos derivados</li>
+<li><strong>Enriched</strong> → enriquecimento semântico via LLM</li>
+<li><strong>Curated</strong> → modelagem dimensional para análises analíticas</li>
+<li><strong>Consumo Analítico</strong> → dashboards e Data App</li>
 </ul>
 <h2 id="-estrutura-do-repositório">📂 Estrutura do Repositório</h2>
 <pre><code>app/ → Data App Streamlit
@@ -189,61 +191,61 @@ notebooks/ → ETL, LLM e análises exploratórias
 <tr>
 <td>1</td>
 <td>Planejamento (PMBOK)</td>
-<td>⏳</td>
+<td>Concluído</td>
 <td><a href="docs/01_planejamento_pmbok.html">Ver</a></td>
 </tr>
 <tr>
 <td>2</td>
 <td>Base de Dados</td>
-<td>✔️</td>
+<td>Concluído</td>
 <td><a href="docs/02_base_de_dados.html">Ver</a></td>
 </tr>
 <tr>
 <td>3</td>
 <td>Integrar e Explorar</td>
-<td>✔️</td>
+<td>Concluído</td>
 <td><a href="docs/03_integrar_explorar.html">Ver</a></td>
 </tr>
 <tr>
 <td>4</td>
 <td>Data Quality</td>
-<td>⏳</td>
+<td>Concluído</td>
 <td><a href="docs/04_data_quality.html">Ver</a></td>
 </tr>
 <tr>
 <td>5</td>
 <td>GenAI / LLM</td>
-<td>⏳</td>
+<td>Concluído</td>
 <td><a href="docs/05_processar_genai_llm.html">Ver</a></td>
 </tr>
 <tr>
 <td>6</td>
 <td>Modelagem de Dados</td>
-<td>⏳</td>
+<td>Concluído</td>
 <td><a href="docs/06_modelagem_dados.html">Ver</a></td>
 </tr>
 <tr>
 <td>7</td>
-<td>Análise / Dashboard</td>
-<td>⏳</td>
+<td>Dashboards</td>
+<td>Concluído</td>
 <td><a href="docs/07_analisar_dashboard.html">Ver</a></td>
 </tr>
 <tr>
 <td>8</td>
 <td>Pipelines</td>
-<td>⏳</td>
+<td>Concluído</td>
 <td><a href="docs/08_pipelines.html">Ver</a></td>
 </tr>
 <tr>
 <td>9</td>
 <td>Data App</td>
-<td>✔️</td>
+<td>Concluído</td>
 <td><a href="docs/09_data_app.html">Ver</a></td>
 </tr>
 <tr>
 <td>10</td>
 <td>Apresentação</td>
-<td>⏳</td>
+<td>Concluído</td>
 <td><a href="docs/10_apresentacao.html">Ver</a></td>
 </tr>
 </tbody>
@@ -259,7 +261,7 @@ notebooks/ → ETL, LLM e análises exploratórias
 <li><strong>Python (Google Colab):</strong> Processamento e transformação dos dados.</li>
 <li><strong>Pandas / PyArrow:</strong> Manipulação e persistência em formato analítico.</li>
 <li><strong>Parquet:</strong> Armazenamento otimizado para análises.</li>
-<li><strong>Estruturação em camadas:</strong> RAW → STANDARDIZED → CURATED.</li>
+<li><strong>Estruturação em camadas:</strong> RAW → Standardized → Curated.</li>
 </ul>
 <h3 id="-modelagem-de-dados">🧱 Modelagem de Dados</h3>
 <ul>
@@ -282,7 +284,7 @@ notebooks/ → ETL, LLM e análises exploratórias
 </ul>
 <h3 id="-data-app">📱 Data App</h3>
 <ul>
-<li><strong>Streamlit:</strong> Aplicação interativa para exploração do catálogo enriquecido (CURATED + GenAI Features).</li>
+<li><strong>Streamlit:</strong> Aplicação interativa para exploração do catálogo enriquecido (Standardized + Enriched).</li>
 </ul>
 <h3 id="-ambiente-de-desenvolvimento">💻 Ambiente de Desenvolvimento</h3>
 <ul>
@@ -303,13 +305,14 @@ notebooks/ → ETL, LLM e análises exploratórias
 <h3 id="passos">Passos</h3>
 <ol>
 <li>Baixar o dataset via Kaggle</li>
-<li>Executar notebook 01 (ETL Silver)</li>
-<li>Executar notebook 02 (Gold)</li>
-<li>Executar notebook 03 (LLM)</li>
-<li>Rodar Streamlit em <code>app/app.py</code></li>
+<li>Executar o notebook <code>01_etl_ingestao_limpeza.ipynb</code></li>
+<li>Executar o notebook <code>02_series_temporal_e_metricas.ipynb</code></li>
+<li>Executar o notebook <code>03_processar_genai_llm_features.ipynb</code></li>
+<li>Gerar o dataset utilizado pelo Data App</li>
+<li>Executar a aplicação Streamlit em <code>app/app.py</code></li>
 </ol>
 <h2 id="-apresentação">🎥 Apresentação</h2>
-<p>O vídeo apresenta:</p>
+<p><strong>O vídeo apresenta:</strong></p>
 <ul>
 <li>Problema de negócio</li>
 <li>Arquitetura proposta</li>
@@ -318,7 +321,7 @@ notebooks/ → ETL, LLM e análises exploratórias
 </ul>
 <p>Link do vídeo (Unlisted): <a href="">Apresentação do Case</a></p>
 <h2 id="-conclusão">🚀 Conclusão</h2>
-<p>A solução proposta demonstra como a Dadosfera pode substituir arquiteturas fragmentadas, centralizando integração, processamento, governança e IA em uma única plataforma, reduzindo custo operacional e tempo até geração de valor.</p>
+<p>A solução demonstra como a Dadosfera pode substituir arquiteturas fragmentadas, centralizando ingestão, processamento, governança, inteligência artificial e consumo analítico em uma única plataforma.</p>
 
             
             

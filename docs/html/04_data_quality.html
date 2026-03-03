@@ -140,48 +140,53 @@
         </head>
         <body class="vscode-body vscode-light">
             <h1 id="data-quality">Data Quality</h1>
-<p>Este documento apresenta a estratégia de qualidade de dados aplicada após a ingestão na camada RAW e antes da modelagem na camada CURATED, garantindo governança e confiabilidade analítica.</p>
+<p>Este documento apresenta a estratégia de qualidade de dados aplicada após a ingestão na camada RAW e antes da modelagem na camada Curated, garantindo governança, rastreabilidade e confiabilidade analítica.</p>
 <h2 id="-objetivo-da-análise-de-qualidade">🎯 Objetivo da Análise de Qualidade</h2>
 <p>Garantir que o dataset esteja consistente, íntegro e adequado para:</p>
 <ul>
-<li>Modelagem dimensional (Kimball)</li>
-<li>Construção de métricas analíticas</li>
-<li>Enriquecimento via LLM</li>
+<li>Modelagem dimensional (abordagem Kimball)</li>
+<li>Construção de métricas analíticas confiáveis</li>
+<li>Enriquecimento semântico via LLM</li>
+<li>Consumo por dashboards e Data App</li>
 </ul>
 <h2 id="-estratégia-de-validação-automatizada">🧪 Estratégia de Validação Automatizada</h2>
-<p>A validação de qualidade foi estruturada utilizando abordagem compatível com frameworks como Great Expectations ou Soda-Core, permitindo definição formal de regras e validações reprodutíveis.</p>
+<p>A estratégia de qualidade foi estruturada de forma compatível com frameworks de validação de dados como Great Expectations ou Soda-Core, permitindo formalização de regras, execução automatizada de testes e rastreabilidade das verificações aplicadas.</p>
 <p><strong>As verificações incluíram:</strong></p>
 <ul>
 <li>Expectativas de domínio (rating entre 0 e 5)</li>
-<li>Expectativas de integridade (product_id único)</li>
+<li>Expectativa de unicidade (product_id único)</li>
 <li>Expectativas de completude (campos críticos não nulos)</li>
-<li>Expectativas de consistência referencial (category_id válido)</li>
+<li>Expectativas de consistência referencial (category_id existente na dimensão categoria)</li>
+<li>Verificação de tipagem consistente após padronização</li>
 </ul>
 <h2 id="-análise-de-completude-nulos">📊 Análise de Completude (Nulos)</h2>
 <p>Nenhuma coluna crítica apresentou percentual de nulos superior ao limiar aceitável de 5%.</p>
 <h3 id="-verificação-de-valores-ausentes">🔍 Verificação de valores ausentes</h3>
 <p>Foi executada análise de nulos por coluna:</p>
 <ul>
-<li>product_title → percentual residual muito baixo</li>
-<li>price → valores zero identificados</li>
-<li>rating → presença de valores zero</li>
-<li>demais colunas → sem nulos relevantes</li>
+<li>product_title → percentual residual baixo, mantido para enriquecimento</li>
+<li>price → identificação de valores zero tratados como inconsistência comercial</li>
+<li>rating → presença de valores zero interpretados como ausência de avaliação</li>
+<li>review_count → ausência de nulos críticos</li>
+<li>demais colunas → sem nulos relevantes para modelagem</li>
 </ul>
 <h3 id="-evidência">📷 Evidência</h3>
 <h4 id="-análise-de-nulos">📌 Análise de Nulos</h4>
 <p><img src="file:///c:\Users\Pink\Documents\GitHub\andrea_sousa_DDF_TECH_022026\assets\prints\04_data_quality_01_null_analysis.jpg" alt="Análise de nulos"></p>
 <h2 id="-análise-de-distribuição">📈 Análise de Distribuição</h2>
-<p>Outliers extremos foram identificados, porém mantidos para preservar integridade do domínio original.</p>
+<p>Outliers extremos foram identificados, porém mantidos para preservar integridade do domínio original e evitar distorção artificial dos dados.</p>
 <h3 id="-preço">💰 Preço</h3>
 <ul>
 <li>Preço mínimo: $0.00</li>
 <li>Preço máximo: ~$19.731</li>
-<li>Forte concentração em faixa &lt; $100</li>
+<li>Forte concentração na faixa inferior a $100</li>
+<li>Valores zero sinalizados como possível inconsistência comercial</li>
 </ul>
 <h3 id="-rating">⭐ Rating</h3>
 <ul>
 <li>Alta concentração entre 4.0 e 5.0</li>
-<li>131.023 produtos com rating zero</li>
+<li>131.023 produtos com rating igual a zero</li>
+<li>Distribuição assimétrica, indicando viés positivo comum em marketplaces</li>
 </ul>
 <h3 id="-evidências">📷 Evidências</h3>
 <h4 id="-distribuição-de-preços">📌 Distribuição de Preços</h4>
@@ -191,26 +196,31 @@
 <h3 id="-validação-de-domínio">🔎 Validação de Domínio</h3>
 <ul>
 <li>rating dentro do intervalo esperado (0 a 5)</li>
-<li>price ≥ 0</li>
+<li>price ≥ 0 (valores zero identificados como possíveis inconsistências comerciais)</li>
+<li>review_count ≥ 0</li>
+<li>units_sold_last_month ≥ 0</li>
 </ul>
-<h2 id="-padronização-e-otimização-de-tipagem-standardized">🧮 Padronização e Otimização de Tipagem (STANDARDIZED)</h2>
+<h2 id="-padronização-e-otimização-de-tipagem-standardized">🧮 Padronização e Otimização de Tipagem (Standardized)</h2>
+<p>Nesta etapa são verificadas e confirmadas as otimizações de tipagem realizadas durante a preparação da camada Standardized.</p>
 <p><strong>Foram aplicadas otimizações:</strong></p>
 <ul>
 <li>float64 → float32</li>
 <li>int64 → int32</li>
 <li>object → string</li>
-<li>criação de colunas booleanas</li>
+<li>Conversão explícita de flags para boolean</li>
 </ul>
 <p><strong>Objetivo:</strong></p>
 <ul>
 <li>Redução de uso de memória</li>
-<li>Melhor performance em processamento</li>
+<li>Melhor performance em processamento analítico</li>
+<li>Padronização consistente para modelagem dimensional</li>
 </ul>
 <h2 id="️-análise-de-integridade">🏷️ Análise de Integridade</h2>
 <ul>
 <li>product_id validado como chave única (sem duplicidade)</li>
-<li>category_id consistente com tabela de categorias (merge validado)</li>
-<li>Nenhum registro duplicado após tratamento</li>
+<li>category_id consistente com tabela de categorias (validação via merge)</li>
+<li>Ausência de registros duplicados após tratamento</li>
+<li>Coerência entre price e list_price (quando aplicável)</li>
 </ul>
 <h2 id="-regras-de-qualidade-definidas">📋 Regras de Qualidade Definidas</h2>
 <table>
@@ -238,6 +248,11 @@
 <td>Valores negativos inválidos</td>
 </tr>
 <tr>
+<td>review_count &gt;= 0</td>
+<td>Domínio</td>
+<td>Valores negativos inválidos</td>
+</tr>
+<tr>
 <td>category_id válido</td>
 <td>Referencial</td>
 <td>Deve existir na tabela Categories</td>
@@ -251,29 +266,31 @@
 </table>
 <h2 id="️-pontos-de-atenção">⚠️ Pontos de Atenção</h2>
 <ul>
-<li>Produtos com preço zero podem representar:
+<li>Produtos com preço igual a zero podem representar:
 <ul>
 <li>Produtos descontinuados</li>
 <li>Erro de origem</li>
+<li>Estratégias promocionais específicas</li>
 </ul>
 </li>
-<li>Rating zero pode indicar ausência de avaliações</li>
-<li>Dataset não possui data real</li>
+<li>Rating igual a zero pode indicar ausência de avaliações, e não necessariamente baixa qualidade</li>
+<li>Dataset não possui dimensão temporal real, exigindo geração sintética para análises evolutivas</li>
 </ul>
 <h2 id="-conclusão-da-qualidade">✅ Conclusão da Qualidade</h2>
 <p>Após as verificações realizadas, o dataset apresenta:</p>
 <ul>
 <li>Consistência estrutural</li>
-<li>Integridade referencial</li>
+<li>Integridade referencial validada</li>
 <li>Tipagem otimizada para performance</li>
+<li>Conformidade com regras de domínio e completude</li>
 <li>Adequação para modelagem dimensional</li>
 <li>Estrutura apropriada para enriquecimento via LLM</li>
 </ul>
-<p>O dataset está apto para evolução para camada CURATED e aplicação de pipelines automatizados de validação contínua.</p>
+<p>O dataset está apto para evolução para a camada Curated e posterior materialização das transformações por meio de pipelines automatizados.</p>
 <div class="markdown-alert markdown-alert-note"><p class="markdown-alert-title"><svg class="octicon octicon-info mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p><p>Os riscos identificados foram documentados e considerados nas decisões arquiteturais subsequentes.</p>
 </div>
 <h2 id="-reprodutibilidade">🔁 Reprodutibilidade</h2>
-<p>Todas as verificações foram executadas via notebook <a href="../notebooks/01_etl_ingestao_limpeza_silver.ipynb">ETL de Ingestão e Limpeza</a>, permitindo reprocessamento e auditoria completa.</p>
+<p>Todas as verificações foram executadas via notebook <a href="../notebooks/01_etl_ingestao_limpeza.ipynb">ETL de Ingestão e Limpeza</a>, permitindo reprocessamento completo, auditoria técnica e rastreabilidade das transformações.</p>
 
             <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
             

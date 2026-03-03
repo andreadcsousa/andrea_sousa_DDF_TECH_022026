@@ -1,28 +1,32 @@
 # Data Directory
 
-O dataset completo **Amazon Products Dataset 2023 (1.4M registros)** não é versionado neste repositório devido ao seu tamanho.
+O dataset completo **Amazon Products Dataset 2023 (~1.4M registros)** não é versionado neste repositório devido ao seu tamanho.
 
 ## 📥 Como Reproduzir
 
 1. Baixe o dataset no Kaggle:
-   https://www.kaggle.com/datasets/asaniczka/amazon-products-dataset-2023-1-4m-products
+
+https://www.kaggle.com/datasets/asaniczka/amazon-products-dataset-2023-1-4m-products
 
 > [!WARNING]
-> Não é necessário baixar de fato o dataset, é possível conectar o Colab direto ao Kaggle.
+> Não é necessário baixar o dataset manualmente.  
+> Os notebooks podem acessar o Kaggle diretamente via Google Colab.
 
 2. Execute o notebook:
-   `01_etl_ingestao_limpeza_silver.ipynb`
 
-3. Em seguida execute:
-   - `02_gold_series_temporal_e_metricas.ipynb`
-   - `03_llm_feature_extraction.ipynb`
+`01_etl_ingestao_limpeza.ipynb`
+
+1. Em seguida execute:
+
+- `02_series_temporal_e_metricas.ipynb`
+- `03_processar_genai_llm_features.ipynb`
 
 ## 📁 Estrutura Esperada (Local)
 
 ```text
 data/
- ├── raw/        # arquivos originais do kaggle
- ├── sample/     # amostras pequenas versionadas
+ ├── raw/        # arquivos originais do Kaggle
+ ├── sample/     # pequenas amostras versionadas
  └── README.md
 ```
 
@@ -35,7 +39,7 @@ A pasta data/sample/ contém pequenas amostras para:
 - Execução do Data App sem necessidade do dataset completo
 
 > [!IMPORTANT]
-> As camadas Silver e Gold são geradas dinamicamente via notebooks e não são versionadas neste repositório.
+> As camadas Standardized e Curated são geradas dinamicamente via notebooks e não são versionadas neste repositório.
 
 **Isso garante:**
 

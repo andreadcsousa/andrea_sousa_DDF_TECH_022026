@@ -140,37 +140,46 @@
         </head>
         <body class="vscode-body vscode-light">
             <h1 id="analisar-dashboards-na-dadosfera-metabase-e-power-bi">Analisar: Dashboards na Dadosfera (Metabase) e Power BI</h1>
-<h2 id="-dashboard-na-plataforma-dadosfera-metabase">📊 Dashboard na Plataforma Dadosfera (Metabase)</h2>
-<p>Conforme solicitado no Item 7 do case, foi criado um dashboard diretamente no módulo de Visualização da Dadosfera (Metabase), utilizando o identificador da tabela na camada CURATED.</p>
+<h2 id="-dashboard-na-plataforma-metabase">📊 Dashboard na Plataforma (Metabase)</h2>
+<p>Conforme solicitado no case técnico, foi criado um dashboard diretamente no módulo de Visualização da plataforma Dadosfera (Metabase).</p>
+<blockquote>
+<p><strong>Acesso ao dashboard:</strong> <a href="http://metabase-treinamentos.dadosfera.ai/public/dashboard/395efcb8-bcda-45bf-8c7e-c4c26b53f866">Amazon Catalog Intelligence</a></p>
+</blockquote>
 <h3 id="-consultas-sql-utilizadas">🔎 Consultas SQL Utilizadas</h3>
-<p>As análises foram construídas com base em queries SQL salvas na plataforma, incluindo:</p>
+<p>As análises foram construídas a partir de consultas SQL salvas na plataforma, permitindo reutilização das métricas e composição das visualizações no dashboard.</p>
 <ol>
 <li>Distribuição de produtos por categoria</li>
 <li>Série temporal de unidades vendidas por categoria</li>
-<li>Receita proxy por segmento de preço</li>
-<li>Ranking de categorias por performance</li>
+<li>Receita estimada por segmento de preço</li>
+<li>Ranking de categorias por performance (strategic_score)</li>
 <li>Distribuição por tier de popularidade</li>
+<li>Análise comparativa entre best sellers e demais produtos</li>
 </ol>
 <h3 id="-evidências">📷 Evidências</h3>
-<h4 id="-query-sql">📌 Query SQL</h4>
-<p><img src="file:///c:\Users\Pink\Documents\GitHub\andrea_sousa_DDF_TECH_022026\assets\prints" alt="Query SQL"></p>
-<h4 id="-resultado-da-query">📌 Resultado da Query</h4>
-<p><img src="file:///c:\Users\Pink\Documents\GitHub\andrea_sousa_DDF_TECH_022026\assets\prints" alt="Resultado da Query"></p>
+<h4 id="-query-sql-e-resultado">📌 Query SQL e resultado</h4>
+<p><img src="file:///c:\Users\Pink\Documents\GitHub\andrea_sousa_DDF_TECH_022026\assets\prints\07_dashboard_07_query_sql_result_metabase.jpg" alt="Query SQL e resultado"></p>
 <h4 id="-dashboard-salvo-na-coleção">📌 Dashboard salvo na Coleção</h4>
-<p><img src="file:///c:\Users\Pink\Documents\GitHub\andrea_sousa_DDF_TECH_022026\assets\prints" alt="Dashboard salvo na Coleção"></p>
-<h2 id="-dashboard-externo-power-bi--bônus">📊 Dashboard Externo (Power BI) – Bônus</h2>
-<p>Desenvolver um dashboard executivo no Power BI com três propósitos principais:</p>
+<p><img src="file:///c:\Users\Pink\Documents\GitHub\andrea_sousa_DDF_TECH_022026\assets\prints\07_dashboard_08_colection_evidence.jpg" alt="Dashboard salvo na Coleção"></p>
+<p><img src="file:///c:\Users\Pink\Documents\GitHub\andrea_sousa_DDF_TECH_022026\assets\prints\07_dashboard_09_pre_visualizacao.jpg" alt="Dashboard Preview"></p>
+<h2 id="-dashboard-externo-power-bi--extensão-analítica">📊 Dashboard Externo (Power BI) – Extensão Analítica</h2>
+<p>Foi desenvolvido dashboard executivo no Power BI com três propósitos principais:</p>
 <ul>
-<li>Apresentar uma visão consolidada da performance do catálogo</li>
-<li>Analisar o posicionamento estrutural por categoria e segmento de preço</li>
+<li>Apresentar visão consolidada da performance do catálogo</li>
+<li>Analisar posicionamento estrutural por categoria e segmento de preço</li>
 <li>Incorporar variáveis enriquecidas por IA para geração de insights estratégicos</li>
 </ul>
-<div class="markdown-alert markdown-alert-important"><p class="markdown-alert-title"><svg class="octicon octicon-report mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v9.5A1.75 1.75 0 0 1 14.25 13H8.06l-2.573 2.573A1.458 1.458 0 0 1 3 14.543V13H1.75A1.75 1.75 0 0 1 0 11.25Zm1.75-.25a.25.25 0 0 0-.25.25v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25Zm7 2.25v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Important</p><p>O dashboard foi construído sobre a camada Gold, derivada do processamento e enriquecimento realizado nos notebooks anteriores.</p>
+<div class="markdown-alert markdown-alert-important"><p class="markdown-alert-title"><svg class="octicon octicon-report mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v9.5A1.75 1.75 0 0 1 14.25 13H8.06l-2.573 2.573A1.458 1.458 0 0 1 3 14.543V13H1.75A1.75 1.75 0 0 1 0 11.25Zm1.75-.25a.25.25 0 0 0-.25.25v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25Zm7 2.25v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Important</p><p>O dashboard foi construído sobre a camada Curated, derivada do processamento estrutural e enriquecimento via LLM realizados nas etapas anteriores.</p>
 </div>
-<p>A replicação das análises em Power BI demonstra a portabilidade do modelo dimensional e reforça a viabilidade de substituição arquitetural, conforme exigido no Item 10.</p>
+<p>A replicação das análises em Power BI demonstra:</p>
+<ul>
+<li>Portabilidade do modelo dimensional (Star Schema)</li>
+<li>Independência de ferramenta de visualização</li>
+<li>Capacidade de integração com diferentes camadas analíticas</li>
+<li>Viabilidade de substituição arquitetural com manutenção do modelo de dados</li>
+</ul>
 <h2 id="️-arquitetura-de-dados">🏗️ Arquitetura de Dados</h2>
 <h3 id="-fonte-de-dados">🔹 Fonte de Dados</h3>
-<p>O relatório consome dados provenientes da camada CURATED, composta por:</p>
+<p>O relatório consome dados provenientes da camada Curated, composta por:</p>
 <ul>
 <li>dash_category_overview</li>
 <li>dash_category_segment_tier</li>
@@ -179,39 +188,42 @@
 </ul>
 <p><strong>Essas tabelas foram geradas a partir de:</strong></p>
 <ul>
-<li>Limpeza e padronização da camada STANDARDIZED</li>
-<li>Feature engineering</li>
-<li>Enriquecimento via LLM (extração de marca, tipo de produto, atributos)</li>
-<li>Agregações estratégicas</li>
+<li>Tratamento e padronização da camada Standardized</li>
+<li>Engenharia de atributos e criação de métricas derivadas</li>
+<li>Enriquecimento semântico via LLM (marca, tipo de produto, atributos)</li>
+<li>Agregações analíticas para consumo em BI</li>
 </ul>
 <h3 id="-estratégia-de-modelagem">🔹 Estratégia de Modelagem</h3>
-<p>A modelagem segue abordagem orientada a medidas (measure-driven model):</p>
+<p>A modelagem no Power BI segue abordagem orientada a medidas (measure-driven model):</p>
 <ul>
 <li>Métricas estratégicas implementadas via DAX</li>
 <li>Separação entre lógica de negócio e camada visual</li>
-<li>Agrupamento organizado de medidas por página</li>
+<li>Organização de medidas por domínio analítico (performance, receita, segmentação)</li>
+<li>Uso de tabelas analíticas como base para cálculos derivados</li>
 </ul>
 <p><strong>Essa abordagem garante:</strong></p>
 <ol>
 <li>Clareza semântica</li>
 <li>Reutilização de métricas</li>
-<li>Escalabilidade do modelo</li>
+<li>Escalabilidade do modelo analítico</li>
 <li>Manutenção simplificada</li>
+<li>Independência entre modelo de dados e visualizações</li>
 </ol>
 <h3 id="-evidências-1">📷 Evidências</h3>
 <h4 id="-modelo-semântico">📌 Modelo Semântico</h4>
 <p><img src="file:///c:\Users\Pink\Documents\GitHub\andrea_sousa_DDF_TECH_022026\assets\prints\07_dashboard_04_data_model_relationships.jpg" alt="Modelo Semântico"></p>
 <h2 id="-estrutura-do-dashboard">📐 Estrutura do Dashboard</h2>
-<p>O dashboard foi estruturado em três níveis analíticos.</p>
+<p>O dashboard foi estruturado em três níveis analíticos complementares.</p>
 <h3 id="-página-01--visão-executiva">🟣 Página 01 – Visão Executiva</h3>
 <ul>
-<li><strong>Objetivo:</strong> Fornecer um panorama geral da saúde e estrutura do catálogo.</li>
-<li><strong>Principais Indicadores:</strong>
+<li><strong>Objetivo:</strong> Fornecer panorama consolidado da saúde e estrutura do catálogo.</li>
+<li><strong>Principais Indicadores (KPIs):</strong>
 <ul>
 <li>Total de produtos</li>
 <li>Total de itens best seller</li>
 <li>Preço médio do catálogo</li>
 <li>Avaliação média do catálogo</li>
+<li>Receita estimada (proxy)</li>
 </ul>
 </li>
 <li><strong>Análises complementares:</strong>
@@ -220,11 +232,12 @@
 <li>Categorias com maior volume de best sellers</li>
 <li>Mapa de performance (Preço vs Avaliação)</li>
 <li>Produto líder com narrativa dinâmica</li>
+<li>Segmentação por faixa de preço</li>
 </ul>
 </li>
 </ul>
 <div class="markdown-alert markdown-alert-tip"><p class="markdown-alert-title"><svg class="octicon octicon-light-bulb mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"></path></svg>Tip</p><p><strong>Pergunta que responde:</strong><br>
-Como está o desempenho geral do catálogo?</p>
+Qual é o estado geral de performance e posicionamento do catálogo?</p>
 </div>
 <h3 id="-evidências-2">📷 Evidências:</h3>
 <h4 id="-página-1---executive-overview">📌 Página 1 - Executive Overview</h4>
@@ -232,32 +245,32 @@ Como está o desempenho geral do catálogo?</p>
 <h3 id="-página-02--segmentação-de-mercado">🟠 Página 02 – Segmentação de Mercado</h3>
 <ul>
 <li><strong>Objetivo:</strong> Analisar o posicionamento estrutural do catálogo por segmento de preço e popularidade.</li>
-<li><strong>Componentes principais</strong>
+<li><strong>Componentes principais:</strong>
 <ul>
-<li>Heatmap de mix por categoria e price segment</li>
+<li>Heatmap de mix por categoria e price_segment</li>
 <li>Indicador de Revenue Proxy</li>
-<li>Segmento dominante</li>
-<li>Tier de popularidade dominante</li>
-<li>Matriz de posicionamento (Preço vs Avaliação)</li>
+<li>Identificação de segmento dominante</li>
+<li>Identificação de tier de popularidade dominante</li>
+<li>Matriz de posicionamento (Preço Médio vs Avaliação Média)</li>
 <li>Alternância dinâmica entre Preço Médio e Revenue Proxy (Field Parameter)</li>
 </ul>
 </li>
 <li><strong>Revenue Proxy:</strong>
 <ul>
 <li>Métrica estimada como: <code>Receita Proxy = Σ (Preço médio × Unidades vendidas)</code></li>
-<li>Utilizada como sinal direcional de monetização, não como receita contábil oficial.</li>
+<li>Utilizada como indicador direcional de potencial de monetização</li>
 </ul>
 </li>
 </ul>
 <div class="markdown-alert markdown-alert-tip"><p class="markdown-alert-title"><svg class="octicon octicon-light-bulb mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"></path></svg>Tip</p><p><strong>Pergunta que responde:</strong><br>
-Como o catálogo está distribuído estruturalmente em termos de valor e popularidade?</p>
+Como o catálogo está distribuído estruturalmente em termos de valor, monetização e popularidade?</p>
 </div>
 <h3 id="-evidências-3">📷 Evidências:</h3>
 <h4 id="-página-2---segmentation">📌 Página 2 - Segmentation</h4>
 <p><img src="file:///c:\Users\Pink\Documents\GitHub\andrea_sousa_DDF_TECH_022026\assets\prints\07_dashboard_02_page02_segmentation.jpg" alt="Segmentation"></p>
 <h3 id="-página-03--inteligência-estratégica-com-ia">🔵 Página 03 – Inteligência Estratégica com IA</h3>
 <ul>
-<li><strong>Objetivo:</strong> Traduzir o enriquecimento via LLM em inteligência acionável.</li>
+<li><strong>Objetivo:</strong> Traduzir o enriquecimento via LLM em inteligência analítica acionável.</li>
 <li><strong>Variáveis derivadas por IA:</strong>
 <ul>
 <li>llm_product_type</li>
@@ -269,8 +282,8 @@ Como o catálogo está distribuído estruturalmente em termos de valor e popular
 <li><strong>Componentes principais:</strong>
 <ul>
 <li>Mix de tipos de produto identificados pela IA</li>
-<li>Marcas inferidas com maior volume</li>
-<li>Matriz estratégica de posicionamento (Preço vs Avaliação)</li>
+<li>Marcas inferidas com maior volume de produtos</li>
+<li>Matriz estratégica de posicionamento (Preço Médio vs Avaliação Média)</li>
 <li>Mapa de concentração por segmento de preço</li>
 <li>Texto estratégico dinâmico com recomendação de ação</li>
 </ul>
@@ -278,21 +291,22 @@ Como o catálogo está distribuído estruturalmente em termos de valor e popular
 <li><strong>Papel estratégico:</strong>
 <ul>
 <li>Conectar: <code>Dados → Sinal → Interpretação → Ação recomendada</code></li>
+<li>Evidenciar ganho analítico proporcionado pelo enriquecimento semântico</li>
 </ul>
 </li>
 </ul>
 <div class="markdown-alert markdown-alert-tip"><p class="markdown-alert-title"><svg class="octicon octicon-light-bulb mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"></path></svg>Tip</p><p><strong>Pergunta que responde:</strong><br>
-Onde a IA identifica concentração de demanda e quais decisões estratégicas são recomendadas?</p>
+Onde a IA identifica concentração de demanda e quais decisões estratégicas podem ser priorizadas?</p>
 </div>
 <h3 id="-evidências-4">📷 Evidências:</h3>
 <h4 id="-página-3---ai-insights">📌 Página 3 - AI Insights</h4>
 <p><img src="file:///c:\Users\Pink\Documents\GitHub\andrea_sousa_DDF_TECH_022026\assets\prints\07_dashboard_03_page03_ai_insights.jpg" alt="AI Insights"></p>
 <h2 id="-organização-das-medidas">🧮 Organização das Medidas</h2>
-<p>As medidas foram organizadas em pastas:</p>
-<p>📁 <strong>Executive Overview:</strong> Métricas gerais de catálogo e produto líder.<br>
-📁 <strong>Segmentation:</strong> Métricas estruturais, segmentação e revenue proxy.<br>
-📁 <strong>AI Insights:</strong> Métricas derivadas da camada enriquecida por LLM.</p>
-<div class="markdown-alert markdown-alert-note"><p class="markdown-alert-title"><svg class="octicon octicon-info mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p><p>Todas as métricas estratégicas são implementadas via DAX, evitando agregações diretas na camada visual.</p>
+<p>As medidas foram organizadas em pastas temáticas:</p>
+<p>📁 <strong>Executive Overview:</strong> Métricas consolidadas de catálogo e identificação de produto líder.<br>
+📁 <strong>Segmentation:</strong> Métricas estruturais, segmentação e Revenue Proxy.<br>
+📁 <strong>AI Insights:</strong> Métricas derivadas da camada enriquecida via LLM.</p>
+<div class="markdown-alert markdown-alert-note"><p class="markdown-alert-title"><svg class="octicon octicon-info mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p><p>Todas as métricas estratégicas foram implementadas via DAX, evitando agregações diretas na camada visual e garantindo separação entre modelo semântico e apresentação.</p>
 </div>
 <h3 id="-evidências-5">📷 Evidências:</h3>
 <h4 id="-organização-de-medidas-em-subpastas">📌 Organização de medidas em subpastas</h4>
@@ -301,14 +315,21 @@ Onde a IA identifica concentração de demanda e quais decisões estratégicas s
 <ul>
 <li>Tema escuro executivo</li>
 <li>Hierarquia visual clara (KPIs → Estrutura → Insight)</li>
-<li>Narrativas dinâmicas para contextualização</li>
-<li>Consistência de métricas e moeda</li>
-<li>Separação entre camada semântica e visual</li>
+<li>Narrativas dinâmicas para contextualização estratégica</li>
+<li>Consistência de métricas, unidade monetária e escalas</li>
+<li>Separação explícita entre camada semântica (modelo) e camada visual (relatório)</li>
 </ul>
 <h3 id="-evidências-6">📷 Evidências:</h3>
 <h4 id="-texto-dinâmico-com-dax">📌 Texto dinâmico com DAX</h4>
 <p><img src="file:///c:\Users\Pink\Documents\GitHub\andrea_sousa_DDF_TECH_022026\assets\prints\07_dashboard_06_dynamic_text_insight_example.jpg" alt="Texto Dinâmico"></p>
-<p>O texto foi criado para alterar, dinamicamente, a partir de qualquer filtro ou seleção feita na página:</p>
+<p>O texto foi construído utilizando medida em DAX, permitindo atualização dinâmica conforme qualquer filtro ou seleção aplicada na página.</p>
+<p><strong>Essa abordagem possibilita:</strong></p>
+<ul>
+<li>Geração automática de narrativa contextual</li>
+<li>Interpretação estratégica baseada nos filtros ativos</li>
+<li>Tradução de métricas quantitativas em insight acionável</li>
+<li>Conexão direta entre análise visual e recomendação executiva</li>
+</ul>
 <pre><code class="language-java">AI Strategic <span class="hljs-title function_">Insight</span> <span class="hljs-params">(Text)</span> =
 <span class="hljs-type">VAR</span> <span class="hljs-variable">TopRow</span> <span class="hljs-operator">=</span> TOPN(<span class="hljs-number">1</span>, ALLSELECTED(dash_ai_segment_analysis), dash_ai_segment_analysis[total_units], DESC)
 <span class="hljs-type">VAR</span> <span class="hljs-variable">TopType</span> <span class="hljs-operator">=</span> MAXX(TopRow, dash_ai_segment_analysis[llm_product_type])
@@ -317,35 +338,25 @@ Onde a IA identifica concentração de demanda e quais decisões estratégicas s
 <span class="hljs-type">VAR</span> <span class="hljs-variable">AvgRating</span> <span class="hljs-operator">=</span> MAXX(TopRow, dash_ai_segment_analysis[avg_rating])
 
 <span class="hljs-type">VAR</span> <span class="hljs-variable">Interpretation</span> <span class="hljs-operator">=</span> SWITCH(TRUE(),
-        ISBLANK(AvgRating),
-        <span class="hljs-string">&quot;Quality perception cannot be validated due to limited reviews.&quot;</span>,
-        AvgRating &gt;= <span class="hljs-number">4.6</span>,
-        <span class="hljs-string">&quot;This indicates exceptional customer satisfaction and strong product–market fit.&quot;</span>,
-        AvgRating &gt;= <span class="hljs-number">4.2</span>,
-        <span class="hljs-string">&quot;This suggests consistent customer satisfaction and a reliable demand signal.&quot;</span>,
-        AvgRating &gt;= <span class="hljs-number">3.8</span>,
-        <span class="hljs-string">&quot;This suggests solid demand with room to improve customer experience.&quot;</span>,
-        AvgRating &gt;= <span class="hljs-number">3.3</span>,
-        <span class="hljs-string">&quot;This suggests moderate satisfaction and potential friction points to address.&quot;</span>,
-        <span class="hljs-string">&quot;This suggests demand may be price-driven, with potential quality and conversion risks.&quot;</span>
+  ISBLANK(AvgRating), <span class="hljs-string">&quot;Quality perception cannot be validated due to limited reviews.&quot;</span>,
+  AvgRating &gt;= <span class="hljs-number">4.6</span>, <span class="hljs-string">&quot;This indicates exceptional customer satisfaction and strong product–market fit.&quot;</span>,
+  AvgRating &gt;= <span class="hljs-number">4.2</span>, <span class="hljs-string">&quot;This suggests consistent customer satisfaction and a reliable demand signal.&quot;</span>,
+  AvgRating &gt;= <span class="hljs-number">3.8</span>, <span class="hljs-string">&quot;This suggests solid demand with room to improve customer experience.&quot;</span>,
+  AvgRating &gt;= <span class="hljs-number">3.3</span>, <span class="hljs-string">&quot;This suggests moderate satisfaction and potential friction points to address.&quot;</span>,
+  <span class="hljs-string">&quot;This suggests demand may be price-driven, with potential quality and conversion risks.&quot;</span>
 )
 
 <span class="hljs-type">VAR</span> <span class="hljs-variable">NextAction</span> <span class="hljs-operator">=</span> SWITCH(TRUE(),
-        ISBLANK(AvgRating),
-        <span class="hljs-string">&quot;Action: prioritize review collection to validate quality before scaling.&quot;</span>,
-        AvgRating &gt;= <span class="hljs-number">4.6</span>,
-        <span class="hljs-string">&quot;Action: scale visibility (search/ads/recommendations) and protect availability.&quot;</span>,
-        AvgRating &gt;= <span class="hljs-number">4.2</span>,
-        <span class="hljs-string">&quot;Action: scale distribution and maintain pricing discipline.&quot;</span>,
-        AvgRating &gt;= <span class="hljs-number">3.8</span>,
-        <span class="hljs-string">&quot;Action: optimize listing content and post-purchase experience to lift ratings.&quot;</span>,
-        AvgRating &gt;= <span class="hljs-number">3.3</span>,
-        <span class="hljs-string">&quot;Action: investigate complaints/returns and remove key friction points.&quot;</span>,
-        <span class="hljs-string">&quot;Action: investigate quality issues and returns risk before increasing exposure.&quot;</span>
+  ISBLANK(AvgRating), <span class="hljs-string">&quot;Action: prioritize review collection to validate quality before scaling.&quot;</span>,
+  AvgRating &gt;= <span class="hljs-number">4.6</span>, <span class="hljs-string">&quot;Action: scale visibility (search/ads/recommendations) and protect availability.&quot;</span>,
+  AvgRating &gt;= <span class="hljs-number">4.2</span>, <span class="hljs-string">&quot;Action: scale distribution and maintain pricing discipline.&quot;</span>,
+  AvgRating &gt;= <span class="hljs-number">3.8</span>, <span class="hljs-string">&quot;Action: optimize listing content and post-purchase experience to lift ratings.&quot;</span>,
+  AvgRating &gt;= <span class="hljs-number">3.3</span>, <span class="hljs-string">&quot;Action: investigate complaints/returns and remove key friction points.&quot;</span>,
+  <span class="hljs-string">&quot;Action: investigate quality issues and returns risk before increasing exposure.&quot;</span>
 )
 
 RETURN
-<span class="hljs-string">&quot;Within the AI-enriched sample, &#x27;&quot;</span> &amp; TopType &amp;
+<span class="hljs-string">&quot;Within the AI-Enriched sample, &#x27;&quot;</span> &amp; TopType &amp;
 <span class="hljs-string">&quot;&#x27; leads demand with &quot;</span> &amp; FORMAT(TopUnits, <span class="hljs-string">&quot;#,0&quot;</span>, <span class="hljs-string">&quot;en-US&quot;</span>) &amp; <span class="hljs-string">&quot; units sold. &quot;</span> &amp;
 <span class="hljs-string">&quot;It is priced at $&quot;</span> &amp; FORMAT(AvgPrice, <span class="hljs-string">&quot;0.00&quot;</span>, <span class="hljs-string">&quot;en-US&quot;</span>) &amp;
 <span class="hljs-string">&quot; with an average rating of &quot;</span> &amp; FORMAT(AvgRating, <span class="hljs-string">&quot;0.0&quot;</span>, <span class="hljs-string">&quot;en-US&quot;</span>) &amp; <span class="hljs-string">&quot;★. &quot;</span> &amp;
@@ -356,12 +367,13 @@ UNICHAR(<span class="hljs-number">10</span>) &amp; UNICHAR(<span class="hljs-num
 <h4 id="-dashboard-publicado-no-power-bi-online">📌 Dashboard publicado no <a href="https://app.powerbi.com/view?r=eyJrIjoiNjhmNDg5MWMtMGU0Yi00ZjI5LTg5MTMtNTRiNTM5Y2RkOTAzIiwidCI6ImEzZTU3Zjc1LTU5YTktNDFkOS05ZGIwLTA0YmM0ODg2YWY3NyJ9&amp;pageName=5f22c10194a1a41d956c">Power BI Online</a></h4>
 <p><strong>O dashboard permite:</strong></p>
 <ul>
-<li>Monitoramento executivo</li>
-<li>Análise estrutural por segmento</li>
-<li>Avaliação de concentração de monetização</li>
-<li>Integração prática de IA em decisões de negócio</li>
+<li>Monitoramento executivo do catálogo</li>
+<li>Análise estrutural por segmento de preço e popularidade</li>
+<li>Avaliação de concentração de monetização (Revenue Proxy)</li>
+<li>Exploração de insights derivados de IA (marca e tipo inferido)</li>
+<li>Tomada de decisão orientada por métricas consolidadas</li>
 </ul>
-<p>Consolida a transição da camada analítica tradicional para uma camada de inteligência aumentada.</p>
+<p>O resultado demonstra a evolução de uma camada analítica tradicional para uma arquitetura de inteligência aumentada, combinando modelagem dimensional, enriquecimento semântico via IA e exploração interativa dos dados.</p>
 
             <script async src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
             

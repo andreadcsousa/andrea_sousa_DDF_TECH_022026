@@ -139,14 +139,15 @@
         </head>
         <body class="vscode-body vscode-light">
             <h1 id="integrar-e-explorar">Integrar e Explorar</h1>
-<p>Este documento descreve as etapas de integração na plataforma Dadosfera, governança, ingestão técnica, exploração inicial dos dados e preparação da camada STANDARDIZED para posterior modelagem.</p>
-<h2 id="-integração-na-plataforma-dadosfera-zona-raw">🔌 Integração na Plataforma Dadosfera (Zona RAW)</h2>
-<p>Os arquivos originais foram carregados utilizando o módulo <strong>Coletar</strong> da Dadosfera, conforme solicitado no case técnico. Foram realizadas as seguintes ações:</p>
+<p>Este documento descreve as etapas de integração na plataforma, governança, ingestão técnica, exploração inicial dos dados e preparação da camada Standardized para posterior modelagem analítica.</p>
+<h2 id="-integração-na-plataforma-de-dados-zona-raw">🔌 Integração na Plataforma de Dados (Zona RAW)</h2>
+<p>Os arquivos originais foram carregados utilizando o módulo <strong>Coletar</strong>, conforme solicitado no case técnico. Foram realizadas as seguintes ações:</p>
 <ul>
 <li>Upload dos arquivos originais (Produtos e Categorias)</li>
 <li>Criação automática de ativos no <strong>Catálogo</strong></li>
 <li>Padronização dos nomes técnicos dos ativos</li>
 <li>Classificação na zona <strong>RAW</strong> do Data Lake</li>
+<li>Validação do volume de registros após ingestão</li>
 </ul>
 <h3 id="-ativos-criados">📂 Ativos Criados</h3>
 <ul>
@@ -154,25 +155,25 @@
 <li><code>RAW_ECOMMERCE_AMAZON_CATEGORIES</code></li>
 </ul>
 <h3 id="-evidências">📸 Evidências:</h3>
-<h4 id="-upload-no-catálogo-da-dadosfera">📌 Upload no catálogo da Dadosfera</h4>
+<h4 id="-upload-no-catálogo">📌 Upload no catálogo</h4>
 <p><img src="file:///c:\Users\Pink\Documents\GitHub\andrea_sousa_DDF_TECH_022026\assets\prints\03_dadosfera_03_raw_upload_confirmation.jpg" alt="Uploads de arquivos raw"></p>
 <div class="markdown-alert markdown-alert-warning"><p class="markdown-alert-title"><svg class="octicon octicon-alert mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Warning</p><p>A plataforma aceita arquivos com limite de até <strong>250MB</strong> por upload.</p>
 <p>O arquivo CSV principal de produtos ultrapassava esse tamanho.
-Para viabilizar o carregamento, foi realizada a conversão para formato <strong>Parquet</strong>, utilizando a ferramenta:
-<a href="https://observablehq.com/@observablehq/csv-to-parquet">https://observablehq.com/@observablehq/csv-to-parquet</a></p>
-<p>A conversão reduziu significativamente o tamanho do arquivo, permitindo o upload sem perda estrutural.</p>
+Para viabilizar o carregamento, foi realizada a conversão para formato <strong>Parquet</strong>, utilizando ferramenta específica de conversão.</p>
+<p>A conversão reduziu significativamente o tamanho do arquivo, permitindo o upload sem perda estrutural e com maior eficiência de armazenamento e leitura.</p>
 </div>
 <div class="markdown-alert markdown-alert-tip"><p class="markdown-alert-title"><svg class="octicon octicon-light-bulb mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"></path></svg>Tip</p><p>O uso de Parquet está alinhado com boas práticas de Data Lake, por ser um formato colunar, comprimido e otimizado para processamento analítico.</p>
 </div>
 <h2 id="️-catalogação-e-governança">🏷️ Catalogação e Governança</h2>
 <p>Após o carregamento, foram aplicadas boas práticas de governança de dados:</p>
 <ul>
-<li>Descrição detalhada do ativo preenchida</li>
+<li>Descrição detalhada do ativo preenchida no catálogo</li>
 <li>Aplicação de tags (ecommerce, raw, catalog, case-tecnico)</li>
-<li>Definição de owner</li>
-<li>Documentação do <strong>Dicionário de Dados</strong> (descrição das colunas)</li>
+<li>Definição de owner responsável pelo ativo</li>
+<li>Classificação na zona RAW do Data Lake</li>
+<li>Documentação do <strong>Dicionário de Dados</strong> com padronização técnica dos nomes das colunas</li>
 </ul>
-<h3 id="-dicionário-de-dados--products">📘 Dicionário de Dados – Products</h3>
+<h3 id="-dicionário-de-dados--products-raw_ecommerce_amazon_products">📘 Dicionário de Dados – Products (RAW_ECOMMERCE_AMAZON_PRODUCTS)</h3>
 <table>
 <thead>
 <tr>
@@ -183,7 +184,7 @@ Para viabilizar o carregamento, foi realizada a conversão para formato <strong>
 <tbody>
 <tr>
 <td>ASIN</td>
-<td>Identificador único do produto na Amazon</td>
+<td>Identificador único do produto na Amazon (chave natural)</td>
 </tr>
 <tr>
 <td>TITLE</td>
@@ -215,7 +216,7 @@ Para viabilizar o carregamento, foi realizada a conversão para formato <strong>
 </tr>
 <tr>
 <td>CATEGORY_ID</td>
-<td>Identificador da categoria</td>
+<td>Identificador da categoria (chave estrangeira)</td>
 </tr>
 <tr>
 <td>ISBESTSELLER</td>
@@ -227,11 +228,11 @@ Para viabilizar o carregamento, foi realizada a conversão para formato <strong>
 </tr>
 <tr>
 <td>_PROCESSING_TIMESTAMP</td>
-<td>Timestamp interno gerado pela plataforma</td>
+<td>Timestamp interno gerado automaticamente na ingestão</td>
 </tr>
 </tbody>
 </table>
-<h3 id="-dicionário-de-dados--categories">📘 Dicionário de Dados – Categories</h3>
+<h3 id="-dicionário-de-dados--categories-raw_ecommerce_amazon_categories">📘 Dicionário de Dados – Categories (RAW_ECOMMERCE_AMAZON_CATEGORIES)</h3>
 <table>
 <thead>
 <tr>
@@ -242,7 +243,7 @@ Para viabilizar o carregamento, foi realizada a conversão para formato <strong>
 <tbody>
 <tr>
 <td>ID</td>
-<td>Identificador único da categoria</td>
+<td>Identificador único da categoria (chave primária)</td>
 </tr>
 <tr>
 <td>CATEGORY_NAME</td>
@@ -250,26 +251,26 @@ Para viabilizar o carregamento, foi realizada a conversão para formato <strong>
 </tr>
 <tr>
 <td>_PROCESSING_TIMESTAMP</td>
-<td>Timestamp interno gerado pela plataforma</td>
+<td>Timestamp interno gerado automaticamente na ingestão</td>
 </tr>
 </tbody>
 </table>
 <h3 id="-evidências-1">📸 Evidências:</h3>
-<h4 id="-descrição-dos-ativos">📌 Descrição dos ativos</h4>
+<h4 id="-descrição-dos-ativos-no-catálogo">📌 Descrição dos ativos no catálogo</h4>
 <p><img src="file:///c:\Users\Pink\Documents\GitHub\andrea_sousa_DDF_TECH_022026\assets\prints\03_dadosfera_02_raw_products_catalog.jpg" alt="Catalogação dos produtos"></p>
 <p><img src="file:///c:\Users\Pink\Documents\GitHub\andrea_sousa_DDF_TECH_022026\assets\prints\03_dadosfera_01_raw_categories_catalog.jpg" alt="Catalogação das categorias"></p>
-<h2 id="️-organização-em-camadas-modelo-dadosfera">🗂️ Organização em Camadas (Modelo Dadosfera)</h2>
-<p>Os dados foram organizados seguindo o padrão arquitetural adotado pela Dadosfera:</p>
+<h2 id="️-organização-em-camadas-modelo-arquitetural">🗂️ Organização em Camadas (Modelo Arquitetural)</h2>
+<p>Os dados foram organizados seguindo o padrão arquitetural de camadas analíticas:</p>
 <ul>
-<li><strong>RAW</strong> → Dados brutos carregados diretamente da fonte (Kaggle), sem transformação.</li>
-<li><strong>STANDARDIZED</strong> → Dados tratados, padronizados e tipados, preparados para modelagem.</li>
-<li><strong>CURATED</strong> → Dados modelados dimensionalmente e prontos para consumo analítico.</li>
+<li><strong>RAW</strong> → Dados brutos carregados diretamente da fonte (Kaggle), sem transformações estruturais.</li>
+<li><strong>Standardized</strong> → Dados tratados, padronizados, tipados e preparados para modelagem analítica.</li>
+<li><strong>Curated</strong> → Dados modelados dimensionalmente e preparados para consumo analítico (dashboards e Data App).</li>
 </ul>
 <h2 id="-ingestão-técnica-colab">📥 Ingestão Técnica (Colab)</h2>
 <h3 id="-fonte-de-dados">📌 Fonte de Dados</h3>
 <ul>
 <li>Dataset: Amazon Products Dataset 2023</li>
-<li>Origem: Kaggle</li>
+<li>Origem: Kaggle (dataset público)</li>
 <li>Formato original: CSV</li>
 <li>Volume: 1.426.337 registros</li>
 </ul>
@@ -277,80 +278,89 @@ Para viabilizar o carregamento, foi realizada a conversão para formato <strong>
 <ul>
 <li>Google Colab</li>
 <li>Python (pandas, pyarrow)</li>
-<li>Persistência em Parquet</li>
+<li>Conversão e persistência em formato Parquet</li>
+<li>Otimização de tipagem (float32 / int32)</li>
 </ul>
-<div class="markdown-alert markdown-alert-note"><p class="markdown-alert-title"><svg class="octicon octicon-info mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p><p>O processamento inicial foi realizado em ambiente controlado (Colab) para validação técnica e otimização de tipagem. A etapa de orquestração e pipeline será implementada na plataforma Dadosfera conforme solicitado no Item 8.</p>
+<div class="markdown-alert markdown-alert-note"><p class="markdown-alert-title"><svg class="octicon octicon-info mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p><p>O processamento inicial foi realizado em ambiente controlado (Colab) para validação técnica, otimização de tipagem e verificação de integridade dos dados. A orquestração definitiva e materialização via pipeline são descritas na etapa de pipelines do projeto.</p>
 </div>
 <h2 id="-exploração-técnica-dos-dados-eda">🔎 Exploração Técnica dos Dados (EDA)</h2>
-<p>Foram realizadas análises exploratórias para compreender qualidade e distribuição dos dados:</p>
+<p>Foram realizadas análises exploratórias para compreensão da qualidade, distribuição e comportamento das variáveis:</p>
 <ul>
-<li>Distribuição de preços</li>
-<li>Distribuição de ratings</li>
-<li>Identificação de produtos sem preço</li>
-<li>Identificação de produtos com rating zero</li>
+<li>Distribuição de preços (price e list_price)</li>
+<li>Distribuição de avaliações (rating)</li>
+<li>Identificação de produtos sem preço válido</li>
+<li>Identificação de produtos com rating igual a zero</li>
 <li>Análise de cardinalidade por categoria</li>
+<li>Avaliação de consistência entre preço atual e preço de lista</li>
 </ul>
 <p>Essas análises subsidiaram decisões de:</p>
 <ul>
-<li>Segmentação de preço</li>
-<li>Estratégia de ranking</li>
-<li>Definição de métricas de popularidade</li>
-<li>Estratégia de amostragem para LLM</li>
+<li>Definição de faixas de segmentação de preço</li>
+<li>Estratégia de ranking e priorização de produtos</li>
+<li>Construção de métricas derivadas (popularidade e desconto percentual)</li>
+<li>Estratégia controlada de amostragem para processamento via LLM</li>
+<li>Tratamento de valores nulos e inconsistências na camada Standardized</li>
 </ul>
 <h3 id="-evidências-2">📸 Evidências:</h3>
 <h4 id="-gráfico-de-distribuição-de-preços">📌 Gráfico de distribuição de preços</h4>
 <p><img src="file:///c:\Users\Pink\Documents\GitHub\andrea_sousa_DDF_TECH_022026\assets\prints\03_gold_01_price_distribution.jpg" alt="Distribuição de Preços"></p>
 <h4 id="-gráfico-de-distribuição-de-ratings">📌 Gráfico de distribuição de ratings</h4>
 <p><img src="file:///c:\Users\Pink\Documents\GitHub\andrea_sousa_DDF_TECH_022026\assets\prints\03_gold_02_rating_distribution.jpg" alt="Distribuição de Ratings"></p>
-<h2 id="-tratamento-e-padronização-camada-standardized">🧹 Tratamento e Padronização (Camada STANDARDIZED)</h2>
+<h2 id="-tratamento-e-padronização-camada-standardized">🧹 Tratamento e Padronização (Camada Standardized)</h2>
 <h3 id="-padronização-de-nomes">🔤 Padronização de Nomes</h3>
 <ul>
 <li>asin → product_id</li>
 <li>title → product_title</li>
+<li>imgUrl → image_url</li>
+<li>productURL → product_url</li>
 <li>reviews → review_count</li>
 <li>boughtInLastMonth → units_sold_last_month</li>
+<li>isBestSeller → is_best_seller</li>
+<li>listPrice → list_price</li>
 </ul>
 <h3 id="-otimização-de-tipos">🧮 Otimização de Tipos</h3>
 <ul>
 <li>float64 → float32</li>
 <li>int64 → int32</li>
 <li>object → string</li>
-<li>Criação de colunas booleanas</li>
+<li>Conversão explícita de flags para boolean</li>
+<li>Identificação preliminar de valores nulos e inconsistentes</li>
 </ul>
 <h3 id="-criação-de-novas-variáveis">📊 Criação de Novas Variáveis</h3>
 <ul>
+<li>discount_percentage (derivado de price e list_price)</li>
 <li>price_segment</li>
 <li>has_rating</li>
-<li>weighted_score</li>
+<li>weighted_score (rating ponderado por review_count)</li>
 <li>popularity_tier</li>
 </ul>
 <h2 id="-garantia-de-reprocessamento">🔁 Garantia de Reprocessamento</h2>
 <p>Antes da persistência, o diretório Parquet é removido para evitar duplicidade de dados. Essa estratégia garante:</p>
 <ul>
 <li>Overwrite controlado</li>
-<li>Idempotência do pipeline</li>
-<li>Reprocessamento seguro</li>
+<li>Idempotência do processamento</li>
+<li>Reprocessamento seguro sem acúmulo de versões inconsistentes</li>
 </ul>
-<h2 id="-saída-da-camada-standardized">📤 Saída da Camada STANDARDIZED</h2>
-<p>DataFrame final estruturado para posterior ingestão na camada STANDARDIZED:</p>
+<h2 id="-saída-da-camada-standardized">📤 Saída da Camada Standardized</h2>
+<p>DataFrame final estruturado para posterior materialização na camada Standardized:</p>
 <ul>
 <li>1.379.629 registros válidos</li>
 <li>17 colunas estruturadas</li>
-<li>Tipagem otimizada</li>
-<li>Sem nulos críticos</li>
+<li>Tipagem otimizada (float32 / int32 / string / boolean)</li>
+<li>Ausência de nulos críticos nas colunas analíticas</li>
 </ul>
 <h3 id="-evidências-3">📸 Evidências:</h3>
 <h4 id="-estrutura-final-info">📌 Estrutura final (.info)</h4>
 <p><img src="file:///c:\Users\Pink\Documents\GitHub\andrea_sousa_DDF_TECH_022026\assets\prints\03_gold_04_final_dataset_info.jpg" alt="Estrutura do dataset (.info())"></p>
-<h4 id="-head-do-dataframe-silver">📌 Head do DataFrame Silver</h4>
+<h4 id="-head-do-dataframe-standardized">📌 Head do DataFrame Standardized</h4>
 <p><img src="file:///c:\Users\Pink\Documents\GitHub\andrea_sousa_DDF_TECH_022026\assets\prints\03_gold_03_final_dataset_head.jpg" alt="Head do dataset"></p>
 <h2 id="-próxima-etapa-microtransformação-e-pipeline">🔄 Próxima Etapa: Microtransformação e Pipeline</h2>
-<p>A camada STANDARDIZED será posteriormente materializada via pipeline na Dadosfera, permitindo:</p>
+<p>A camada Standardized representa a primeira camada analítica confiável do projeto, servindo como base para as etapas subsequentes de qualidade, enriquecimento semântico, modelagem dimensional e consumo analítico. Ela servirá como base para as etapas seguintes do projeto, incluindo enriquecimento semântico via LLM, modelagem dimensional na camada Curated e materialização das transformações por meio de pipelines automatizados.</p>
 <ul>
 <li>Versionamento das transformações</li>
 <li>Execução incremental</li>
 <li>Governança centralizada</li>
-<li>Evolução para camada CURATED</li>
+<li>Evolução estruturada para a camada Curated</li>
 </ul>
 
             

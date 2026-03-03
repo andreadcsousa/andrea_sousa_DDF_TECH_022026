@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Pipelines de Dados</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="pipelines-de-dados">Pipelines de Dados</h1>
+<p>Esta etapa apresenta a estratégia de orquestração e automação das transformações de dados implementadas ao longo do projeto.</p>
+<p>O objetivo é garantir que todas as etapas de ingestão, tratamento, enriquecimento e materialização analítica possam ser executadas de forma automatizada e auditável.</p>
+<h2 id="-objetivo-do-pipeline">🎯 Objetivo do Pipeline</h2>
+<p>O pipeline foi projetado para:</p>
+<ul>
+<li>Automatizar o fluxo de processamento de dados</li>
+<li>Garantir reprodutibilidade das transformações</li>
+<li>Permitir execução incremental</li>
+<li>Centralizar governança de dados</li>
+<li>Materializar a camada <strong>Curated</strong> utilizada por dashboards e Data Apps</li>
+</ul>
+<h2 id="-arquitetura-do-pipeline">🧱 Arquitetura do Pipeline</h2>
+<p>O pipeline segue a arquitetura de camadas adotada ao longo do projeto:</p>
+<p><code>RAW → Standardized → Enriched → Curated</code></p>
+<p>Cada etapa possui responsabilidade clara dentro do fluxo de processamento.</p>
+<table>
+<thead>
+<tr>
+<th>Camada</th>
+<th>Responsabilidade</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RAW</td>
+<td>Ingestão de dados brutos</td>
+</tr>
+<tr>
+<td>Standardized</td>
+<td>Limpeza, tipagem e padronização</td>
+</tr>
+<tr>
+<td>Enriched</td>
+<td>Extração de features via LLM</td>
+</tr>
+<tr>
+<td>Curated</td>
+<td>Modelagem analítica dimensional</td>
+</tr>
+</tbody>
+</table>
+<h2 id="️-estrutura-do-pipeline">⚙️ Estrutura do Pipeline</h2>
+<p>O pipeline foi estruturado em etapas sequenciais.</p>
+<h3 id="1️⃣-ingestão-raw">1️⃣ Ingestão (RAW)</h3>
+<p>Responsável pela leitura dos dados originais carregados na plataforma.</p>
+<ul>
+<li><strong>Ações executadas:</strong>
+<ul>
+<li>Leitura das tabelas RAW</li>
+<li>Validação de estrutura</li>
+<li>Verificação de volume</li>
+</ul>
+</li>
+<li><strong>Entradas</strong>
+<ul>
+<li>RAW_ECOMMERCE_AMAZON_PRODUCTS</li>
+<li>RAW_ECOMMERCE_AMAZON_CATEGORIES</li>
+</ul>
+</li>
+<li><strong>Saída</strong>
+<ul>
+<li>Dataset bruto preparado para transformação.</li>
+</ul>
+</li>
+</ul>
+<h3 id="2️⃣-padronização-standardized">2️⃣ Padronização (Standardized)</h3>
+<p>Etapa responsável pelo tratamento e normalização dos dados.</p>
+<ul>
+<li><strong>Transformações aplicadas</strong>
+<ul>
+<li>Padronização de nomes de colunas</li>
+<li>Conversão de tipos</li>
+<li>Tratamento e validação de valores nulos</li>
+<li>Criação de variáveis derivadas</li>
+</ul>
+</li>
+<li><strong>Variáveis criadas</strong>
+<ul>
+<li>price_segment</li>
+<li>has_rating</li>
+<li>weighted_score</li>
+<li>popularity_tier</li>
+<li>discount_percentage</li>
+</ul>
+</li>
+<li><strong>Saída</strong>
+<ul>
+<li>Tabela estruturada para modelagem analítica.</li>
+</ul>
+</li>
+</ul>
+<h3 id="3️⃣-enriquecimento-via-ia-enriched">3️⃣ Enriquecimento via IA (Enriched)</h3>
+<p>Etapa responsável pela extração de atributos semânticos utilizando LLM.</p>
+<ul>
+<li><strong>Entrada:</strong>
+<ul>
+<li>product_title</li>
+</ul>
+</li>
+<li><strong>Features extraídas</strong>
+<ul>
+<li>llm_brand_guess</li>
+<li>llm_product_type</li>
+<li>llm_attributes_json</li>
+<li>llm_keywords_json</li>
+<li>llm_title_clean</li>
+</ul>
+</li>
+<li><strong>Estratégia aplicada</strong>
+<ul>
+<li>Amostragem estratificada por categoria, price_segment e popularity_tier</li>
+<li>Controle de custo por tokens</li>
+<li>Validação de JSON retornado</li>
+</ul>
+</li>
+<li><strong>Saída</strong>
+<ul>
+<li>Tabela enriquecida semanticamente.</li>
+</ul>
+</li>
+</ul>
+<h3 id="4️⃣-modelagem-analítica-curated">4️⃣ Modelagem Analítica (Curated)</h3>
+<p>Responsável pela materialização das tabelas dimensionais e fatos analíticos utilizados nas análises.</p>
+<table>
+<thead>
+<tr>
+<th>Tabelas geradas</th>
+<th>Tipo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dim_product</td>
+<td>Dimensão</td>
+</tr>
+<tr>
+<td>dim_category</td>
+<td>Dimensão</td>
+</tr>
+<tr>
+<td>dim_date</td>
+<td>Dimensão</td>
+</tr>
+<tr>
+<td>dim_price_segment</td>
+<td>Dimensão</td>
+</tr>
+<tr>
+<td>dim_popularity_tier</td>
+<td>Dimensão</td>
+</tr>
+<tr>
+<td>fact_product_snapshot</td>
+<td>Fato</td>
+</tr>
+<tr>
+<td>fact_category_monthly</td>
+<td>Fato</td>
+</tr>
+</tbody>
+</table>
+<p>Essa etapa consolida o modelo dimensional utilizado nos dashboards e no Data App.</p>
+<h2 id="-estratégia-de-execução">🔄 Estratégia de Execução</h2>
+<p>O pipeline foi projetado para suportar execução incremental.</p>
+<p><strong>Estratégias utilizadas</strong></p>
+<ul>
+<li>Reprocessamento idempotente</li>
+<li>Validação de qualidade antes da materialização</li>
+<li>Separação de camadas analíticas</li>
+<li>Persistência intermediária em Parquet e materialização das tabelas analíticas</li>
+</ul>
+<h2 id="-validação-do-pipeline">🧪 Validação do Pipeline</h2>
+<p>Antes da materialização final foram aplicadas verificações automáticas:</p>
+<ul>
+<li>Unicidade de product_id</li>
+<li>Consistência referencial com category_id</li>
+<li>Domínio de valores numéricos</li>
+<li>Validação de tipagem</li>
+</ul>
+<p>Essas validações garantem integridade antes da publicação da camada analítica.</p>
+<h2 id="-benefícios-arquiteturais">📊 Benefícios Arquiteturais</h2>
+<p>A adoção de pipelines automatizados permite:</p>
+<ul>
+<li>Redução de processamento manual</li>
+<li>Reexecução segura de transformações</li>
+<li>Versionamento e rastreabilidade da lógica de transformação de dados</li>
+<li>Governança centralizada</li>
+<li>Escalabilidade do processamento</li>
+</ul>
+<h2 id="-evolução-para-produção">🔁 Evolução para Produção</h2>
+<p>Em cenário produtivo, o pipeline pode evoluir para:</p>
+<ul>
+<li>Execução agendada e orquestrada</li>
+<li>Processamento incremental</li>
+<li>Monitoramento de falhas</li>
+<li>Controle de custos de LLM</li>
+<li>Atualização automática de dashboards</li>
+</ul>
+<h2 id="-papel-estratégico">🧠 Papel Estratégico</h2>
+<p>O pipeline conecta todas as etapas do ciclo de vida de dados:</p>
+<p><code>Ingestão → Qualidade → Enriquecimento → Modelagem → Consumo Analítico</code></p>
+<p>Essa estrutura transforma um fluxo manual de análise em <strong>um sistema de dados reexecutável</strong>, capaz de sustentar aplicações analíticas e de IA em escala.</p>
+<h1 id="-evidências">📷 Evidências</h1>
+<h4 id="-coletar--conexões">📌 Coletar &gt; Conexões</h4>
+<p><img src="file:///c:\Users\Pink\Documents\GitHub\andrea_sousa_DDF_TECH_022026\assets\prints\08_pipeline_neon_conection_postgresql.jpg" alt="Conexão Neon e PostgreSQL"></p>
+<h4 id="-coletar--pipelines">📌 Coletar &gt; Pipelines</h4>
+<p><img src="file:///c:\Users\Pink\Documents\GitHub\andrea_sousa_DDF_TECH_022026\assets\prints\08_pipeline_execution.jpg" alt="Pipeline Dadosfera"></p>
+<h4 id="-explorar--catálogo">📌 Explorar &gt; Catálogo</h4>
+<p><img src="file:///c:\Users\Pink\Documents\GitHub\andrea_sousa_DDF_TECH_022026\assets\prints\08_pipeline_catalog_active_raw.jpg" alt="Ativos gerados"></p>
+<h1 id="-resultado">🏁 Resultado</h1>
+<p>Com a implementação do pipeline:</p>
+<ul>
+<li>o processamento torna-se <strong>automatizado</strong></li>
+<li>as transformações tornam-se <strong>reprodutíveis</strong></li>
+<li>a camada analítica torna-se <strong>governável</strong></li>
+</ul>
+<p>O pipeline consolida a transição de um fluxo experimental de notebooks para uma arquitetura de dados estruturada, reexecutável e pronta para evolução produtiva.</p>
+
+            
+            
+        </body>
+        </html>

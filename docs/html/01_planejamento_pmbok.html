@@ -140,52 +140,58 @@
         <body class="vscode-body vscode-light">
             <h1 id="planejamento-do-projeto-pmbok">Planejamento do Projeto (PMBOK)</h1>
 <h2 id="-objetivo">🎯 Objetivo</h2>
-<p>Construir uma Prova de Conceito de Plataforma de Dados utilizando a Dadosfera SaaS, capaz de substituir arquiteturas fragmentadas e centralizar ingestão, processamento, modelagem e IA aplicadas a um catálogo de e-commerce com mais de 1,5 milhão de produtos.</p>
+<p>Estruturar o planejamento completo do projeto de implementação de uma Plataforma de Dados para uma empresa de e-commerce, utilizando a Dadosfera SaaS como solução central.</p>
+<p>Este planejamento segue as boas práticas do PMBOK e serve como base organizacional para a execução do case técnico, garantindo alinhamento entre escopo, riscos, entregáveis e geração de valor ao negócio.</p>
+<h2 id="-artefato-de-planejamento">📋 Artefato de Planejamento</h2>
+<p>O projeto foi gerenciado através de um Kanban Board estruturado em macrofases, detalhando entregáveis, dependências e pontos críticos.</p>
+<p>O planejamento foi elaborado antes da execução técnica do case, servindo como guia para organização das etapas de engenharia, análise e entrega final.</p>
 <h2 id="-escopo">📌 Escopo</h2>
+<p>O escopo foi definido considerando a construção de uma Prova de Conceito (PoC), com foco em demonstrar viabilidade técnica, arquitetura de dados e geração de valor ao negócio.</p>
 <h3 id="inclui">Inclui</h3>
 <ul>
-<li>Ingestão de dados (&gt;1M registros)</li>
-<li>Tratamento e padronização (STANDARDIZED)</li>
-<li>Modelagem analítica (CURATED - Data Warehouse Dimensional)</li>
-<li>Geração de série temporal</li>
-<li>Extração de features via LLM</li>
-<li>Criação de Dashboard analítico</li>
-<li>Criação de Data App com Streamlit</li>
-<li>Pipeline automatizado</li>
-<li>Apresentação executiva</li>
+<li>Ingestão de dados de e-commerce (&gt;1M registros)</li>
+<li>Tratamento, padronização e organização em camadas (RAW → Standardized → Curated)</li>
+<li>Modelagem analítica dimensional (Data Warehouse - abordagem Kimball)</li>
+<li>Geração de análises de série temporal para suporte à tomada de decisão</li>
+<li>Extração estruturada de features a partir de dados desestruturados via LLM</li>
+<li>Criação de Dashboard analítico com múltiplas visualizações</li>
+<li>Desenvolvimento de Data App interativo com Streamlit</li>
+<li>Construção de Pipeline automatizado para processamento e atualização dos dados</li>
+<li>Apresentação executiva demonstrando a viabilidade da Dadosfera como Plataforma de Dados</li>
 </ul>
 <h3 id="não-inclui">Não inclui</h3>
 <ul>
-<li>Deploy produtivo em ambiente corporativo real</li>
-<li>Integração com ERP/CRM externo</li>
-<li>Monitoramento contínuo em produção</li>
+<li>Implantação produtiva em ambiente corporativo real</li>
+<li>Integração direta com sistemas transacionais externos (ERP/CRM)</li>
+<li>Monitoramento contínuo e governança operacional em ambiente produtivo</li>
 </ul>
 <h2 id="-estrutura-analítica">📂 Estrutura Analítica</h2>
 <ol>
-<li>Planejamento</li>
-<li>Ingestão e Integração</li>
-<li>Tratamento e Padronização</li>
-<li>Modelagem de Dados</li>
-<li>Enriquecimento com IA</li>
-<li>Análise e Visualização</li>
-<li>Desenvolvimento de Data App</li>
-<li>Pipeline e Catalogação</li>
-<li>Apresentação Executiva</li>
+<li>Planejamento e Definição de Escopo</li>
+<li>Ingestão e Integração (RAW Zone)</li>
+<li>Tratamento, Padronização e Data Quality (Standardized Zone)</li>
+<li>Modelagem Analítica (Curated - Data Warehouse Dimensional)</li>
+<li>Enriquecimento com IA (Feature Engineering via LLM)</li>
+<li>Análise e Visualização (Dashboard Analítico)</li>
+<li>Desenvolvimento de Data App (Streamlit)</li>
+<li>Pipeline de Processamento e Catalogação</li>
+<li>Apresentação Executiva (Prova de Conceito)</li>
 </ol>
 <h2 id="-alinhamento-ao-ciclo-de-vida-da-dadosfera">🔁 Alinhamento ao Ciclo de Vida da Dadosfera</h2>
 <p>O planejamento foi estruturado seguindo as fases:</p>
 <ul>
 <li><strong>Integrar:</strong> Ingestão (RAW)</li>
-<li><strong>Processar:</strong> Padronização e Enriquecimento (STANDARDIZED + LLM)</li>
-<li><strong>Explorar:</strong> Catalogação e organização em camadas</li>
+<li><strong>Processar:</strong> Tratamento, padronização e validação de qualidade (Standardized)</li>
+<li><strong>Explorar:</strong> Catalogação, organização em camadas e análise exploratória dos dados</li>
 <li><strong>Analisar:</strong> Dashboards e consultas SQL</li>
-<li><strong>ML/AI:</strong> Extração de features estruturadas via LLM</li>
-<li><strong>Data Apps:</strong> Aplicação Streamlit</li>
+<li><strong>ML/AI:</strong> Extração de features estruturadas e enriquecimento semântico via LLM</li>
+<li><strong>Data Apps:</strong> Aplicação interativa em Streamlit para exploração e geração de insights</li>
 </ul>
 <h2 id="-metodologia-de-gestão">📌 Metodologia de Gestão</h2>
-<p>O projeto foi estruturado utilizando abordagem Agile/Kanban, com organização em Epics, Features e Tasks no Azure Devops.</p>
+<p>O projeto foi estruturado utilizando abordagem Agile (Kanban), com organização em Epics, Features e Tasks no Azure DevOps.</p>
+<p>Os Épicos foram definidos utilizando a metodologia <strong>5W (What, Why, Who, When, Where)</strong>, garantindo clareza de escopo, responsabilidade e contexto técnico desde a concepção de cada macroentrega.</p>
 <p><strong>Colunas utilizadas:</strong> <code>New | Active | Resolved | Closed</code></p>
-<div class="markdown-alert markdown-alert-note"><p class="markdown-alert-title"><svg class="octicon octicon-info mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p><p>A organização por Epics permitiu controle incremental da entrega e mitigação de riscos dentro do prazo estabelecido (5 dias corridos)</p>
+<div class="markdown-alert markdown-alert-note"><p class="markdown-alert-title"><svg class="octicon octicon-info mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p><p>A organização por Epics permitiu controle incremental da entrega, rastreabilidade das decisões técnicas e mitigação de riscos dentro do prazo estabelecido (5 dias corridos).</p>
 </div>
 <h2 id="-cronograma">📅 Cronograma</h2>
 <table>
@@ -199,12 +205,12 @@
 <tbody>
 <tr>
 <td>1</td>
-<td>Ingestão + STANDARDIZED</td>
+<td>Ingestão + Standardized</td>
 <td>Execução</td>
 </tr>
 <tr>
 <td>2</td>
-<td>CURATED + Modelagem</td>
+<td>Curated + Modelagem</td>
 <td>Execução</td>
 </tr>
 <tr>
@@ -215,12 +221,12 @@
 <tr>
 <td>4</td>
 <td>Data App + Consolidação</td>
-<td>Monitoramento</td>
+<td>Execução e Monitoramento</td>
 </tr>
 <tr>
 <td>5</td>
 <td>Apresentação Executiva</td>
-<td>Encerramento</td>
+<td>Encerramento e Entrega</td>
 </tr>
 </tbody>
 </table>
@@ -240,8 +246,8 @@
 <tr>
 <td>Alto volume de dados</td>
 <td>Técnico</td>
-<td>Lentidão e uso excessivo de memória</td>
-<td>Média</td>
+<td>Degradação de performance durante processamento inicial</td>
+<td>Alta</td>
 <td>Uso de tipos otimizados (float32/int32) e particionamento</td>
 </tr>
 <tr>
@@ -256,10 +262,10 @@
 <td>Financeiro</td>
 <td>Aumento de custo inesperado</td>
 <td>Média</td>
-<td>Uso de amostra estratificada e controle de chamadas</td>
+<td>Processamento em batch, controle de tokens e amostragem estratificada</td>
 </tr>
 <tr>
-<td>Prazo curto (4 dias)</td>
+<td>Prazo curto (5 dias corridos)</td>
 <td>Cronograma</td>
 <td>Entrega incompleta</td>
 <td>Média</td>
@@ -293,6 +299,27 @@
 <td>Baixa</td>
 <td>Uso de provedor estável e backup local</td>
 </tr>
+<tr>
+<td>Falha na ingestão (volume alto)</td>
+<td>Técnico</td>
+<td>Interrupção do fluxo de integração e atraso nas etapas seguintes</td>
+<td>Médio</td>
+<td>Uso de amostragem controlada (200k) para contingência</td>
+</tr>
+<tr>
+<td>Instabilidade na conexão PostgreSQL</td>
+<td>Operacional</td>
+<td>Impossibilidade temporária de acesso aos dados</td>
+<td>Alto</td>
+<td>Reconexão automática e fallback local (DuckDB)</td>
+</tr>
+<tr>
+<td>Inconsistência nos dados RAW</td>
+<td>Técnico</td>
+<td>Comprometimento da qualidade analítica e da modelagem</td>
+<td>Médio</td>
+<td>Validação com Great Expectations antes da modelagem</td>
+</tr>
 </tbody>
 </table>
 <h2 id="-interdependências-do-projeto">🔗 Interdependências do Projeto</h2>
@@ -300,71 +327,71 @@
 <p>O fluxo de dependências segue a lógica das camadas analíticas e do ciclo de vida de dados:</p>
 <h3 id="-camadas-de-engenharia">🧱 Camadas de Engenharia</h3>
 <ul>
-<li><strong>Silver → Gold:</strong> A camada Gold depende da padronização, tipagem e validação realizadas na Silver.</li>
-<li><strong>Silver → LLM:</strong> O enriquecimento via LLM utiliza dados estruturados e consistentes provenientes da Silver.</li>
+<li><strong>Standardized → Curated:</strong> A camada Curated depende da padronização, tipagem e validação realizadas na Standardized.</li>
+<li><strong>Standardized → LLM:</strong> O enriquecimento via LLM utiliza dados estruturados e consistentes provenientes da Standardized.</li>
 </ul>
 <h3 id="-camadas-analíticas">📊 Camadas Analíticas</h3>
 <ul>
-<li><strong>Gold → Dashboard:</strong> O dashboard consome exclusivamente métricas consolidadas da camada Gold.</li>
-<li><strong>Gold + LLM → Data App:</strong> O Data App integra métricas analíticas (Gold) e atributos enriquecidos (LLM).</li>
+<li><strong>Curated → Dashboard:</strong> O dashboard consome exclusivamente métricas consolidadas da camada Curated.</li>
+<li><strong>Curated + LLM → Data App:</strong> O Data App integra métricas analíticas (Curated) e atributos enriquecidos (LLM).</li>
 </ul>
 <h3 id="-entrega-final">🎥 Entrega Final</h3>
 <ul>
 <li><strong>Todos os componentes → Apresentação Executiva:</strong> A apresentação depende da consolidação de todas as etapas anteriores, garantindo narrativa coerente e evidências reprodutíveis.</li>
 </ul>
-<h2 id="-estimativa-de-custos-simulação">💰 Estimativa de Custos (Simulação)</h2>
+<h2 id="-estimativa-de-custos">💰 Estimativa de Custos</h2>
 <ul>
-<li>Infraestrutura Dadosfera: modelo SaaS (licenciamento simplificado)</li>
-<li>PostgreSQL Cloud (Free Tier)</li>
-<li>Processamento LLM: custo variável por token (controlado por amostragem)</li>
-<li>Streamlit Cloud: Free Tier</li>
-<li>Ambiente Colab: Gratuito</li>
+<li>Plataforma de Dados (Dadosfera SaaS): licenciamento simplificado e centralização de serviços</li>
+<li>Banco relacional PostgreSQL (Cloud - Free Tier para PoC)</li>
+<li>Processamento LLM: custo variável por volume de tokens (controle por batch e amostragem)</li>
+<li>Hospedagem de Data App (Streamlit Cloud - Free Tier)</li>
+<li>Ambiente de desenvolvimento (Google Colab - gratuito)</li>
 </ul>
-<div class="markdown-alert markdown-alert-important"><p class="markdown-alert-title"><svg class="octicon octicon-report mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v9.5A1.75 1.75 0 0 1 14.25 13H8.06l-2.573 2.573A1.458 1.458 0 0 1 3 14.543V13H1.75A1.75 1.75 0 0 1 0 11.25Zm1.75-.25a.25.25 0 0 0-.25.25v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25Zm7 2.25v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Important</p><p><strong>Estimativa:</strong> Baixo custo inicial comparado à arquitetura distribuída tradicional.</p>
+<div class="markdown-alert markdown-alert-important"><p class="markdown-alert-title"><svg class="octicon octicon-report mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v9.5A1.75 1.75 0 0 1 14.25 13H8.06l-2.573 2.573A1.458 1.458 0 0 1 3 14.543V13H1.75A1.75 1.75 0 0 1 0 11.25Zm1.75-.25a.25.25 0 0 0-.25.25v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25Zm7 2.25v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Important</p><p>Estimativa de baixo custo operacional para PoC, com escalabilidade sob demanda e redução de overhead infraestrutural.</p>
 </div>
 <h2 id="-indicadores-de-sucesso">📊 Indicadores de Sucesso</h2>
 <p>O projeto será considerado bem-sucedido se:</p>
 <ul>
-<li>Dados estruturados em camadas Bronze, Silver e Gold</li>
-<li>Modelo dimensional validado (DDL executado com sucesso)</li>
+<li>Dados estruturados em camadas RAW, Standardized e Curated</li>
+<li>Modelo dimensional implementado e validado com criação bem-sucedida das tabelas fact e dimension</li>
 <li>Dashboard contendo no mínimo 5 visualizações distintas</li>
-<li>LLM gerando atributos estruturados reutilizáveis</li>
-<li>Pipeline cadastrado e executável</li>
+<li>LLM gerando atributos estruturados persistidos e integrados à camada analítica</li>
+<li>Pipeline definido e registrado na plataforma, permitindo execução automatizada</li>
 <li>Data App funcional publicado</li>
 </ul>
 <h2 id="-pontos-críticos">🎯 Pontos Críticos</h2>
 <p>Os pontos críticos representam fatores que podem comprometer qualidade, clareza arquitetural ou avaliação técnica do case. Estes pontos foram monitorados ao longo do projeto como critérios de controle de qualidade.</p>
 <h3 id="-consistência-do-schema">🧱 Consistência do Schema</h3>
-<p>A integridade entre Bronze, Silver e Gold deve ser mantida, garantindo:</p>
+<p>A integridade entre RAW, Standardized e Curated deve ser mantida, garantindo:</p>
 <ul>
 <li>Tipagem consistente</li>
-<li>Ausência de colunas ambíguas</li>
-<li>Integridade de chaves no modelo dimensional</li>
+<li>Ausência de colunas ambíguas ou duplicadas</li>
+<li>Integridade de chaves primárias e estrangeiras no modelo dimensional</li>
 </ul>
 <h3 id="-controle-de-custo-e-volume-da-llm">🤖 Controle de Custo e Volume da LLM</h3>
 <p>O enriquecimento via LLM deve:</p>
 <ul>
-<li>Utilizar amostra estratificada</li>
-<li>Minimizar chamadas desnecessárias</li>
-<li>Produzir atributos reutilizáveis</li>
+<li>Utilizar amostragem estratificada controlada</li>
+<li>Minimizar chamadas desnecessárias com processamento em batch</li>
+<li>Produzir atributos estruturados persistidos e reutilizáveis na camada analítica</li>
 </ul>
 <h3 id="-rastreabilidade-das-transformações">🔍 Rastreabilidade das Transformações</h3>
 <p>Todas as transformações devem ser:</p>
 <ul>
-<li>Reprodutíveis via notebooks</li>
-<li>Documentadas no GitHub</li>
-<li>Separadas por camadas (Silver / Gold / Enriched)</li>
+<li>Reprodutíveis via notebooks versionados</li>
+<li>Documentadas no GitHub com instruções claras de execução</li>
+<li>Organizadas por camadas (RAW / Standardized / Curated / Enriched)</li>
 </ul>
 <h3 id="-clareza-e-reprodutibilidade">📚 Clareza e Reprodutibilidade</h3>
 <p>O projeto deve permitir que um avaliador:</p>
 <ul>
 <li>Execute os notebooks sem ajustes manuais</li>
-<li>Compreenda a arquitetura através do índice</li>
-<li>Navegue facilmente entre documentos e evidências</li>
+<li>Compreenda a arquitetura através do índice e da documentação</li>
+<li>Navegue facilmente entre documentos, evidências e ativos publicados</li>
 </ul>
 <h2 id="-justificativa-estratégica">📊 Justificativa Estratégica</h2>
-<p>O planejamento foi estruturado para demonstrar como a Dadosfera pode reduzir complexidade arquitetural, centralizando ingestão, processamento, modelagem, IA e visualização em uma única plataforma.</p>
-<p>A proposta demonstra viabilidade técnica e financeira frente a arquiteturas tradicionais baseadas em múltiplos serviços distribuídos (ETL dedicado, DW separado, ferramenta de BI isolada e camada de ML desacoplada).</p>
+<p>O planejamento foi estruturado para evidenciar a redução de complexidade arquitetural por meio da centralização de ingestão, processamento, modelagem, enriquecimento com IA e visualização em uma única plataforma integrada.</p>
+<p>A proposta demonstra viabilidade técnica e eficiência operacional frente a arquiteturas tradicionais baseadas em múltiplos serviços distribuídos (ETL dedicado, Data Warehouse separado, ferramenta de BI isolada e camada de ML desacoplada), reduzindo overhead de integração, custo de manutenção e tempo de entrega de valor.</p>
 <h2 id="-evidência-de-gestão-no-azure-devops">📷 Evidência de Gestão no Azure DevOps</h2>
 <p>Abaixo estão evidências da organização e execução do projeto:</p>
 <h4 id="-épicos-criados">📌 Épicos Criados</h4>
