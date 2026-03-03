@@ -1,6 +1,6 @@
 # Integrar e Explorar
 
-Este documento descreve as etapas de integração na plataforma Dadosfera, governança, ingestão técnica, exploração e construção da camada Silver do dataset de e-commerce.
+Este documento descreve as etapas de integração na plataforma Dadosfera, governança, ingestão técnica, exploração inicial dos dados e preparação da camada STANDARDIZED para posterior modelagem.
 
 ## 🔌 Integração na Plataforma Dadosfera (Zona RAW)
 
@@ -76,16 +76,13 @@ Após o carregamento, foram aplicadas boas práticas de governança de dados:
 
 ![Catalogação das categorias](../assets/prints/03_dadosfera_01_raw_categories_catalog.jpg)
 
-## 🗂️ Organização em Camadas (Data Lake)
+## 🗂️ Organização em Camadas (Modelo Dadosfera)
 
-Os dados foram organizados seguindo o padrão clássico de Data Lake:
+Os dados foram organizados seguindo o padrão arquitetural adotado pela Dadosfera:
 
-- **RAW** → Dados brutos carregados diretamente da fonte (Kaggle), sem transformação
-- **SILVER** → Dados tratados, padronizados e tipados (processados via Python)
-- **GOLD** → Dados agregados e prontos para consumo analítico
-
-> [!NOTE]
-> Os ativos presentes na Dadosfera representam a camada **RAW**.
+- **RAW** → Dados brutos carregados diretamente da fonte (Kaggle), sem transformação.
+- **STANDARDIZED** → Dados tratados, padronizados e tipados, preparados para modelagem.
+- **CURATED** → Dados modelados dimensionalmente e prontos para consumo analítico.
 
 ## 📥 Ingestão Técnica (Colab)
 
@@ -102,7 +99,10 @@ Os dados foram organizados seguindo o padrão clássico de Data Lake:
 - Python (pandas, pyarrow)
 - Persistência em Parquet
 
-## 🔎 Exploração Inicial (EDA)
+> [!NOTE]
+> O processamento inicial foi realizado em ambiente controlado (Colab) para validação técnica e otimização de tipagem. A etapa de orquestração e pipeline será implementada na plataforma Dadosfera conforme solicitado no Item 8.
+
+## 🔎 Exploração Técnica dos Dados (EDA)
 
 Foram realizadas análises exploratórias para compreender qualidade e distribuição dos dados:
 
@@ -129,7 +129,7 @@ Essas análises subsidiaram decisões de:
 
 ![Distribuição de Ratings](../assets/prints/03_gold_02_rating_distribution.jpg)
 
-## 🧹 Tratamento e Padronização (Camada Silver)
+## 🧹 Tratamento e Padronização (Camada STANDARDIZED)
 
 ### 🔤 Padronização de Nomes
 
@@ -160,9 +160,9 @@ Antes da persistência, o diretório Parquet é removido para evitar duplicidade
 - Idempotência do pipeline
 - Reprocessamento seguro
 
-## 📤 Saída da Camada Silver
+## 📤 Saída da Camada STANDARDIZED
 
-DataFrame final estruturado:
+DataFrame final estruturado para posterior ingestão na camada STANDARDIZED:
 
 - 1.379.629 registros válidos
 - 17 colunas estruturadas
@@ -178,3 +178,12 @@ DataFrame final estruturado:
 #### 📌 Head do DataFrame Silver
 
 ![Head do dataset](../assets/prints/03_gold_03_final_dataset_head.jpg)
+
+## 🔄 Próxima Etapa: Microtransformação e Pipeline
+
+A camada STANDARDIZED será posteriormente materializada via pipeline na Dadosfera, permitindo:
+
+- Versionamento das transformações
+- Execução incremental
+- Governança centralizada
+- Evolução para camada CURATED

@@ -1,6 +1,6 @@
 # Processar com GenAI (LLM Feature Extraction)
 
-Esta etapa tem como objetivo enriquecer o dataset estruturado com informações extraídas a partir de dados não estruturados (campo `product_title`), utilizando um modelo de linguagem (LLM).
+Esta etapa tem como objetivo enriquecer o dataset estruturado com informações extraídas a partir de dados não estruturados (campo <u>product_title</u>), utilizando um modelo de linguagem (LLM).
 
 ## 🎯 Objetivo
 
@@ -14,9 +14,9 @@ Transformar títulos de produtos (texto livre) em atributos estruturados reutili
 
 ## 🧠 Estratégia de Processamento
 
-### 🔎 Entrada
+### 📥 Entrada
 
-Camada **Silver** contendo:
+**Camada STANDARDIZED contendo:**
 
 - product_id
 - category_id
@@ -26,7 +26,7 @@ Camada **Silver** contendo:
 
 ### 📤 Saída
 
-Tabela enriquecida contendo:
+**Tabela enriquecida contendo:**
 
 - llm_brand_guess
 - llm_product_type
@@ -37,11 +37,14 @@ Tabela enriquecida contendo:
 - created_at_utc
 - llm_error (controle)
 
+> [!NOTE]
+> Embora o processamento tenha sido realizado inicialmente em ambiente controlado (Colab), a arquitetura proposta prevê a orquestração dessa etapa via Pipeline na Dadosfera (Item 8), garantindo versionamento, reexecução e governança centralizada.
+
 ## 📊 Estratégia de Amostragem
 
 Como o dataset possui mais de 1.4M registros, foi adotada uma estratégia de **amostragem estratificada** para controle de custo e tempo de execução.
 
-Critérios utilizados:
+**Critérios utilizados:**
 
 - Seleção das categorias mais frequentes
 - Amostragem por combinação de:
@@ -49,16 +52,16 @@ Critérios utilizados:
   - price_segment
   - popularity_tier
 
-A amostra final foi limitada para manter eficiência computacional e controle financeiro.
+> [!IMPORTANT]
+> A amostra final foi limitada para manter eficiência computacional e controle financeiro.
 
-Parâmetros utilizados nesta execução:
+**Parâmetros utilizados nesta execução:**
 
 - TOP_CATEGORIES = 40
 - K_PER_GROUP = 3
 - MAX_SAMPLE = 400
 
-> [!NOTE]
-> Essa abordagem é adequada para casos de prova de conceito e demonstração arquitetural.
+Essa abordagem é adequada para casos de prova de conceito e demonstração arquitetural.
 
 ### 📷 Evidências
 
@@ -76,7 +79,7 @@ O modelo foi instruído a retornar exclusivamente JSON estruturado com os seguin
 - keywords (lista)
 - title_clean
 
-Boas práticas adotadas:
+**Boas práticas adotadas:**
 
 - temperature = 0 (determinismo e consistência)
 - max_tokens limitado para controle de custo
@@ -84,6 +87,8 @@ Boas práticas adotadas:
 - Retry automático com backoff exponencial
 - Logging de falhas por registro (llm_error)
 - Limite de tamanho de listas (attributes ≤ 6, keywords ≤ 6)
+
+O formato estruturado garante compatibilidade com modelagem dimensional e consumo analítico em dashboards.
 
 ### 📷 Evidências
 
@@ -106,7 +111,7 @@ Boas práticas adotadas:
 - Sucesso: 400
 - Falhas registradas (llm_error): 0
 
-Validações realizadas:
+**Validações realizadas:**
 
 - Retorno exclusivo em JSON
 - Presença obrigatória de todos os campos esperados
@@ -121,11 +126,9 @@ Validações realizadas:
 
 ## 📂 Persistência
 
-A saída foi salva em formato **Parquet** (dataset/pasta com arquivos `part-*.parquet`) em:
+A saída foi salva em formato Parquet, permitindo ingestão posterior na plataforma Dadosfera e integração à camada CURATED.
 
-- `/content/drive/MyDrive/Colab Notebooks/dadosfera/amazon_products_enriched_llm/`
-
-Essa camada pode ser:
+**Essa camada pode ser:**
 
 - Unida à Silver via product_id
 - Utilizada para geração de métricas Gold
@@ -140,19 +143,18 @@ Essa camada pode ser:
 
 ## 🧱 Organização no Data Lake
 
-Após esta etapa, o fluxo de dados passa a ser:
-
-`RAW → SILVER → ENRICHED (LLM) → GOLD`
+Após esta etapa, o fluxo de dados passa a ser:  
+`RAW → STANDARDIZED → ENRICHED (LLM) → CURATED`
 
 > [!IMPORTANT]
-> ENRICHED = Silver + features semânticas via LLM.
-> Essa camada não substitui a Silver, apenas a estende semanticamente.
+> ENRICHED = STANDARDIZED + features semânticas via LLM.  
+> Essa camada não substitui a STANDARDIZED, apenas a estende semanticamente.
 
 ## 🔁 Reprodutibilidade
 
 O processo é totalmente reexecutável via notebook: [Processar GenAI LLM Features](../notebooks/03_processar_genai_llm_features.ipynb)
 
-A execução inclui:
+**A execução inclui:**
 
 1. Leitura da camada Silver
 2. Aplicação da estratégia de amostragem
@@ -179,7 +181,12 @@ A execução inclui:
   - Controle de taxa (rate limit)
   - Orquestração via pipeline produtivo
 
+> [!TIP]
+> A versão produtiva dessa etapa deve ser orquestrada via pipeline com controle de checkpoint e validação automática.
+
 ## 💰 Estimativa de Custo (LLM)
+
+A estratégia de amostragem demonstrou viabilidade financeira para expansão gradual da cobertura total.
 
 - Modelo: `gpt-4o-mini`
 - Registros processados: 400
@@ -204,4 +211,4 @@ A execução inclui:
 
 ## ✅ Resultado
 
-A camada ENRICHED adiciona inteligência semântica ao dataset estruturado, permitindo análises descritivas e prescritivas mais avançadas e ampliando o potencial analítico da plataforma de dados construída no case.
+A camada ENRICHED adiciona inteligência semântica ao dataset estruturado, permitindo análises descritivas e prescritivas mais avançadas e habilitando futuras aplicações de recomendação, clustering semântico e personalização de experiência de compra.

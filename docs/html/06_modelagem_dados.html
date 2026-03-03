@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Modelagem de Dados</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="modelagem-de-dados">Modelagem de Dados</h1>
+<h2 id="-abordagem-escolhida-kimball">📐 Abordagem escolhida: Kimball</h2>
+<p>A modelagem foi estruturada seguindo os princípios de <strong>Ralph Kimball (modelo dimensional)</strong>, organizando o domínio em:</p>
+<ul>
+<li><strong>Dimensões</strong> → contexto e atributos descritivos</li>
+<li><strong>Fatos</strong> → métricas e eventos mensuráveis</li>
+</ul>
+<p>A modelagem foi aplicada sobre a camada CURATED, derivada da camada STANDARDIZED enriquecida com features via LLM.</p>
+<h3 id="-justificativa-da-escolha">🎯 Justificativa da Escolha</h3>
+<ul>
+<li>Foco em análise e BI (Metabase / Dadosfera)</li>
+<li>Clareza na definição de granularidade</li>
+<li>Facilidade de expansão futura (GenAI, similaridade, recomendação)</li>
+<li>Desempenho em consultas analíticas (Star Schema)</li>
+<li>Adequação ao módulo de Visualização da Dadosfera (consultas SQL analíticas)</li>
+<li>Simplicidade de manutenção frente a arquiteturas complexas (ex: Data Vault) para escopo de BI</li>
+</ul>
+<h2 id="-princípio-de-modelagem">📌 Princípio de Modelagem</h2>
+<p>O modelo foi estruturado em formato Star Schema, com fatos centralizados e dimensões desnormalizadas para otimização analítica. O modelo foi dividido em dois Data Marts analíticos complementares::</p>
+<ol>
+<li><strong>Snapshot por Produto →</strong> análise de performance individual.</li>
+<li><strong>Série Temporal Agregada →</strong> análise estratégica por categoria e segmento.</li>
+</ol>
+<h2 id="-visão-1--catálogo-e-performance-snapshot-por-produto">🔎 Visão 1 – Catálogo e Performance (Snapshot por Produto)</h2>
+<h3 id="-dimensões">🧩 Dimensões</h3>
+<blockquote>
+<p>📂 dim_product</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Tipo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>product_id (PK)</td>
+<td>text</td>
+</tr>
+<tr>
+<td>product_title</td>
+<td>text</td>
+</tr>
+<tr>
+<td>category_id (FK)</td>
+<td>integer</td>
+</tr>
+<tr>
+<td>price</td>
+<td>numeric</td>
+</tr>
+<tr>
+<td>list_price</td>
+<td>numeric</td>
+</tr>
+<tr>
+<td>price_segment</td>
+<td>text</td>
+</tr>
+<tr>
+<td>rating</td>
+<td>numeric</td>
+</tr>
+<tr>
+<td>review_count</td>
+<td>integer</td>
+</tr>
+<tr>
+<td>has_rating</td>
+<td>boolean</td>
+</tr>
+<tr>
+<td>is_best_seller</td>
+<td>boolean</td>
+</tr>
+<tr>
+<td>image_url</td>
+<td>text</td>
+</tr>
+<tr>
+<td>product_url</td>
+<td>text</td>
+</tr>
+</tbody>
+</table>
+<div class="markdown-alert markdown-alert-note"><p class="markdown-alert-title"><svg class="octicon octicon-info mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p><p>A inclusão de atributos como price e rating na dimensão foi adotada por se tratar de snapshot descritivo do estado atual do produto, não representando eventos históricos.</p>
+</div>
+<blockquote>
+<p>📂 dim_category</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Tipo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>category_id (PK)</td>
+<td>integer</td>
+</tr>
+<tr>
+<td>category_name</td>
+<td>text</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-fatos">📊 Fatos</h3>
+<blockquote>
+<p>🧾 fact_product_snapshot</p>
+</blockquote>
+<ul>
+<li>Granularidade: <strong>1 linha = 1 produto</strong></li>
+<li>Chave Primária: <strong>product_id</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Métrica</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>units_sold_last_month</td>
+</tr>
+<tr>
+<td>weighted_score</td>
+</tr>
+<tr>
+<td>strategic_score</td>
+</tr>
+<tr>
+<td>category_rank</td>
+</tr>
+<tr>
+<td>is_top_10_category</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💼 Uso Principal</p>
+</blockquote>
+<ul>
+<li>Top produtos por categoria</li>
+<li>Priorização de catálogo</li>
+<li>Comparação de performance intra-categoria</li>
+</ul>
+<h2 id="-visão-2--série-temporal-mensal-por-categoria--segmentações">📈 Visão 2 – Série Temporal (Mensal por Categoria + Segmentações)</h2>
+<p>Essa abordagem foi adotada exclusivamente para fins analíticos e demonstração de modelagem temporal.</p>
+<h3 id="-dimensões-1">🧩 Dimensões</h3>
+<blockquote>
+<p>📅 dim_date</p>
+</blockquote>
+<ul>
+<li>Granularidade: 1 linha = 1 mês por combinação de categoria, price_segment e popularity_tier.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>date_id (PK)</td>
+</tr>
+<tr>
+<td>month_start</td>
+</tr>
+<tr>
+<td>year</td>
+</tr>
+<tr>
+<td>month_number</td>
+</tr>
+<tr>
+<td>month_name</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💲 dim_price_segment</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>price_segment (PK)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>⭐ dim_popularity_tier</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Campo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>popularity_tier (PK)</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>📂 dim_category (reutilizada)</p>
+</blockquote>
+<p>A dimensão de categoria é compartilhada entre os fatos, garantindo consistência analítica entre análises de produto e análises temporais.</p>
+<h3 id="-fatos-1">📊 Fatos</h3>
+<blockquote>
+<p>fact_category_monthly</p>
+</blockquote>
+<ul>
+<li>Granularidade: <strong>1 linha = 1 mês + 1 categoria + 1 price_segment + 1 popularity_tier</strong></li>
+<li>Chave Primária composta: <strong>date_id, category_id, price_segment, popularity_tier</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Métrica</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>units_sold</td>
+</tr>
+<tr>
+<td>revenue</td>
+</tr>
+<tr>
+<td>median_price</td>
+</tr>
+<tr>
+<td>avg_price</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💼 Uso Principal</p>
+</blockquote>
+<ul>
+<li>Análise de tendência e sazonalidade</li>
+<li>Comparação entre segmentos (budget vs premium)</li>
+<li>Análise por faixa de popularidade</li>
+</ul>
+<div class="markdown-alert markdown-alert-important"><p class="markdown-alert-title"><svg class="octicon octicon-report mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v9.5A1.75 1.75 0 0 1 14.25 13H8.06l-2.573 2.573A1.458 1.458 0 0 1 3 14.543V13H1.75A1.75 1.75 0 0 1 0 11.25Zm1.75-.25a.25.25 0 0 0-.25.25v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25Zm7 2.25v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Important</p><p><strong>Observação:</strong> Como o dataset não possui data real, a série temporal foi gerada de forma sintética e reprodutível (seed fixa), ancorada em <code>units_sold_last_month</code> e sazonalidade típica de e-commerce.</p>
+</div>
+<h2 id="-integração-com-dadosfera">🧠 Integração com Dadosfera</h2>
+<p>O modelo dimensional foi desenhado para ser materializado via pipeline na plataforma Dadosfera, utilizando a camada CURATED como base para dashboards e Data Apps.</p>
+<p><strong>A arquitetura permite:</strong></p>
+<ul>
+<li>Execução de consultas SQL diretamente no módulo de Visualização</li>
+<li>Evolução para modelos de recomendação</li>
+<li>Integração com features enriquecidas via LLM</li>
+</ul>
+<h2 id="-diagrama-erd">➿ Diagrama ERD</h2>
+<ul>
+<li>Ferramenta utilizada: <strong>dbdesigner (ERD)</strong></li>
+<li>Validação do DDL: <strong>DBeaver + DuckDB</strong></li>
+</ul>
+<h4 id="-modelo-kimball">📌 Modelo Kimball</h4>
+<p><img src="file:///c:\Users\Pink\Documents\GitHub\andrea_sousa_DDF_TECH_022026\assets\diagrams\06_modelagem_00_diagrama_kimball.png" alt="Modelo Kimball"></p>
+<h2 id="-ddl-sql">🧾 DDL (SQL)</h2>
+<p>O DDL foi estruturado de forma compatível com engines SQL amplamente utilizadas (PostgreSQL, DuckDB), reforçando portabilidade e viabilidade arquitetural.</p>
+<ul>
+<li>Arquivo: <strong><a href="../assets/sql/kimball_ddl.sql">assets/sql/kimball_ddl.sql</a></strong></li>
+<li>Engine de validação: <strong>DuckDB (via DBeaver)</strong></li>
+</ul>
+<h3 id="-validação-do-modelo">✅ Validação do Modelo</h3>
+<p>A validação estrutural assegura que o modelo pode ser implantado em qualquer engine SQL compatível, reforçando a capacidade de substituição arquitetural. O modelo dimensional foi validado executando o DDL no DBeaver utilizando DuckDB como engine local.</p>
+<p><strong>Nesta etapa foi validada:</strong></p>
+<ul>
+<li>Estrutura das tabelas</li>
+<li>Chaves primárias</li>
+<li>Chaves estrangeiras</li>
+<li>Integridade relacional</li>
+</ul>
+<h4 id="-ddl-no-dbeaver">📌 DDL no Dbeaver</h4>
+<p><img src="file:///c:\Users\Pink\Documents\GitHub\andrea_sousa_DDF_TECH_022026\assets\prints\06_modelagem_01_kimball_ddl.jpg" alt="Kimball DDL"></p>
+<div class="markdown-alert markdown-alert-warning"><p class="markdown-alert-title"><svg class="octicon octicon-alert mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Warning</p><p>A materialização efetiva ocorrerá via pipeline na plataforma, conforme descrito no Item 8.</p>
+</div>
+
+            
+            
+        </body>
+        </html>

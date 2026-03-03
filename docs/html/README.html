@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Case T&eacute;cnico &ndash; Plataforma de Dados com IA &lpar;Dadosfera&rpar;</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="case-técnico--plataforma-de-dados-com-ia-dadosfera">Case Técnico – Plataforma de Dados com IA (Dadosfera)</h1>
+<h2 id="-visão-geral">📌 Visão Geral</h2>
+<p>Este repositório apresenta uma Prova de Conceito (PoC) para implementação de uma Plataforma de Dados utilizando a Dadosfera SaaS, aplicada a um cenário realista de e-commerce com mais de 1,5 milhão de registros (Amazon Products Dataset 2023).</p>
+<p>O objetivo é demonstrar como a Dadosfera pode atuar como camada central de integração, processamento, modelagem, IA e consumo analítico, reduzindo complexidade arquitetural e acelerando a geração de valor.</p>
+<h2 id="-problema-de-negócio">🎯 Problema de Negócio</h2>
+<p>A empresa possui mais de 1 milhão de produtos cadastrados com:</p>
+<ul>
+<li>Estrutura de catálogo pouco padronizada</li>
+<li>Dificuldade de análise estratégica por categoria</li>
+<li>Baixa capacidade de segmentação inteligente</li>
+<li>Ausência de estrutura adequada para IA e recomendação</li>
+</ul>
+<p>Impacto estimado:</p>
+<ul>
+<li>Perda de oportunidades de venda por baixa recomendação inteligente</li>
+<li>Dificuldade em identificar categorias estratégicas</li>
+<li>Alto custo operacional para análises ad-hoc</li>
+</ul>
+<p>A solução proposta centraliza, estrutura e enriquece o catálogo utilizando engenharia de dados e GenAI.</p>
+<h2 id="️-arquitetura-do-projeto">🗃️ Arquitetura do Projeto</h2>
+<p>Camadas implementadas (equivalente ao modelo de Data Lake da Dadosfera):</p>
+<ul>
+<li><strong>RAW (Bronze)</strong> → Dados brutos importados via módulo de Coleta</li>
+<li><strong>STANDARDIZED (Silver)</strong> → Dados tratados e padronizados via pipelines</li>
+<li><strong>CURATED (Gold)</strong> → Modelagem analítica (Data Warehouse - Kimball)</li>
+<li><strong>GenAI Layer</strong> → Extração de features estruturadas via LLM</li>
+<li><strong>Consumption Layer</strong> → Dashboards (Metabase) e Data App (Streamlit)</li>
+</ul>
+<h2 id="-estrutura-do-repositório">📂 Estrutura do Repositório</h2>
+<pre><code>app/ → Data App Streamlit
+assets/ → Diagramas e imagens do case
+dashboard/ → Queries SQL e prints do Metabase
+data/ → Dados processados (amostras)
+docs/ → Documentação complementar (PMBOK, modelagem, etc.)
+notebooks/ → ETL, LLM e análises exploratórias
+</code></pre>
+<h2 id="-itens-do-case-e-documentação">📊 Itens do Case e Documentação</h2>
+<p>A documentação completa de cada etapa do case está disponível na pasta <code>docs/</code>, organizada conforme o template oficial da Dadosfera:</p>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Descrição</th>
+<th>Status</th>
+<th>Documentação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Planejamento (PMBOK)</td>
+<td>⏳</td>
+<td><a href="docs/01_planejamento_pmbok.html">Ver</a></td>
+</tr>
+<tr>
+<td>2</td>
+<td>Base de Dados</td>
+<td>✔️</td>
+<td><a href="docs/02_base_de_dados.html">Ver</a></td>
+</tr>
+<tr>
+<td>3</td>
+<td>Integrar e Explorar</td>
+<td>✔️</td>
+<td><a href="docs/03_integrar_explorar.html">Ver</a></td>
+</tr>
+<tr>
+<td>4</td>
+<td>Data Quality</td>
+<td>⏳</td>
+<td><a href="docs/04_data_quality.html">Ver</a></td>
+</tr>
+<tr>
+<td>5</td>
+<td>GenAI / LLM</td>
+<td>⏳</td>
+<td><a href="docs/05_processar_genai_llm.html">Ver</a></td>
+</tr>
+<tr>
+<td>6</td>
+<td>Modelagem de Dados</td>
+<td>⏳</td>
+<td><a href="docs/06_modelagem_dados.html">Ver</a></td>
+</tr>
+<tr>
+<td>7</td>
+<td>Análise / Dashboard</td>
+<td>⏳</td>
+<td><a href="docs/07_analisar_dashboard.html">Ver</a></td>
+</tr>
+<tr>
+<td>8</td>
+<td>Pipelines</td>
+<td>⏳</td>
+<td><a href="docs/08_pipelines.html">Ver</a></td>
+</tr>
+<tr>
+<td>9</td>
+<td>Data App</td>
+<td>✔️</td>
+<td><a href="docs/09_data_app.html">Ver</a></td>
+</tr>
+<tr>
+<td>10</td>
+<td>Apresentação</td>
+<td>⏳</td>
+<td><a href="docs/10_apresentacao.html">Ver</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="-tecnologias-e-ferramentas">🧠 Tecnologias e Ferramentas</h2>
+<h3 id="️-banco-de-dados">🗄️ Banco de Dados</h3>
+<ul>
+<li><strong>PostgreSQL (Cloud):</strong> Base transacional pública utilizada como origem operacional do e-commerce.</li>
+<li>Utilizado para simular ambiente transacional real e permitir integração via módulo de Coleta da Dadosfera.</li>
+</ul>
+<h3 id="️-engenharia-de-dados">🏗️ Engenharia de Dados</h3>
+<ul>
+<li><strong>Python (Google Colab):</strong> Processamento e transformação dos dados.</li>
+<li><strong>Pandas / PyArrow:</strong> Manipulação e persistência em formato analítico.</li>
+<li><strong>Parquet:</strong> Armazenamento otimizado para análises.</li>
+<li><strong>Estruturação em camadas:</strong> RAW → STANDARDIZED → CURATED.</li>
+</ul>
+<h3 id="-modelagem-de-dados">🧱 Modelagem de Dados</h3>
+<ul>
+<li><strong>Modelagem Dimensional (Kimball):</strong> Construção de Data Warehouse com visão analítica orientada a negócio.</li>
+<li>Separação em tabelas fato e dimensões para suportar análises por categoria e série temporal.</li>
+</ul>
+<h3 id="-inteligência-artificial">🤖 Inteligência Artificial</h3>
+<ul>
+<li><strong>OpenAI API (LLM):</strong> Extração de features estruturadas a partir de descrições textuais.</li>
+<li>Enriquecimento semântico do catálogo para segmentação e futuras aplicações de recomendação.</li>
+</ul>
+<h3 id="-visualização-e-consumo-analítico">📊 Visualização e Consumo Analítico</h3>
+<ul>
+<li><strong>Metabase (via Dadosfera):</strong> Dashboards internos na plataforma.</li>
+<li><strong>Power BI:</strong> Análises complementares externas e comparação arquitetural.</li>
+</ul>
+<h3 id="-plataforma-de-dados">🌐 Plataforma de Dados</h3>
+<ul>
+<li><strong>Dadosfera SaaS:</strong> Camada central de integração, catalogação, pipelines e governança.</li>
+</ul>
+<h3 id="-data-app">📱 Data App</h3>
+<ul>
+<li><strong>Streamlit:</strong> Aplicação interativa para exploração do catálogo enriquecido (CURATED + GenAI Features).</li>
+</ul>
+<h3 id="-ambiente-de-desenvolvimento">💻 Ambiente de Desenvolvimento</h3>
+<ul>
+<li>Google Colab</li>
+<li>Visual Studio Code</li>
+</ul>
+<h3 id="-versionamento-e-documentação">📦 Versionamento e Documentação</h3>
+<ul>
+<li>GitHub</li>
+</ul>
+<h2 id="️-como-reproduzir">▶️ Como Reproduzir</h2>
+<h3 id="pré-requisitos">Pré-requisitos</h3>
+<ul>
+<li>Python 3.10+</li>
+<li>Variável de ambiente OPENAI_API_KEY configurada</li>
+<li>Dataset com ~1.5M registros</li>
+</ul>
+<h3 id="passos">Passos</h3>
+<ol>
+<li>Baixar o dataset via Kaggle</li>
+<li>Executar notebook 01 (ETL Silver)</li>
+<li>Executar notebook 02 (Gold)</li>
+<li>Executar notebook 03 (LLM)</li>
+<li>Rodar Streamlit em <code>app/app.py</code></li>
+</ol>
+<h2 id="-apresentação">🎥 Apresentação</h2>
+<p>O vídeo apresenta:</p>
+<ul>
+<li>Problema de negócio</li>
+<li>Arquitetura proposta</li>
+<li>Demonstração da plataforma</li>
+<li>Viabilidade de substituição da arquitetura atual</li>
+</ul>
+<p>Link do vídeo (Unlisted): <a href="">Apresentação do Case</a></p>
+<h2 id="-conclusão">🚀 Conclusão</h2>
+<p>A solução proposta demonstra como a Dadosfera pode substituir arquiteturas fragmentadas, centralizando integração, processamento, governança e IA em uma única plataforma, reduzindo custo operacional e tempo até geração de valor.</p>
+
+            
+            
+        </body>
+        </html>

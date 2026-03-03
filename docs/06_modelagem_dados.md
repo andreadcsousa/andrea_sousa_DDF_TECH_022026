@@ -7,16 +7,20 @@ A modelagem foi estruturada seguindo os princípios de **Ralph Kimball (modelo d
 - **Dimensões** → contexto e atributos descritivos
 - **Fatos** → métricas e eventos mensuráveis
 
+A modelagem foi aplicada sobre a camada CURATED, derivada da camada STANDARDIZED enriquecida com features via LLM.
+
 ### 🎯 Justificativa da Escolha
 
 - Foco em análise e BI (Metabase / Dadosfera)
 - Clareza na definição de granularidade
 - Facilidade de expansão futura (GenAI, similaridade, recomendação)
 - Desempenho em consultas analíticas (Star Schema)
+- Adequação ao módulo de Visualização da Dadosfera (consultas SQL analíticas)
+- Simplicidade de manutenção frente a arquiteturas complexas (ex: Data Vault) para escopo de BI
 
 ## 📌 Princípio de Modelagem
 
-O modelo foi estruturado em formato Star Schema, com fatos centralizados e dimensões desnormalizadas para otimização analítica. O modelo foi dividido em duas visões complementares:
+O modelo foi estruturado em formato Star Schema, com fatos centralizados e dimensões desnormalizadas para otimização analítica. O modelo foi dividido em dois Data Marts analíticos complementares::
 
 1. **Snapshot por Produto →** análise de performance individual.
 2. **Série Temporal Agregada →** análise estratégica por categoria e segmento.
@@ -25,7 +29,7 @@ O modelo foi estruturado em formato Star Schema, com fatos centralizados e dimen
 
 ### 🧩 Dimensões
 
-> 🛍 dim_product
+> 📂 dim_product
 
 | Campo            | Tipo    |
 | ---------------- | ------- |
@@ -42,6 +46,9 @@ O modelo foi estruturado em formato Star Schema, com fatos centralizados e dimen
 | image_url        | text    |
 | product_url      | text    |
 
+> [!NOTE]
+> A inclusão de atributos como price e rating na dimensão foi adotada por se tratar de snapshot descritivo do estado atual do produto, não representando eventos históricos.
+
 > 📂 dim_category
 
 | Campo            | Tipo    |
@@ -51,7 +58,7 @@ O modelo foi estruturado em formato Star Schema, com fatos centralizados e dimen
 
 ### 📊 Fatos
 
-> fact_product_snapshot
+> 🧾 fact_product_snapshot
 
 - Granularidade: **1 linha = 1 produto**
 - Chave Primária: **product_id**
@@ -72,11 +79,13 @@ O modelo foi estruturado em formato Star Schema, com fatos centralizados e dimen
 
 ## 📈 Visão 2 – Série Temporal (Mensal por Categoria + Segmentações)
 
+Essa abordagem foi adotada exclusivamente para fins analíticos e demonstração de modelagem temporal.
+
 ### 🧩 Dimensões
 
 > 📅 dim_date
 
-- Granularidade: **1 linha = 1 mês**
+- Granularidade: 1 linha = 1 mês por combinação de categoria, price_segment e popularity_tier.
 
 | Campo        |
 | ------------ |
@@ -125,6 +134,16 @@ A dimensão de categoria é compartilhada entre os fatos, garantindo consistênc
 > [!IMPORTANT]
 > **Observação:** Como o dataset não possui data real, a série temporal foi gerada de forma sintética e reprodutível (seed fixa), ancorada em `units_sold_last_month` e sazonalidade típica de e-commerce.
 
+## 🧠 Integração com Dadosfera
+
+O modelo dimensional foi desenhado para ser materializado via pipeline na plataforma Dadosfera, utilizando a camada CURATED como base para dashboards e Data Apps.
+
+**A arquitetura permite:**
+
+- Execução de consultas SQL diretamente no módulo de Visualização
+- Evolução para modelos de recomendação
+- Integração com features enriquecidas via LLM
+
 ## ➿ Diagrama ERD
 
 - Ferramenta utilizada: **dbdesigner (ERD)**
@@ -135,6 +154,8 @@ A dimensão de categoria é compartilhada entre os fatos, garantindo consistênc
 ![Modelo Kimball](../assets/diagrams/06_modelagem_00_diagrama_kimball.png)
 
 ## 🧾 DDL (SQL)
+
+O DDL foi estruturado de forma compatível com engines SQL amplamente utilizadas (PostgreSQL, DuckDB), reforçando portabilidade e viabilidade arquitetural.
 
 - Arquivo: **[assets/sql/kimball_ddl.sql](../assets/sql/kimball_ddl.sql)**
 - Engine de validação: **DuckDB (via DBeaver)**
@@ -155,4 +176,4 @@ A validação estrutural assegura que o modelo pode ser implantado em qualquer e
 ![Kimball DDL](../assets/prints/06_modelagem_01_kimball_ddl.jpg)
 
 > [!WARNING]
-> A carga de dados não foi realizada neste momento, pois o objetivo desta etapa é demonstrar o desenho lógico do Data Warehouse.
+> A materialização efetiva ocorrerá via pipeline na plataforma, conforme descrito no Item 8.

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Data App &lpar;Streamlit&rpar;</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="data-app-streamlit">Data App (Streamlit)</h1>
+<p>Esta etapa entrega um <strong>Data App em Streamlit</strong> para exploração interativa do catálogo Amazon, utilizando a base STANDARDIZED enriquecida com features via LLM (camada ENRICHED).</p>
+<h2 id="-objetivo">🎯 Objetivo</h2>
+<p>O objetivo é disponibilizar uma experiência leve e navegável para:</p>
+<ul>
+<li><strong>Explorar o catálogo por:</strong> Categoria, Price Segment e Popularity Tier</li>
+<li><strong>Visualizar relações entre:</strong> Preço x Rating</li>
+<li><strong>Analisar mix por:</strong> Price Segment e por Revenue Proxy</li>
+<li><strong>Consumir atributos enriquecidos por IA:</strong> Brand Guess e Product Type</li>
+</ul>
+<p>Camada de consumo interativo (Data App) que complementa o dashboard executivo:</p>
+<ul>
+<li><strong>Data App (Streamlit):</strong> exploração livre, filtros, tabelas e gráficos com granularidade</li>
+</ul>
+<div class="markdown-alert markdown-alert-note"><p class="markdown-alert-title"><svg class="octicon octicon-info mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p><p>Embora o Data App esteja hospedado externamente (Streamlit Community Cloud), sua camada de dados segue o modelo arquitetural proposto na Dadosfera (RAW → STANDARDIZED → ENRICHED → CURATED), demonstrando portabilidade da solução.</p>
+</div>
+<h2 id="-entradas-e-saídas">🧾 Entradas e Saídas</h2>
+<h3 id="entrada">Entrada</h3>
+<ul>
+<li>Notebook no Google Colab: <a href="../notebooks/04_data_app_streamlit.ipynb">Data APP Streamlit</a></li>
+<li>Dataset parquet do app: <a href="../app/amazon_catalog_app.parquet">Amazon Catalog APP</a></li>
+<li>Arquivo da aplicação: <a href="../app/app.py">Streamlit Data APP</a></li>
+<li>Conteúdo (colunas esperadas, exemplo):
+<ul>
+<li><code>product_id</code>, <code>product_title</code>, <code>category_name</code></li>
+<li><code>price</code>, <code>rating</code>, <code>units_sold_last_month</code>, <code>is_best_seller</code></li>
+<li><code>price_segment</code>, <code>popularity_tier</code></li>
+<li><code>llm_brand_guess</code>, <code>llm_product_type</code>, <code>llm_title_clean</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="saída">Saída</h3>
+<h4 id="-aplicação-streamlit-amazon-catalog-intelligence">📌 Aplicação Streamlit: <a href="https://acs-amazon-catalog-app.streamlit.app/">Amazon Catalog Intelligence</a></h4>
+<p>O notebook no Google Colab gera o arquivo parquet. Esse arquivo é utilizado no script do app para executar a aplicação via Streamlit localmente.</p>
+<div class="markdown-alert markdown-alert-note"><p class="markdown-alert-title"><svg class="octicon octicon-info mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p><p>O arquivo parquet foi baixado e mantido na pasta <code>app/</code> para facilitar a execução local.<br>
+Em cenário produtivo, recomenda-se apontar para um storage/URL ou pipeline de publicação.<br>
+A arquitetura ideal prevê leitura direta da camada CURATED materializada via pipeline na Dadosfera.</p>
+</div>
+<h2 id="-estrutura-no-repositório">🧱 Estrutura no repositório</h2>
+<p>Arquivos criados/organizados nesta etapa:</p>
+<ul>
+<li><code>app/app.py</code> — aplicação Streamlit</li>
+<li><code>app/requirements.txt</code> — dependências do app</li>
+<li><code>app/README.md</code> — instruções rápidas de execução</li>
+<li><code>app/.streamlit/config.toml</code> (se existir) — configuração visual e de tema</li>
+</ul>
+<h2 id="️-como-rodar-localmente">▶️ Como rodar localmente</h2>
+<p>Abra o terminal na raiz do repositório e rode:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">cd</span> app
+python -m venv venv
+
+<span class="hljs-comment"># Windows</span>
+.venv\Scripts\activate
+
+<span class="hljs-comment"># Mac/Linux</span>
+<span class="hljs-built_in">source</span> venv/bin/activate
+
+pip install -r requirements.txt
+streamlit run app.py
+</code></pre>
+<h2 id="-navegação-do-app">🧭 Navegação do app</h2>
+<p>O app foi estruturado em 3 abas:</p>
+<ul>
+<li><strong>Executive</strong>
+<ul>
+<li>Cards: Products, Best Sellers, Avg Price, Avg Rating</li>
+<li>Tabela: Top Products (Units Sold Last Month)</li>
+<li>Scatter: Performance Map (Price vs Rating)</li>
+</ul>
+</li>
+<li><strong>Segmentation</strong>
+<ul>
+<li>Tabela: Product Mix (Category x Price Segment)</li>
+<li>Gráfico: Revenue Proxy (directional)</li>
+</ul>
+</li>
+<li><strong>AI Insights</strong>
+<ul>
+<li>Ranking por IA (ex: Revenue Proxy por llm_product_type e/ou llm_brand_guess)</li>
+<li>Objetivo: destacar padrões e concentração por atributos inferidos via LLM</li>
+</ul>
+</li>
+</ul>
+<h2 id="-papel-estratégico-do-data-app">🧠 Papel Estratégico do Data App</h2>
+<p>O Data App atua como camada de exploração livre, permitindo análises ad-hoc e inspeção granular de produtos individuais, complementando o dashboard executivo.</p>
+<p>Enquanto o dashboard responde perguntas estruturadas, o Data App permite investigação interativa e descoberta de padrões.</p>
+<h3 id="-evidências">📷 Evidências</h3>
+<h4 id="-executive">📌 Executive</h4>
+<p><img src="file:///c:\Users\Pink\Documents\GitHub\andrea_sousa_DDF_TECH_022026\assets\prints\09_app_01_executive.jpg" alt="Executive Overview"></p>
+<h4 id="-segmentation">📌 Segmentation</h4>
+<p><img src="file:///c:\Users\Pink\Documents\GitHub\andrea_sousa_DDF_TECH_022026\assets\prints\09_app_02_segmentation.jpg" alt="Segmentation"></p>
+<h4 id="-ai-insights">📌 AI Insights</h4>
+<p><img src="file:///c:\Users\Pink\Documents\GitHub\andrea_sousa_DDF_TECH_022026\assets\prints\09_app_03_ai_insights.jpg" alt="AI Insights"></p>
+<h2 id="-integração-com-pipeline">🔁 Integração com Pipeline</h2>
+<p>A versão atual utiliza dataset exportado em Parquet para fins de PoC.</p>
+<p><strong>A arquitetura final prevê:</strong></p>
+<ul>
+<li>Pipeline automatizado na Dadosfera</li>
+<li>Publicação da camada CURATED</li>
+<li>Consumo direto via conexão segura ou endpoint de dados</li>
+</ul>
+
+            
+            
+        </body>
+        </html>

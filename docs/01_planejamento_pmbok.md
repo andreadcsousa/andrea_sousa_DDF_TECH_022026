@@ -2,15 +2,15 @@
 
 ## 🎯 Objetivo
 
-Construir uma Plataforma de Dados para centralizar, estruturar e enriquecer um catálogo de e-commerce com mais de 1 milhão de produtos, permitindo análises estratégicas e uso de IA para geração de valor.
+Construir uma Prova de Conceito de Plataforma de Dados utilizando a Dadosfera SaaS, capaz de substituir arquiteturas fragmentadas e centralizar ingestão, processamento, modelagem e IA aplicadas a um catálogo de e-commerce com mais de 1,5 milhão de produtos.
 
 ## 📌 Escopo
 
-**Inclui:**
+### Inclui
 
 - Ingestão de dados (>1M registros)
-- Tratamento e padronização (Silver)
-- Modelagem analítica (Gold)
+- Tratamento e padronização (STANDARDIZED)
+- Modelagem analítica (CURATED - Data Warehouse Dimensional)
 - Geração de série temporal
 - Extração de features via LLM
 - Criação de Dashboard analítico
@@ -18,7 +18,7 @@ Construir uma Plataforma de Dados para centralizar, estruturar e enriquecer um c
 - Pipeline automatizado
 - Apresentação executiva
 
-**Não inclui:**
+### Não inclui
 
 - Deploy produtivo em ambiente corporativo real
 - Integração com ERP/CRM externo
@@ -40,12 +40,12 @@ Construir uma Plataforma de Dados para centralizar, estruturar e enriquecer um c
 
 O planejamento foi estruturado seguindo as fases:
 
-- Integrar → Ingestão
-- Processar → Silver + Gold
-- Explorar → Modelagem Dimensional
-- Analisar → Dashboard
-- ML/AI → LLM Feature Extraction
-- Data Apps → Streamlit
+- **Integrar:** Ingestão (RAW)
+- **Processar:** Padronização e Enriquecimento (STANDARDIZED + LLM)
+- **Explorar:** Catalogação e organização em camadas
+- **Analisar:** Dashboards e consultas SQL
+- **ML/AI:** Extração de features estruturadas via LLM
+- **Data Apps:** Aplicação Streamlit
 
 ## 📌 Metodologia de Gestão
 
@@ -54,16 +54,17 @@ O projeto foi estruturado utilizando abordagem Agile/Kanban, com organização e
 **Colunas utilizadas:** `New | Active | Resolved | Closed`
 
 > [!NOTE]
-> A organização por Epics permitiu controle incremental da entrega e mitigação de riscos dentro do prazo de 4 dias.
+> A organização por Epics permitiu controle incremental da entrega e mitigação de riscos dentro do prazo estabelecido (5 dias corridos)
 
 ## 📅 Cronograma
 
-| Dia   | Entregas                                  |
-| ----- | ----------------------------------------- |
-| Dia 1 | Ingestão + Silver + Documentação          |
-| Dia 2 | Gold + Modelagem + DevOps + Documentação  |
-| Dia 3 | LLM + Dashboard + Pipeline + Documentação |
-| Dia 4 | Data App + Vídeo + Consolidação Final     |
+| Dia | Entregas                | Fase PMBOK    |
+| --- | ----------------------- | ------------- |
+| 1   | Ingestão + STANDARDIZED | Execução      |
+| 2   | CURATED + Modelagem     | Execução      |
+| 3   | LLM + Dashboard         | Execução      |
+| 4   | Data App + Consolidação | Monitoramento |
+| 5   | Apresentação Executiva  | Encerramento  |
 
 ## ⚠️ Análise de Riscos
 
@@ -78,6 +79,7 @@ A análise de riscos foi conduzida considerando aspectos técnicos, estratégico
 | Complexidade excessiva da solução    | Estratégico | Dificuldade de explicação           | Baixa         | Foco em arquitetura clara e modular                           |
 | Dependência de ferramentas externas  | Operacional | Bloqueio técnico                    | Baixa         | Uso de alternativas locais (DuckDB, Colab)                    |
 | Desalinhamento com critérios do case | Estratégico | Penalização na avaliação            | Baixa         | Revisão contínua do enunciado e checklist de requisitos       |
+| Endpoint PostgreSQL público          | Técnico     | Indisponibilidade temporária        | Baixa         | Uso de provedor estável e backup local                        |
 
 ## 🔗 Interdependências do Projeto
 
@@ -101,13 +103,14 @@ O fluxo de dependências segue a lógica das camadas analíticas e do ciclo de v
 
 ## 💰 Estimativa de Custos (Simulação)
 
-- Infraestrutura Dadosfera: SaaS
-- Processamento LLM: custo controlado por amostra
-- Streamlit Cloud: gratuito
-- Ambiente Colab: gratuito
+- Infraestrutura Dadosfera: modelo SaaS (licenciamento simplificado)
+- PostgreSQL Cloud (Free Tier)
+- Processamento LLM: custo variável por token (controlado por amostragem)
+- Streamlit Cloud: Free Tier
+- Ambiente Colab: Gratuito
 
 > [!IMPORTANT]
-> Estimativa: Baixo custo inicial comparado à arquitetura distribuída tradicional.
+> **Estimativa:** Baixo custo inicial comparado à arquitetura distribuída tradicional.
 
 ## 📊 Indicadores de Sucesso
 
@@ -159,6 +162,8 @@ O projeto deve permitir que um avaliador:
 ## 📊 Justificativa Estratégica
 
 O planejamento foi estruturado para demonstrar como a Dadosfera pode reduzir complexidade arquitetural, centralizando ingestão, processamento, modelagem, IA e visualização em uma única plataforma.
+
+A proposta demonstra viabilidade técnica e financeira frente a arquiteturas tradicionais baseadas em múltiplos serviços distribuídos (ETL dedicado, DW separado, ferramenta de BI isolada e camada de ML desacoplada).
 
 ## 📷 Evidência de Gestão no Azure DevOps
 

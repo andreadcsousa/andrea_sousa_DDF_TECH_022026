@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Integrar e Explorar</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="integrar-e-explorar">Integrar e Explorar</h1>
+<p>Este documento descreve as etapas de integração na plataforma Dadosfera, governança, ingestão técnica, exploração inicial dos dados e preparação da camada STANDARDIZED para posterior modelagem.</p>
+<h2 id="-integração-na-plataforma-dadosfera-zona-raw">🔌 Integração na Plataforma Dadosfera (Zona RAW)</h2>
+<p>Os arquivos originais foram carregados utilizando o módulo <strong>Coletar</strong> da Dadosfera, conforme solicitado no case técnico. Foram realizadas as seguintes ações:</p>
+<ul>
+<li>Upload dos arquivos originais (Produtos e Categorias)</li>
+<li>Criação automática de ativos no <strong>Catálogo</strong></li>
+<li>Padronização dos nomes técnicos dos ativos</li>
+<li>Classificação na zona <strong>RAW</strong> do Data Lake</li>
+</ul>
+<h3 id="-ativos-criados">📂 Ativos Criados</h3>
+<ul>
+<li><code>RAW_ECOMMERCE_AMAZON_PRODUCTS</code></li>
+<li><code>RAW_ECOMMERCE_AMAZON_CATEGORIES</code></li>
+</ul>
+<h3 id="-evidências">📸 Evidências:</h3>
+<h4 id="-upload-no-catálogo-da-dadosfera">📌 Upload no catálogo da Dadosfera</h4>
+<p><img src="file:///c:\Users\Pink\Documents\GitHub\andrea_sousa_DDF_TECH_022026\assets\prints\03_dadosfera_03_raw_upload_confirmation.jpg" alt="Uploads de arquivos raw"></p>
+<div class="markdown-alert markdown-alert-warning"><p class="markdown-alert-title"><svg class="octicon octicon-alert mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Warning</p><p>A plataforma aceita arquivos com limite de até <strong>250MB</strong> por upload.</p>
+<p>O arquivo CSV principal de produtos ultrapassava esse tamanho.
+Para viabilizar o carregamento, foi realizada a conversão para formato <strong>Parquet</strong>, utilizando a ferramenta:
+<a href="https://observablehq.com/@observablehq/csv-to-parquet">https://observablehq.com/@observablehq/csv-to-parquet</a></p>
+<p>A conversão reduziu significativamente o tamanho do arquivo, permitindo o upload sem perda estrutural.</p>
+</div>
+<div class="markdown-alert markdown-alert-tip"><p class="markdown-alert-title"><svg class="octicon octicon-light-bulb mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"></path></svg>Tip</p><p>O uso de Parquet está alinhado com boas práticas de Data Lake, por ser um formato colunar, comprimido e otimizado para processamento analítico.</p>
+</div>
+<h2 id="️-catalogação-e-governança">🏷️ Catalogação e Governança</h2>
+<p>Após o carregamento, foram aplicadas boas práticas de governança de dados:</p>
+<ul>
+<li>Descrição detalhada do ativo preenchida</li>
+<li>Aplicação de tags (ecommerce, raw, catalog, case-tecnico)</li>
+<li>Definição de owner</li>
+<li>Documentação do <strong>Dicionário de Dados</strong> (descrição das colunas)</li>
+</ul>
+<h3 id="-dicionário-de-dados--products">📘 Dicionário de Dados – Products</h3>
+<table>
+<thead>
+<tr>
+<th>Coluna</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ASIN</td>
+<td>Identificador único do produto na Amazon</td>
+</tr>
+<tr>
+<td>TITLE</td>
+<td>Nome do produto</td>
+</tr>
+<tr>
+<td>IMGURL</td>
+<td>URL da imagem principal</td>
+</tr>
+<tr>
+<td>PRODUCTURL</td>
+<td>URL da página do produto</td>
+</tr>
+<tr>
+<td>STARS</td>
+<td>Avaliação média do produto (0 a 5)</td>
+</tr>
+<tr>
+<td>REVIEWS</td>
+<td>Quantidade total de avaliações</td>
+</tr>
+<tr>
+<td>PRICE</td>
+<td>Preço atual em USD</td>
+</tr>
+<tr>
+<td>LISTPRICE</td>
+<td>Preço original antes de desconto</td>
+</tr>
+<tr>
+<td>CATEGORY_ID</td>
+<td>Identificador da categoria</td>
+</tr>
+<tr>
+<td>ISBESTSELLER</td>
+<td>Indicador booleano de best seller</td>
+</tr>
+<tr>
+<td>BOUGHTINLASTMONTH</td>
+<td>Volume estimado de vendas no último mês</td>
+</tr>
+<tr>
+<td>_PROCESSING_TIMESTAMP</td>
+<td>Timestamp interno gerado pela plataforma</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-dicionário-de-dados--categories">📘 Dicionário de Dados – Categories</h3>
+<table>
+<thead>
+<tr>
+<th>Coluna</th>
+<th>Descrição</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ID</td>
+<td>Identificador único da categoria</td>
+</tr>
+<tr>
+<td>CATEGORY_NAME</td>
+<td>Nome textual da categoria</td>
+</tr>
+<tr>
+<td>_PROCESSING_TIMESTAMP</td>
+<td>Timestamp interno gerado pela plataforma</td>
+</tr>
+</tbody>
+</table>
+<h3 id="-evidências-1">📸 Evidências:</h3>
+<h4 id="-descrição-dos-ativos">📌 Descrição dos ativos</h4>
+<p><img src="file:///c:\Users\Pink\Documents\GitHub\andrea_sousa_DDF_TECH_022026\assets\prints\03_dadosfera_02_raw_products_catalog.jpg" alt="Catalogação dos produtos"></p>
+<p><img src="file:///c:\Users\Pink\Documents\GitHub\andrea_sousa_DDF_TECH_022026\assets\prints\03_dadosfera_01_raw_categories_catalog.jpg" alt="Catalogação das categorias"></p>
+<h2 id="️-organização-em-camadas-modelo-dadosfera">🗂️ Organização em Camadas (Modelo Dadosfera)</h2>
+<p>Os dados foram organizados seguindo o padrão arquitetural adotado pela Dadosfera:</p>
+<ul>
+<li><strong>RAW</strong> → Dados brutos carregados diretamente da fonte (Kaggle), sem transformação.</li>
+<li><strong>STANDARDIZED</strong> → Dados tratados, padronizados e tipados, preparados para modelagem.</li>
+<li><strong>CURATED</strong> → Dados modelados dimensionalmente e prontos para consumo analítico.</li>
+</ul>
+<h2 id="-ingestão-técnica-colab">📥 Ingestão Técnica (Colab)</h2>
+<h3 id="-fonte-de-dados">📌 Fonte de Dados</h3>
+<ul>
+<li>Dataset: Amazon Products Dataset 2023</li>
+<li>Origem: Kaggle</li>
+<li>Formato original: CSV</li>
+<li>Volume: 1.426.337 registros</li>
+</ul>
+<h3 id="️-ambiente-utilizado">🛠️ Ambiente Utilizado</h3>
+<ul>
+<li>Google Colab</li>
+<li>Python (pandas, pyarrow)</li>
+<li>Persistência em Parquet</li>
+</ul>
+<div class="markdown-alert markdown-alert-note"><p class="markdown-alert-title"><svg class="octicon octicon-info mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p><p>O processamento inicial foi realizado em ambiente controlado (Colab) para validação técnica e otimização de tipagem. A etapa de orquestração e pipeline será implementada na plataforma Dadosfera conforme solicitado no Item 8.</p>
+</div>
+<h2 id="-exploração-técnica-dos-dados-eda">🔎 Exploração Técnica dos Dados (EDA)</h2>
+<p>Foram realizadas análises exploratórias para compreender qualidade e distribuição dos dados:</p>
+<ul>
+<li>Distribuição de preços</li>
+<li>Distribuição de ratings</li>
+<li>Identificação de produtos sem preço</li>
+<li>Identificação de produtos com rating zero</li>
+<li>Análise de cardinalidade por categoria</li>
+</ul>
+<p>Essas análises subsidiaram decisões de:</p>
+<ul>
+<li>Segmentação de preço</li>
+<li>Estratégia de ranking</li>
+<li>Definição de métricas de popularidade</li>
+<li>Estratégia de amostragem para LLM</li>
+</ul>
+<h3 id="-evidências-2">📸 Evidências:</h3>
+<h4 id="-gráfico-de-distribuição-de-preços">📌 Gráfico de distribuição de preços</h4>
+<p><img src="file:///c:\Users\Pink\Documents\GitHub\andrea_sousa_DDF_TECH_022026\assets\prints\03_gold_01_price_distribution.jpg" alt="Distribuição de Preços"></p>
+<h4 id="-gráfico-de-distribuição-de-ratings">📌 Gráfico de distribuição de ratings</h4>
+<p><img src="file:///c:\Users\Pink\Documents\GitHub\andrea_sousa_DDF_TECH_022026\assets\prints\03_gold_02_rating_distribution.jpg" alt="Distribuição de Ratings"></p>
+<h2 id="-tratamento-e-padronização-camada-standardized">🧹 Tratamento e Padronização (Camada STANDARDIZED)</h2>
+<h3 id="-padronização-de-nomes">🔤 Padronização de Nomes</h3>
+<ul>
+<li>asin → product_id</li>
+<li>title → product_title</li>
+<li>reviews → review_count</li>
+<li>boughtInLastMonth → units_sold_last_month</li>
+</ul>
+<h3 id="-otimização-de-tipos">🧮 Otimização de Tipos</h3>
+<ul>
+<li>float64 → float32</li>
+<li>int64 → int32</li>
+<li>object → string</li>
+<li>Criação de colunas booleanas</li>
+</ul>
+<h3 id="-criação-de-novas-variáveis">📊 Criação de Novas Variáveis</h3>
+<ul>
+<li>price_segment</li>
+<li>has_rating</li>
+<li>weighted_score</li>
+<li>popularity_tier</li>
+</ul>
+<h2 id="-garantia-de-reprocessamento">🔁 Garantia de Reprocessamento</h2>
+<p>Antes da persistência, o diretório Parquet é removido para evitar duplicidade de dados. Essa estratégia garante:</p>
+<ul>
+<li>Overwrite controlado</li>
+<li>Idempotência do pipeline</li>
+<li>Reprocessamento seguro</li>
+</ul>
+<h2 id="-saída-da-camada-standardized">📤 Saída da Camada STANDARDIZED</h2>
+<p>DataFrame final estruturado para posterior ingestão na camada STANDARDIZED:</p>
+<ul>
+<li>1.379.629 registros válidos</li>
+<li>17 colunas estruturadas</li>
+<li>Tipagem otimizada</li>
+<li>Sem nulos críticos</li>
+</ul>
+<h3 id="-evidências-3">📸 Evidências:</h3>
+<h4 id="-estrutura-final-info">📌 Estrutura final (.info)</h4>
+<p><img src="file:///c:\Users\Pink\Documents\GitHub\andrea_sousa_DDF_TECH_022026\assets\prints\03_gold_04_final_dataset_info.jpg" alt="Estrutura do dataset (.info())"></p>
+<h4 id="-head-do-dataframe-silver">📌 Head do DataFrame Silver</h4>
+<p><img src="file:///c:\Users\Pink\Documents\GitHub\andrea_sousa_DDF_TECH_022026\assets\prints\03_gold_03_final_dataset_head.jpg" alt="Head do dataset"></p>
+<h2 id="-próxima-etapa-microtransformação-e-pipeline">🔄 Próxima Etapa: Microtransformação e Pipeline</h2>
+<p>A camada STANDARDIZED será posteriormente materializada via pipeline na Dadosfera, permitindo:</p>
+<ul>
+<li>Versionamento das transformações</li>
+<li>Execução incremental</li>
+<li>Governança centralizada</li>
+<li>Evolução para camada CURATED</li>
+</ul>
+
+            
+            
+        </body>
+        </html>

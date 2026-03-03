@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Processar com GenAI &lpar;LLM Feature Extraction&rpar;</title>
+            <style>
+/* From extension vscode.github */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+.vscode-dark img[src$=\#gh-light-mode-only],
+.vscode-light img[src$=\#gh-dark-mode-only],
+.vscode-high-contrast:not(.vscode-high-contrast-light) img[src$=\#gh-light-mode-only],
+.vscode-high-contrast-light img[src$=\#gh-dark-mode-only] {
+	display: none;
+}
+
+</style>
+            
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item {
+    list-style-type: none;
+}
+
+.task-list-item-checkbox {
+    margin-left: -20px;
+    vertical-align: middle;
+    pointer-events: none;
+}
+</style>
+<style>
+:root {
+  --color-note: #0969da;
+  --color-tip: #1a7f37;
+  --color-warning: #9a6700;
+  --color-severe: #bc4c00;
+  --color-caution: #d1242f;
+  --color-important: #8250df;
+}
+
+</style>
+<style>
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-note: #2f81f7;
+    --color-tip: #3fb950;
+    --color-warning: #d29922;
+    --color-severe: #db6d28;
+    --color-caution: #f85149;
+    --color-important: #a371f7;
+  }
+}
+
+</style>
+<style>
+.markdown-alert {
+  padding: 0.5rem 1rem;
+  margin-bottom: 16px;
+  color: inherit;
+  border-left: .25em solid #888;
+}
+
+.markdown-alert>:first-child {
+  margin-top: 0
+}
+
+.markdown-alert>:last-child {
+  margin-bottom: 0
+}
+
+.markdown-alert .markdown-alert-title {
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  line-height: 1
+}
+
+.markdown-alert .markdown-alert-title .octicon {
+  margin-right: 0.5rem;
+  display: inline-block;
+  overflow: visible !important;
+  vertical-align: text-bottom;
+  fill: currentColor;
+}
+
+.markdown-alert.markdown-alert-note {
+  border-left-color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-note .markdown-alert-title {
+  color: var(--color-note);
+}
+
+.markdown-alert.markdown-alert-important {
+  border-left-color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-important .markdown-alert-title {
+  color: var(--color-important);
+}
+
+.markdown-alert.markdown-alert-warning {
+  border-left-color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-warning .markdown-alert-title {
+  color: var(--color-warning);
+}
+
+.markdown-alert.markdown-alert-tip {
+  border-left-color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-tip .markdown-alert-title {
+  color: var(--color-tip);
+}
+
+.markdown-alert.markdown-alert-caution {
+  border-left-color: var(--color-caution);
+}
+
+.markdown-alert.markdown-alert-caution .markdown-alert-title {
+  color: var(--color-caution);
+}
+
+</style>
+        
+        </head>
+        <body class="vscode-body vscode-light">
+            <h1 id="processar-com-genai-llm-feature-extraction">Processar com GenAI (LLM Feature Extraction)</h1>
+<p>Esta etapa tem como objetivo enriquecer o dataset estruturado com informações extraídas a partir de dados não estruturados (campo <u>product_title</u>), utilizando um modelo de linguagem (LLM).</p>
+<h2 id="-objetivo">🎯 Objetivo</h2>
+<p>Transformar títulos de produtos (texto livre) em atributos estruturados reutilizáveis para:</p>
+<ul>
+<li>Segmentação avançada</li>
+<li>Análise por tipo de produto</li>
+<li>Inferência de marca</li>
+<li>Enriquecimento para dashboards</li>
+<li>Base para recomendações futuras</li>
+</ul>
+<h2 id="-estratégia-de-processamento">🧠 Estratégia de Processamento</h2>
+<h3 id="-entrada">📥 Entrada</h3>
+<p><strong>Camada STANDARDIZED contendo:</strong></p>
+<ul>
+<li>product_id</li>
+<li>category_id</li>
+<li>product_title</li>
+<li>price_segment</li>
+<li>popularity_tier</li>
+</ul>
+<h3 id="-saída">📤 Saída</h3>
+<p><strong>Tabela enriquecida contendo:</strong></p>
+<ul>
+<li>llm_brand_guess</li>
+<li>llm_product_type</li>
+<li>llm_attributes_json</li>
+<li>llm_keywords_json</li>
+<li>llm_title_clean</li>
+<li>llm_model</li>
+<li>created_at_utc</li>
+<li>llm_error (controle)</li>
+</ul>
+<div class="markdown-alert markdown-alert-note"><p class="markdown-alert-title"><svg class="octicon octicon-info mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p><p>Embora o processamento tenha sido realizado inicialmente em ambiente controlado (Colab), a arquitetura proposta prevê a orquestração dessa etapa via Pipeline na Dadosfera (Item 8), garantindo versionamento, reexecução e governança centralizada.</p>
+</div>
+<h2 id="-estratégia-de-amostragem">📊 Estratégia de Amostragem</h2>
+<p>Como o dataset possui mais de 1.4M registros, foi adotada uma estratégia de <strong>amostragem estratificada</strong> para controle de custo e tempo de execução.</p>
+<p><strong>Critérios utilizados:</strong></p>
+<ul>
+<li>Seleção das categorias mais frequentes</li>
+<li>Amostragem por combinação de:
+<ul>
+<li>category_id</li>
+<li>price_segment</li>
+<li>popularity_tier</li>
+</ul>
+</li>
+</ul>
+<div class="markdown-alert markdown-alert-important"><p class="markdown-alert-title"><svg class="octicon octicon-report mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v9.5A1.75 1.75 0 0 1 14.25 13H8.06l-2.573 2.573A1.458 1.458 0 0 1 3 14.543V13H1.75A1.75 1.75 0 0 1 0 11.25Zm1.75-.25a.25.25 0 0 0-.25.25v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25Zm7 2.25v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Important</p><p>A amostra final foi limitada para manter eficiência computacional e controle financeiro.</p>
+</div>
+<p><strong>Parâmetros utilizados nesta execução:</strong></p>
+<ul>
+<li>TOP_CATEGORIES = 40</li>
+<li>K_PER_GROUP = 3</li>
+<li>MAX_SAMPLE = 400</li>
+</ul>
+<p>Essa abordagem é adequada para casos de prova de conceito e demonstração arquitetural.</p>
+<h3 id="-evidências">📷 Evidências</h3>
+<h4 id="-shape-do-sample">📌 Shape do sample:</h4>
+<p><img src="file:///c:\Users\Pink\Documents\GitHub\andrea_sousa_DDF_TECH_022026\assets\prints\05_llm_02_sample_dataset_shape.jpg" alt="Shape do sample"></p>
+<h2 id="-prompt-engineering">🧾 Prompt Engineering</h2>
+<p>O modelo foi instruído a retornar exclusivamente JSON estruturado com os seguintes campos:</p>
+<ul>
+<li>brand_guess</li>
+<li>product_type</li>
+<li>attributes (lista)</li>
+<li>keywords (lista)</li>
+<li>title_clean</li>
+</ul>
+<p><strong>Boas práticas adotadas:</strong></p>
+<ul>
+<li>temperature = 0 (determinismo e consistência)</li>
+<li>max_tokens limitado para controle de custo</li>
+<li>Validação e parsing seguro de JSON</li>
+<li>Retry automático com backoff exponencial</li>
+<li>Logging de falhas por registro (llm_error)</li>
+<li>Limite de tamanho de listas (attributes ≤ 6, keywords ≤ 6)</li>
+</ul>
+<p>O formato estruturado garante compatibilidade com modelagem dimensional e consumo analítico em dashboards.</p>
+<h3 id="-evidências-1">📷 Evidências</h3>
+<h4 id="-prompt-definition">📌 Prompt Definition:</h4>
+<p><img src="file:///c:\Users\Pink\Documents\GitHub\andrea_sousa_DDF_TECH_022026\assets\prints\05_llm_04_prompt_definition.jpg" alt="Prompt Definition"></p>
+<h2 id="️-modelo-utilizado">⚙️ Modelo Utilizado</h2>
+<ul>
+<li><strong>Modelo:</strong> <code>gpt-4o-mini</code></li>
+<li><strong>Motivo da escolha:</strong>
+<ul>
+<li>Boa relação custo/benefício</li>
+<li>Capacidade adequada para extração estruturada</li>
+<li>Performance satisfatória para processamento em lote</li>
+<li>Latência adequada para PoC</li>
+</ul>
+</li>
+</ul>
+<h2 id="-validação-do-resultado">✅ Validação do Resultado</h2>
+<ul>
+<li>Registros processados: 400</li>
+<li>Sucesso: 400</li>
+<li>Falhas registradas (llm_error): 0</li>
+</ul>
+<p><strong>Validações realizadas:</strong></p>
+<ul>
+<li>Retorno exclusivo em JSON</li>
+<li>Presença obrigatória de todos os campos esperados</li>
+<li>Limitação de tamanho das listas</li>
+<li>Inspeção manual de amostra (5 registros) para validação semântica</li>
+</ul>
+<h3 id="-evidências-2">📷 Evidências</h3>
+<h4 id="-enriched-dataframe-preview">📌 Enriched Dataframe Preview:</h4>
+<p><img src="file:///c:\Users\Pink\Documents\GitHub\andrea_sousa_DDF_TECH_022026\assets\prints\05_llm_08_enriched_dataframe_preview.jpg" alt="Enriched Dataframe Preview"></p>
+<h2 id="-persistência">📂 Persistência</h2>
+<p>A saída foi salva em formato Parquet, permitindo ingestão posterior na plataforma Dadosfera e integração à camada CURATED.</p>
+<p><strong>Essa camada pode ser:</strong></p>
+<ul>
+<li>Unida à Silver via product_id</li>
+<li>Utilizada para geração de métricas Gold</li>
+<li>Consumida por Data Apps</li>
+<li>Integrada a dashboards analíticos</li>
+</ul>
+<h3 id="-evidências-3">📷 Evidências</h3>
+<h4 id="-parquet-saved-confirmation">📌 Parquet Saved Confirmation:</h4>
+<p><img src="file:///c:\Users\Pink\Documents\GitHub\andrea_sousa_DDF_TECH_022026\assets\prints\05_llm_11_parquet_saved_confirmation.jpg" alt="Parquet Saved Confirmation"></p>
+<h2 id="-organização-no-data-lake">🧱 Organização no Data Lake</h2>
+<p>Após esta etapa, o fluxo de dados passa a ser:<br>
+<code>RAW → STANDARDIZED → ENRICHED (LLM) → CURATED</code></p>
+<div class="markdown-alert markdown-alert-important"><p class="markdown-alert-title"><svg class="octicon octicon-report mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v9.5A1.75 1.75 0 0 1 14.25 13H8.06l-2.573 2.573A1.458 1.458 0 0 1 3 14.543V13H1.75A1.75 1.75 0 0 1 0 11.25Zm1.75-.25a.25.25 0 0 0-.25.25v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25Zm7 2.25v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Important</p><p>ENRICHED = STANDARDIZED + features semânticas via LLM.<br>
+Essa camada não substitui a STANDARDIZED, apenas a estende semanticamente.</p>
+</div>
+<h2 id="-reprodutibilidade">🔁 Reprodutibilidade</h2>
+<p>O processo é totalmente reexecutável via notebook: <a href="../notebooks/03_processar_genai_llm_features.ipynb">Processar GenAI LLM Features</a></p>
+<p><strong>A execução inclui:</strong></p>
+<ol>
+<li>Leitura da camada Silver</li>
+<li>Aplicação da estratégia de amostragem</li>
+<li>Chamada à API OpenAI</li>
+<li>Validação da resposta</li>
+<li>Persistência em Parquet</li>
+</ol>
+<h3 id="-evidências-4">📷 Evidências</h3>
+<h4 id="-execution-progress-bar">📌 Execution Progress Bar:</h4>
+<p><img src="file:///c:\Users\Pink\Documents\GitHub\andrea_sousa_DDF_TECH_022026\assets\prints\05_llm_06_execution_progress_bar.jpg" alt="Execution Progress Bar"></p>
+<h4 id="-execution-summary">📌 Execution Summary:</h4>
+<p><img src="file:///c:\Users\Pink\Documents\GitHub\andrea_sousa_DDF_TECH_022026\assets\prints\05_llm_07_execution_summary.jpg" alt="Execution Summary"></p>
+<h2 id="️-limitações">⚠️ Limitações</h2>
+<ul>
+<li>O processamento foi realizado sobre amostra controlada (PoC).</li>
+<li>Para cobertura completa (1.4M registros), seria necessário:
+<ul>
+<li>Execução em lotes</li>
+<li>Monitoramento de custo</li>
+<li>Controle de taxa (rate limit)</li>
+<li>Orquestração via pipeline produtivo</li>
+</ul>
+</li>
+</ul>
+<div class="markdown-alert markdown-alert-tip"><p class="markdown-alert-title"><svg class="octicon octicon-light-bulb mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"></path></svg>Tip</p><p>A versão produtiva dessa etapa deve ser orquestrada via pipeline com controle de checkpoint e validação automática.</p>
+</div>
+<h2 id="-estimativa-de-custo-llm">💰 Estimativa de Custo (LLM)</h2>
+<p>A estratégia de amostragem demonstrou viabilidade financeira para expansão gradual da cobertura total.</p>
+<ul>
+<li>Modelo: <code>gpt-4o-mini</code></li>
+<li>Registros processados: 400</li>
+<li>Sucesso: 400</li>
+<li>Falhas: 0</li>
+</ul>
+<h3 id="tokens-estimativa-conservadora">Tokens (estimativa conservadora)</h3>
+<ul>
+<li>Tokens médios de entrada por chamada: ~350</li>
+<li>Tokens médios de saída por chamada: ~180</li>
+<li>Tokens totais estimados (entrada): ~140,000</li>
+<li>Tokens totais estimados (saída): ~72,000</li>
+</ul>
+<div class="markdown-alert markdown-alert-important"><p class="markdown-alert-title"><svg class="octicon octicon-report mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 1.75C0 .784.784 0 1.75 0h12.5C15.216 0 16 .784 16 1.75v9.5A1.75 1.75 0 0 1 14.25 13H8.06l-2.573 2.573A1.458 1.458 0 0 1 3 14.543V13H1.75A1.75 1.75 0 0 1 0 11.25Zm1.75-.25a.25.25 0 0 0-.25.25v9.5c0 .138.112.25.25.25h2a.75.75 0 0 1 .75.75v2.19l2.72-2.72a.749.749 0 0 1 .53-.22h6.5a.25.25 0 0 0 .25-.25v-9.5a.25.25 0 0 0-.25-.25Zm7 2.25v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Important</p><p>Valores estimados por heurística com base no tamanho médio do prompt e do JSON retornado. O consumo real pode variar conforme o conteúdo dos títulos processados.</p>
+</div>
+<h3 id="-evidências-5">📷 Evidências</h3>
+<h4 id="-cost-estimation-output">📌 Cost Estimation Output:</h4>
+<p><img src="file:///c:\Users\Pink\Documents\GitHub\andrea_sousa_DDF_TECH_022026\assets\prints\05_llm_13_cost_estimation_output.jpg" alt="Cost Estimation Output"></p>
+<h2 id="-resultado">✅ Resultado</h2>
+<p>A camada ENRICHED adiciona inteligência semântica ao dataset estruturado, permitindo análises descritivas e prescritivas mais avançadas e habilitando futuras aplicações de recomendação, clustering semântico e personalização de experiência de compra.</p>
+
+            
+            
+        </body>
+        </html>

@@ -1,6 +1,34 @@
-# Camada Analítica: Dashboard Executivo em Power BI
+# Analisar: Dashboards na Dadosfera (Metabase) e Power BI
 
-## 🎯 Objetivo
+## 📊 Dashboard na Plataforma Dadosfera (Metabase)
+
+Conforme solicitado no Item 7 do case, foi criado um dashboard diretamente no módulo de Visualização da Dadosfera (Metabase), utilizando o identificador da tabela na camada CURATED.
+
+### 🔎 Consultas SQL Utilizadas
+
+As análises foram construídas com base em queries SQL salvas na plataforma, incluindo:
+
+1. Distribuição de produtos por categoria
+2. Série temporal de unidades vendidas por categoria
+3. Receita proxy por segmento de preço
+4. Ranking de categorias por performance
+5. Distribuição por tier de popularidade
+
+### 📷 Evidências
+
+#### 📌 Query SQL
+
+![Query SQL](../assets/prints)
+
+#### 📌 Resultado da Query
+
+![Resultado da Query](../assets/prints)
+
+#### 📌 Dashboard salvo na Coleção
+
+![Dashboard salvo na Coleção](../assets/prints)
+
+## 📊 Dashboard Externo (Power BI) – Bônus
 
 Desenvolver um dashboard executivo no Power BI com três propósitos principais:
 
@@ -11,20 +39,22 @@ Desenvolver um dashboard executivo no Power BI com três propósitos principais:
 > [!IMPORTANT]
 > O dashboard foi construído sobre a camada Gold, derivada do processamento e enriquecimento realizado nos notebooks anteriores.
 
+A replicação das análises em Power BI demonstra a portabilidade do modelo dimensional e reforça a viabilidade de substituição arquitetural, conforme exigido no Item 10.
+
 ## 🏗️ Arquitetura de Dados
 
 ### 🔹 Fonte de Dados
 
-O relatório consome dados provenientes da camada Gold, composta por:
+O relatório consome dados provenientes da camada CURATED, composta por:
 
 - dash_category_overview
 - dash_category_segment_tier
 - dash_ai_segment_analysis
 - dash_top_product_types
 
-Essas tabelas foram geradas a partir de:
+**Essas tabelas foram geradas a partir de:**
 
-- Limpeza e padronização da Silver layer
+- Limpeza e padronização da camada STANDARDIZED
 - Feature engineering
 - Enriquecimento via LLM (extração de marca, tipo de produto, atributos)
 - Agregações estratégicas
@@ -37,7 +67,7 @@ A modelagem segue abordagem orientada a medidas (measure-driven model):
 - Separação entre lógica de negócio e camada visual
 - Agrupamento organizado de medidas por página
 
-Essa abordagem garante:
+**Essa abordagem garante:**
 
 1. Clareza semântica
 2. Reutilização de métricas
@@ -211,7 +241,7 @@ UNICHAR(10) & UNICHAR(10) & Interpretation & " " &
 
 #### 📌 Dashboard publicado no [Power BI Online](https://app.powerbi.com/view?r=eyJrIjoiNjhmNDg5MWMtMGU0Yi00ZjI5LTg5MTMtNTRiNTM5Y2RkOTAzIiwidCI6ImEzZTU3Zjc1LTU5YTktNDFkOS05ZGIwLTA0YmM0ODg2YWY3NyJ9&pageName=5f22c10194a1a41d956c)
 
-O dashboard permite:
+**O dashboard permite:**
 
 - Monitoramento executivo
 - Análise estrutural por segmento
