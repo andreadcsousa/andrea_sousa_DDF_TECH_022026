@@ -142,4 +142,4 @@ Esse fluxo conecta engenharia de dados, enriquecimento com IA e aplicações ana
 ## 🔟 Apresentação
 
 - **Documento:** [Apresentação](../docs/10_apresentacao.md)
-- **Vídeo de apresentação (YouTube - Unlisted):** [Inserir link da gravação]()
+- **Vídeo de apresentação (YouTube - Unlisted):** [Apresentação do Case](https://youtu.be/SoJQ9SUAgz0)

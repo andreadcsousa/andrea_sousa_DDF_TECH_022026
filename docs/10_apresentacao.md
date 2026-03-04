@@ -6,9 +6,11 @@ Este projeto demonstra a construção de uma **plataforma analítica de dados pa
 
 A solução consolida um fluxo completo de dados:
 
-`Ingestão → Qualidade → Enriquecimento com LLM → Modelagem → Dashboards → Data App → Pipeline automatizado.`
+**Ingestão → Qualidade → Enriquecimento com LLM → Modelagem → Dashboards → Data App → Pipeline automatizado**
 
 O resultado é uma arquitetura capaz de transformar um catálogo de produtos em **inteligência analítica acionável**.
+
+![Infográfico de Dados](../assets/diagrams/10_apresentacao_arquitetura_dados_genai.png)
 
 ## 🎯 Problema de Negócio
 
@@ -109,6 +111,8 @@ Pipeline orquestra o fluxo completo de dados.
 - [Dashboard Power BI](https://app.powerbi.com/view?r=eyJrIjoiNjhmNDg5MWMtMGU0Yi00ZjI5LTg5MTMtNTRiNTM5Y2RkOTAzIiwidCI6ImEzZTU3Zjc1LTU5YTktNDFkOS05ZGIwLTA0YmM0ODg2YWY3NyJ9&pageName=5f22c10194a1a41d956c)
 
 - [Data App Streamlit](https://acs-amazon-catalog-app.streamlit.app/)
+
+- [Apresentação do Case](https://youtu.be/SoJQ9SUAgz0)
 
 ## 📊 Resultados do Projeto
 

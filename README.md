@@ -137,7 +137,7 @@ A documentação completa de cada etapa do case está disponível na pasta `docs
 - Demonstração da plataforma
 - Viabilidade de substituição da arquitetura atual
 
-Link do vídeo (Unlisted): [Apresentação do Case]()
+Link do vídeo (Unlisted): [Apresentação do Case](https://youtu.be/SoJQ9SUAgz0)
 
 ## 🚀 Conclusão
 
